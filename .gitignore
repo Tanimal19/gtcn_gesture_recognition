@@ -8,3 +8,4 @@ __pycache__
 shrec_2021/
 
 _/
+*.pkl

@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader, Dataset
 import time
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, classification_report
-from share.gesture_model import AbstractGestureModel
+from abstract_model import AbstractGestureModel
 from dataclasses import dataclass
 from collections import Counter
 import logging
@@ -12,7 +12,6 @@ import logging
 @dataclass
 class TrainingConfig:
     name: str
-    weight: list[float] | None = None
     learning_rate: float = 1e-3
     max_epochs: int = 100
     early_stopping_patience: int = 10

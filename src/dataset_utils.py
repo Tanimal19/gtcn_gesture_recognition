@@ -1,5 +1,11 @@
 from enum import Enum, auto
 from dataclasses import dataclass
+from typing import List, Dict
+import os
+
+
+SHREC_TRAINING_DATASET_FOLDER = "./shrec_2021/training_set/"
+SHREC_TEST_DATASET_FOLDER = "./shrec_2021/test_set/"
 
 
 class GestureLabel(Enum):
@@ -49,15 +55,91 @@ class HandLandmark(Enum):
 
 
 @dataclass
-class DatasetInput:
-    sequence_id: str
+class DSequenceFrame:
     frame_index: int
-    landmarks: dict[HandLandmark, tuple[float, float, float]]  # x, y, z coordinates
+    landmarks: Dict[HandLandmark, tuple[float, float, float]]  # (x, y, z)
 
 
 @dataclass
-class DatasetOutput:
+class DSequence:
     sequence_id: str
-    gestures: list[
+    frames: List[DSequenceFrame]
+
+
+@dataclass
+class DAnnotation:
+    sequence_id: str
+    gestures: List[
         tuple[GestureLabel, int, int]
     ]  # (gesture_label, start_frame_index, end_frame_index)
+
+
+# --------------------------------------
+# Parsing SHREC21 files to dataclasses
+# --------------------------------------
+VALUES_PER_LANDMARK = 7  # x,y,z,qx,qy,qz,qw
+
+
+def parse_shrec_sequence_file(filepath: str) -> DSequence:
+    sequence_id = os.path.splitext(os.path.basename(filepath))[0]
+
+    frames: List[DSequenceFrame] = []
+
+    with open(filepath, "r") as f:
+        lines = f.readlines()
+
+    for frame_idx, line in enumerate(lines, start=1):
+        line = line.strip()
+        if not line:
+            continue
+        values = [float(v) for v in line.split(";") if v]
+        assert len(values) == len(HandLandmark) * VALUES_PER_LANDMARK
+
+        landmarks = {}
+
+        for i, lm in enumerate(HandLandmark):
+            base = i * VALUES_PER_LANDMARK
+            x, y, z = values[base : base + 3]  # ignore quaternion
+            landmarks[lm] = (x, y, z)
+
+        frames.append(
+            DSequenceFrame(
+                frame_index=frame_idx,
+                landmarks=landmarks,
+            )
+        )
+
+    return DSequence(
+        sequence_id=sequence_id,
+        frames=frames,
+    )
+
+
+def parse_shrec_annotations_file(filepath: str) -> List[DAnnotation]:
+    results = []
+
+    with open(filepath, "r") as f:
+        for line in f:
+            parts = line.strip().split(";")
+            if len(parts) < 2:
+                continue
+
+            sequence_id = parts[0]
+            gesture_entries = parts[1:-1]  # last entry is empty after last semicolon
+
+            gestures = []
+            # process triplets: LABEL, start, end
+            for i in range(0, len(gesture_entries), 3):
+                label = GestureLabel[gesture_entries[i]]
+                start_f = int(gesture_entries[i + 1])
+                end_f = int(gesture_entries[i + 2])
+                gestures.append((label, start_f, end_f))
+
+            results.append(
+                DAnnotation(
+                    sequence_id=sequence_id,
+                    gestures=gestures,
+                )
+            )
+
+    return results
