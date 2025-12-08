@@ -1,0 +1,10 @@
+__pycache__
+*.pyc
+
+*.DS_Store
+
+.venv/
+
+shrec_2021/
+
+_/
