@@ -29,7 +29,7 @@ class GTCNModel(AbstractGestureModel):
     Output: (B, num_gestures)
     """
 
-    WINDOW_LENGTH = 30
+    WINDOW_LENGTH = 50
     GCN_HIDDEN_DIM = 16  # GCN hidden dimension
     TCN_HIDDEN_DIM = 64  # TCN hidden dimension
     CLASS_HIDDEN_DIM = 32  # Classifier hidden dimension
@@ -46,8 +46,7 @@ class GTCNModel(AbstractGestureModel):
         HandLandmark.middleC,
         HandLandmark.middleEnd,
     ]
-    GESTURES = [  # none + dynamic gestures
-        GestureLabel.NONE,
+    GESTURES = [  # only dynamic gestures
         GestureLabel.LEFT,
         GestureLabel.RIGHT,
         GestureLabel.CIRCLE,
@@ -185,7 +184,7 @@ class GTCNModel(AbstractGestureModel):
         """
         Gesture Probability Classifier (outputs logits for CrossEntropyLoss)\n
         Input: (B, tcn_hidden_dim)\n
-        Output: (B, num_gestures + 1) (+1 for no gesture)
+        Output: (B, num_gestures)
         """
 
         def __init__(self, hidden_dim, num_gestures):
@@ -196,7 +195,7 @@ class GTCNModel(AbstractGestureModel):
             self.net = nn.Sequential(
                 nn.Linear(in_dim, hidden_dim),
                 nn.ReLU(),
-                nn.Linear(hidden_dim, num_gestures + 1),
+                nn.Linear(hidden_dim, num_gestures),
             )
 
         def forward(self, x):

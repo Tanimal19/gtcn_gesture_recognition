@@ -12,9 +12,6 @@ class SequenceDataset(Dataset):
         assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
         assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
         assert X.shape[3] == 3, "X coordinate dimension mismatch!"
-        assert set(y).issubset(
-            set(GTCNModel.GESTURES)
-        ), "y contains invalid gesture labels!"
 
         self.X = X
         self.y = y
@@ -83,8 +80,6 @@ def train_over_sequences(
     seq_files = sorted(f for f in os.listdir(seq_folder) if f.endswith(".pkl"))
     print(f"Found {len(seq_files)} sequence files.")
 
-    best_train_loss = float("inf")
-
     for epoch in range(epochs):
         print(f"\n==================== Epoch {epoch+1}/{epochs} ====================")
 
@@ -93,6 +88,7 @@ def train_over_sequences(
         total_val_acc = 0
         total_val_count = 0
         total_samples = 0
+        best_train_loss = float("inf")
 
         # Loop over each sequence file
         for seq_file in seq_files:

@@ -9,6 +9,7 @@ SHREC_TEST_DATASET_FOLDER = "./shrec_2021/test_set/"
 
 
 class GestureLabel(Enum):
+    NONE = 0
     # static gestures
     ONE = auto()
     TWO = auto()
@@ -115,7 +116,9 @@ def parse_shrec_sequence_file(filepath: str) -> DSequence:
     )
 
 
-def parse_shrec_annotations_file(filepath: str) -> List[DAnnotation]:
+def parse_shrec_annotations_file(
+    filepath: str, avaliable_gestures: List[GestureLabel] = list(GestureLabel)
+) -> List[DAnnotation]:
     results = []
 
     with open(filepath, "r") as f:
@@ -131,6 +134,8 @@ def parse_shrec_annotations_file(filepath: str) -> List[DAnnotation]:
             # process triplets: LABEL, start, end
             for i in range(0, len(gesture_entries), 3):
                 label = GestureLabel[gesture_entries[i]]
+                if label not in avaliable_gestures:
+                    continue
                 start_f = int(gesture_entries[i + 1])
                 end_f = int(gesture_entries[i + 2])
                 gestures.append((label, start_f, end_f))

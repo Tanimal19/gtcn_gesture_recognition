@@ -32,9 +32,9 @@ def convert_window_to_X(window: List[DSequenceFrame]) -> np.ndarray:
 
 
 def convert_annotation_to_y(annotation: DAnnotation, total_frames: int) -> np.ndarray:
-    y = np.full(total_frames, 0, dtype=np.long)  # initialize with 0 for 'none'
+    y = np.full(total_frames, -1, dtype=np.long)
     for label, start_frame, end_frame in annotation.gestures:
-        y[start_frame:end_frame] = GTCNModel.GESTURES.index(label)
+        y[start_frame:end_frame] = label.value
 
     # output shape: (total_frames,)
     return y
