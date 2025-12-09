@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from src.abstract_model import AbstractGestureModel
+from model_runner import AbstractGestureModel
 from src.dataset_utils import GestureLabel, HandLandmark
 
 

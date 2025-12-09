@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from src.abstract_model import AbstractGestureModel
 from src.dataset_utils import GestureLabel, HandLandmark
 
 
@@ -22,14 +21,14 @@ def generate_adjacent_matrix(
     return adj
 
 
-class GTCNModel(AbstractGestureModel):
+class GTCNModel(nn.Module):
     """
     Gesture Recognition Network\n
     Input: (B, window_length, num_landmarks, 3)\n
     Output: (B, num_gestures)
     """
 
-    WINDOW_LENGTH = 30
+    WINDOW_LENGTH = 20
     GCN_HIDDEN_DIM = 16  # GCN hidden dimension
     TCN_HIDDEN_DIM = 64  # TCN hidden dimension
     CLASS_HIDDEN_DIM = 32  # Classifier hidden dimension
@@ -181,11 +180,11 @@ class GTCNModel(AbstractGestureModel):
             x = x.mean(dim=2)
             return x
 
-    class GestureProbClassifier(nn.Module):
+    class GestureClassifier(nn.Module):
         """
-        Gesture Probability Classifier (outputs logits for CrossEntropyLoss)\n
+        Gesture Classifier (outputs logits for CrossEntropyLoss)\n
         Input: (B, tcn_hidden_dim)\n
-        Output: (B, num_gestures + 1) (+1 for no gesture)
+        Output: (B, num_gestures)
         """
 
         def __init__(self, hidden_dim, num_gestures):
@@ -196,7 +195,7 @@ class GTCNModel(AbstractGestureModel):
             self.net = nn.Sequential(
                 nn.Linear(in_dim, hidden_dim),
                 nn.ReLU(),
-                nn.Linear(hidden_dim, num_gestures + 1),
+                nn.Linear(hidden_dim, num_gestures),
             )
 
         def forward(self, x):
@@ -208,7 +207,7 @@ class GTCNModel(AbstractGestureModel):
         self.gcn = self.GCNLayer(self.GCN_HIDDEN_DIM)
         self.pool = self.FingerPooling()
         self.tcn = self.TemporalConvNet(self.TCN_HIDDEN_DIM)
-        self.classifier = self.GestureProbClassifier(
+        self.classifier = self.GestureClassifier(
             self.CLASS_HIDDEN_DIM, len(self.GESTURES)
         )
 
@@ -224,57 +223,3 @@ class GTCNModel(AbstractGestureModel):
         logits = self.classifier(feat)  # (B, num_gestures)
 
         return logits
-
-    @staticmethod
-    def find_best_threshold(
-        model: nn.Module,
-        val_loader: torch.utils.data.DataLoader,
-    ) -> float:
-        thresholds = np.arange(0.1, 0.9, 0.05)
-        best_th = 0.5
-        best_f1 = 0
-
-        for th in thresholds:
-            tp = fp = fn = 0
-
-            for x, y in val_loader:
-                pred = GTCNModel.predict_label(model, x, threshold=float(th))
-                tp += (pred == y).sum().item()
-                fn += (pred == -1).sum().item()
-                fp += ((pred != y) & (pred != -1)).sum().item()
-
-            precision = tp / (tp + fp + 1e-6)
-            recall = tp / (tp + fn + 1e-6)
-            f1 = 2 * precision * recall / (precision + recall + 1e-6)
-
-            if f1 > best_f1:
-                best_f1 = f1
-                best_th = th
-
-            print(
-                f"Threshold: {th:.2f}, Precision: {precision:.4f}, Recall: {recall:.4f}, F1: {f1:.4f}"
-            )
-
-        return float(best_th)
-
-    @staticmethod
-    def predict_label(
-        model: nn.Module, x: torch.Tensor, threshold: float
-    ) -> torch.Tensor:
-        model.eval()
-
-        with torch.no_grad():
-
-            logits = model(x)
-            prob = F.softmax(logits, dim=-1)
-            max_prob, pred_class = torch.max(prob, dim=-1)
-
-            pred_class[max_prob < threshold] = -1  # -1 for no gesture
-
-            return pred_class
-
-    @staticmethod
-    def convert_y_to_gesture(y: int) -> GestureLabel | None:
-        if y == -1:
-            return None  # no gesture
-        return GTCNModel.GESTURES[y]

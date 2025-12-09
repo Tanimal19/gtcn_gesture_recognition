@@ -17,7 +17,6 @@ class GestureLabel(Enum):
     FOUR = auto()
     OK = auto()
     MENU = auto()
-    POINTING = auto()
     # dynamic gestures
     LEFT = auto()
     RIGHT = auto()

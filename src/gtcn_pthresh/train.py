@@ -3,7 +3,7 @@ import pickle
 import torch
 from torch.utils.data import DataLoader, Dataset
 from src.gtcn.model import GTCNModel
-from src.gtcn.preprocess import DATASET_FOLDER
+from gtcn.create_set import DATASET_FOLDER
 
 
 class SequenceDataset(Dataset):

@@ -4,10 +4,8 @@ from src.dataset_utils import (
     DAnnotation,
     DSequenceFrame,
     SHREC_TRAINING_DATASET_FOLDER,
-    SHREC_TEST_DATASET_FOLDER,
 )
 from src.gtcn.model import GTCNModel
-from sklearn.model_selection import train_test_split
 from typing import List
 from collections import Counter
 import numpy as np
@@ -32,36 +30,27 @@ def convert_window_to_X(window: List[DSequenceFrame]) -> np.ndarray:
 
 
 def convert_annotation_to_y(annotation: DAnnotation, total_frames: int) -> np.ndarray:
-    y = np.full(total_frames, 0, dtype=np.long)  # initialize with 0 for 'none'
+    y = np.full(total_frames, -1, dtype=np.long)
+
     for label, start_frame, end_frame in annotation.gestures:
+        pre_start = max(0, start_frame - GTCNModel.WINDOW_LENGTH)
+        post_end = min(total_frames, end_frame + GTCNModel.WINDOW_LENGTH)
+        y[pre_start:post_end] = 0  # non gesture
         y[start_frame:end_frame] = GTCNModel.GESTURES.index(label)
 
     # output shape: (total_frames,)
     return y
 
 
-def stratified_split(
-    X: np.ndarray, y: np.ndarray, val_size=0.2
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    N = len(y)
-    indices = list(range(N))
-
-    train_idx, val_idx = train_test_split(
-        indices,
-        test_size=val_size,
-        stratify=y,
-        random_state=42,
-    )
-
-    print("> y label distribution:")
-    print(f"\ttrain: {Counter(y[train_idx])}")
-    print(f"\tval: {Counter(y[val_idx])}")
-
-    return (X[train_idx], y[train_idx], X[val_idx], y[val_idx])
-
-
-def create_dataset(sequences_folder, ann_file, output_folder, max_sequence_id=None):
+def create_training_set(
+    sequences_folder, ann_file, output_folder, max_sequence_id=None
+):
     os.makedirs(output_folder, exist_ok=True)
+
+    total_X = np.array([], dtype=np.float32).reshape(
+        0, GTCNModel.WINDOW_LENGTH, len(GTCNModel.LANDMARKS), 3
+    )
+    total_y = np.array([], dtype=np.long)
 
     annotations = parse_shrec_annotations_file(ann_file, GTCNModel.GESTURES)
     for ann in annotations:
@@ -73,7 +62,7 @@ def create_dataset(sequences_folder, ann_file, output_folder, max_sequence_id=No
         sequence = parse_shrec_sequence_file(sequence_file)
 
         # Convert each window in the sequence to X
-        X: List[np.ndarray] = []
+        X = []
         for end_frame in range(len(sequence.frames)):
             start_frame = end_frame - GTCNModel.WINDOW_LENGTH + 1
             if start_frame >= 0:
@@ -88,37 +77,34 @@ def create_dataset(sequences_folder, ann_file, output_folder, max_sequence_id=No
 
         y = convert_annotation_to_y(ann, len(sequence.frames))
 
-        print(f"X.shape: {np.array(X).shape}, y.shape: {y.shape}")
+        mask = y != -1
+        X = np.array(X)[mask]
+        y = y[mask]
 
-        X_train, y_train, X_val, y_val = stratified_split(
-            X=np.array(X), y=y, val_size=0.2
+        total_X = np.concatenate((total_X, X), axis=0)
+        total_y = np.concatenate((total_y, y), axis=0)
+
+    print(f"X.shape: {total_X.shape}, y.shape: {total_y.shape}")
+    c = Counter(total_y)
+    distribution_str = "y label distribution:"
+    for label_idx in range(len(GTCNModel.GESTURES)):
+        distribution_str += f" {GTCNModel.GESTURES[label_idx].name}:{c[label_idx]}"
+    print(distribution_str)
+
+    output_file = output_folder + f"train.pkl"
+    with open(output_file, "wb") as f:
+        pickle.dump(
+            {"X": total_X, "y": total_y},
+            f,
         )
-
-        output_file = output_folder + f"s{ann.sequence_id}.pkl"
-        with open(output_file, "wb") as f:
-            pickle.dump(
-                {
-                    "X_train": X_train,
-                    "y_train": y_train,
-                    "X_val": X_val,
-                    "y_val": y_val,
-                },
-                f,
-            )
-        file_size = os.path.getsize(output_file) / (1024 * 1024)
-        print(f"Saved to {output_file} ({file_size:.2f} MB)\n")
+    file_size = os.path.getsize(output_file) / (1024 * 1024)
+    print(f"Saved to {output_file} ({file_size:.2f} MB)")
 
 
 if __name__ == "__main__":
-    create_dataset(
+    create_training_set(
         sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
         ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-        output_folder=DATASET_FOLDER + "training_set/",
-        max_sequence_id=10,
+        output_folder=DATASET_FOLDER,
+        max_sequence_id=None,
     )
-
-    # create_dataset(
-    #     sequences_folder=SHREC_TEST_DATASET_FOLDER + "sequences/",
-    #     ann_file=SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt",
-    #     output_folder=DATASET_FOLDER + "test/",
-    # )

@@ -1,0 +1,23 @@
+
+Gesture              Total Occurrences    Total Frames    Avg Duration    Std Duration   
+NONE                 -                    168933          -               -         
+ONE                  24                   3461            144.21          41.31          
+TWO                  24                   3968            165.33          37.86          
+THREE                24                   3848            160.33          41.33          
+FOUR                 24                   3802            158.42          38.21          
+OK                   24                   3547            147.79          40.53          
+MENU                 24                   3527            146.96          43.09          
+LEFT                 24                   666             27.75           11.88          
+RIGHT                24                   522             21.75           10.87          
+CIRCLE               24                   1370            57.08           13.22          
+V                    24                   708             29.50           10.40          
+CROSS                24                   1106            46.08           11.23          
+GRAB                 25                   674             26.96           18.67          
+PINCH                23                   589             25.61           11.23          
+TAP                  24                   495             20.62           6.20           
+DENY                 24                   1978            82.42           45.78          
+KNOB                 24                   1313            54.71           48.71          
+EXPAND               24                   362             15.08           8.14           
+
+
+avg duration of dynamic gestures: 37
