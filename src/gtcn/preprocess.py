@@ -7,8 +7,9 @@ from src.dataset_utils import (
     SHREC_TEST_DATASET_FOLDER,
 )
 from src.gtcn.model import GTCNModel
-from dataclasses import dataclass
+from sklearn.model_selection import train_test_split
 from typing import List
+from collections import Counter
 import torch
 import numpy as np
 import pickle
@@ -40,9 +41,28 @@ def convert_annotation_to_y(annotation: DAnnotation, total_frames: int) -> np.nd
     return y
 
 
-def create_dataset(sequences_folder, ann_file, output_file, max_sequence_id=None):
-    X: List[torch.Tensor] = []
-    y = np.array([], dtype=np.int32)
+def stratified_split(
+    X: np.ndarray, y: np.ndarray, val_size=0.2
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    N = len(y)
+    indices = list(range(N))
+
+    train_idx, val_idx = train_test_split(
+        indices,
+        test_size=val_size,
+        stratify=y,
+        random_state=42,
+    )
+
+    print("y distribution:")
+    print(f"train: {Counter(y[train_idx])}")
+    print(f"val: {Counter(y[val_idx])}")
+
+    return (X[train_idx], y[train_idx], X[val_idx], y[val_idx])
+
+
+def create_dataset(sequences_folder, ann_file, output_folder, max_sequence_id=None):
+    os.makedirs(output_folder, exist_ok=True)
 
     annotations = parse_shrec_annotations_file(ann_file)
     for ann in annotations:
@@ -50,10 +70,11 @@ def create_dataset(sequences_folder, ann_file, output_file, max_sequence_id=None
             continue
 
         print(f"+ Processing sequence: {ann.sequence_id}")
-        sequence_file = sequences_folder + ann.sequence_id + ".txt"
+        sequence_file = sequences_folder + str(ann.sequence_id) + ".txt"
         sequence = parse_shrec_sequence_file(sequence_file)
 
         # Convert each window in the sequence to X
+        X: List[np.ndarray] = []
         for end_frame in range(len(sequence.frames)):
             start_frame = end_frame - GTCNModel.WINDOW_LENGTH + 1
             if start_frame >= 0:
@@ -64,30 +85,41 @@ def create_dataset(sequences_folder, ann_file, output_file, max_sequence_id=None
                 ]
 
             assert len(window) == GTCNModel.WINDOW_LENGTH
-            X_npy = convert_window_to_X(window)
+            X.append(convert_window_to_X(window))
 
-            X.append(torch.tensor(X_npy, dtype=torch.float32))
+        y = convert_annotation_to_y(ann, len(sequence.frames))
 
-        y_npy = convert_annotation_to_y(ann, len(sequence.frames))
-        y = np.concatenate((y, y_npy), axis=0)
+        print(f"X.shape: {np.array(X).shape}, y.shape: {y.shape}")
 
-    print(f"X.shape: {(len(X),) + X[0].shape}, y.shape: {y.shape}")
-    with open(output_file, "wb") as f:
-        pickle.dump({"X": X, "y": y}, f)
+        X_train, y_train, X_val, y_val = stratified_split(
+            X=np.array(X), y=y, val_size=0.2
+        )
 
-    file_size = os.path.getsize(output_file)
-    print(f"Saved pickle file size: {file_size / (1024 * 1024):.2f} MB")
+        output_file = output_folder + f"s{ann.sequence_id}.pkl"
+        with open(output_file, "wb") as f:
+            pickle.dump(
+                {
+                    "X_train": X_train,
+                    "y_train": y_train,
+                    "X_val": X_val,
+                    "y_val": y_val,
+                },
+                f,
+            )
+        file_size = os.path.getsize(output_file) / (1024 * 1024)
+        print(f"-> Saved to {output_file} ({file_size:.2f} MB)\n")
 
 
 if __name__ == "__main__":
-    # create_dataset(
-    #     sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
-    #     ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-    #     output_file=DATASET_FOLDER + "training_set.pkl",
-    # )
-
     create_dataset(
-        sequences_folder=SHREC_TEST_DATASET_FOLDER + "sequences/",
-        ann_file=SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt",
-        output_file=DATASET_FOLDER + "test_set.pkl",
+        sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
+        ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
+        output_folder=DATASET_FOLDER + "training_set/",
+        max_sequence_id=5,
     )
+
+    # create_dataset(
+    #     sequences_folder=SHREC_TEST_DATASET_FOLDER + "sequences/",
+    #     ann_file=SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt",
+    #     output_folder=DATASET_FOLDER + "test/",
+    # )

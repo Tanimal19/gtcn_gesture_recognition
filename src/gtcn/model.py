@@ -170,7 +170,7 @@ class GTCNModel(AbstractGestureModel):
 
     class GestureProbClassifier(nn.Module):
         """
-        Gesture Probability Classifier (output probabilities, not label)\n
+        Gesture Probability Classifier (outputs logits for CrossEntropyLoss)\n
         Input: (B, tcn_hidden_dim)\n
         Output: (B, num_gestures)
         """
@@ -208,9 +208,9 @@ class GTCNModel(AbstractGestureModel):
         g = g.reshape(B, T, -1)  # (B, T, gcn_hidden_dim*3)
         g = g.transpose(1, 2)  # (B, gcn_hidden_dim*3, T)
         feat = self.tcn(g)  # (B, tcn_hidden_dim)
-        out = self.classifier(feat)  # (B, num_gestures)
+        logits = self.classifier(feat)  # (B, num_gestures)
 
-        return out
+        return logits
 
     @staticmethod
     def find_best_threshold(

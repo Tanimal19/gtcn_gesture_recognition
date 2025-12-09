@@ -62,13 +62,13 @@ class DSequenceFrame:
 
 @dataclass
 class DSequence:
-    sequence_id: str
+    sequence_id: int
     frames: List[DSequenceFrame]
 
 
 @dataclass
 class DAnnotation:
-    sequence_id: str
+    sequence_id: int
     gestures: List[
         tuple[GestureLabel, int, int]
     ]  # (gesture_label, start_frame_index, end_frame_index)
@@ -110,7 +110,7 @@ def parse_shrec_sequence_file(filepath: str) -> DSequence:
         )
 
     return DSequence(
-        sequence_id=sequence_id,
+        sequence_id=int(sequence_id),
         frames=frames,
     )
 
@@ -137,7 +137,7 @@ def parse_shrec_annotations_file(filepath: str) -> List[DAnnotation]:
 
             results.append(
                 DAnnotation(
-                    sequence_id=sequence_id,
+                    sequence_id=int(sequence_id),
                     gestures=gestures,
                 )
             )

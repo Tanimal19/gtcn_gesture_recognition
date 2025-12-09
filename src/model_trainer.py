@@ -1,12 +1,14 @@
-import torch
-from torch.utils.data import DataLoader, Dataset
+import os
 import time
+import pickle
+import torch
+import logging
+from torch.utils.data import DataLoader, Dataset
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, classification_report
-from abstract_model import AbstractGestureModel
+from src.abstract_model import AbstractGestureModel
 from dataclasses import dataclass
 from collections import Counter
-import logging
 
 
 @dataclass
@@ -17,16 +19,19 @@ class TrainingConfig:
     early_stopping_patience: int = 10
 
 
-class TensorDataset(Dataset):
-    def __init__(self, X, y):
-        self.X = X
-        self.y = y
+class LazyPickleDataset(Dataset):
+    def __init__(self, root):
+        self.files = sorted(
+            [os.path.join(root, f) for f in os.listdir(root) if f.endswith(".pkl")]
+        )
 
     def __len__(self):
-        return len(self.X)
+        return len(self.files)
 
     def __getitem__(self, idx):
-        return self.X[idx], self.y[idx]
+        with open(self.files[idx], "rb") as f:
+            data = pickle.load(f)
+        return data["X"], data["y"]
 
 
 class GestureModelTrainer:
@@ -34,8 +39,7 @@ class GestureModelTrainer:
         self,
         output_dir: str,
         model: AbstractGestureModel,
-        dataset: TensorDataset,
-        test_size: float,
+        dataset: LazyPickleDataset,
         configs: list[TrainingConfig],
     ):
         self.output_dir = output_dir
@@ -43,19 +47,10 @@ class GestureModelTrainer:
 
         self.model = model
         self.configs = configs
-        self.is_test = test_size > 0
 
-        if self.is_test:
-            train_ds, val_ds, test_ds = self._stratified_split(
-                dataset, test_size=test_size
-            )
-            self.train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
-            self.val_loader = DataLoader(val_ds, batch_size=32, shuffle=False)
-            self.test_loader = DataLoader(test_ds, batch_size=32, shuffle=False)
-        else:
-            train_ds, val_ds = self._stratified_split_no_test(dataset)
-            self.train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
-            self.val_loader = DataLoader(val_ds, batch_size=32, shuffle=False)
+        train_ds, val_ds = self._stratified_split(dataset)
+        self.train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
+        self.val_loader = DataLoader(val_ds, batch_size=32, shuffle=False)
 
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model.to(self.device)
@@ -170,74 +165,9 @@ class GestureModelTrainer:
 
         return total_loss / total, total_correct / total
 
-    def _test(self, criterion):
-        self.model.eval()
-        total_loss = 0
-        total_correct = 0
-        total = 0
-
-        with torch.no_grad():
-            true_y = []
-            pred_y = []
-            for X, y in self.test_loader:
-                X, y = X.to(self.device), y.to(self.device)
-
-                out = self.model(X)
-                loss = criterion(out, y)
-
-                total_loss += loss.item() * X.size(0)
-                pred = out.argmax(dim=1)
-                total_correct += (pred == y).sum().item()
-                total += X.size(0)
-
-                true_y.extend(y.cpu().numpy())
-                pred_y.extend(pred.cpu().numpy())
-
-            return {
-                "loss": total_loss / total,
-                "acc": total_correct / total,
-                "cmat": confusion_matrix(true_y, pred_y),
-                "class_report": classification_report(true_y, pred_y),
-            }
-
     def _stratified_split(
-        self, dataset: TensorDataset, val_size=0.2, test_size=0.2
-    ) -> tuple[TensorDataset, TensorDataset, TensorDataset]:
-        X = dataset.X
-        y = dataset.y
-
-        N = len(y)
-        indices = list(range(N))
-
-        # train + val | test
-        train_val_idx, test_idx = train_test_split(
-            indices, test_size=test_size, stratify=y.numpy(), random_state=42
-        )
-
-        # train | val
-        train_size = 1 - val_size / (1 - test_size)
-        y_train_val = y[train_val_idx]
-        train_idx, val_idx = train_test_split(
-            train_val_idx,
-            test_size=1 - train_size,
-            stratify=y_train_val.numpy(),
-            random_state=42,
-        )
-
-        train_dataset = TensorDataset(X[train_idx], y[train_idx])
-        val_dataset = TensorDataset(X[val_idx], y[val_idx])
-        test_dataset = TensorDataset(X[test_idx], y[test_idx])
-
-        self.logger.debug("Dataset distribution:")
-        self.logger.debug(f"> Train: {Counter(y[train_idx].numpy())}")
-        self.logger.debug(f"> Val:   {Counter(y[val_idx].numpy())}")
-        self.logger.debug(f"> Test:  {Counter(y[test_idx].numpy())}")
-
-        return train_dataset, val_dataset, test_dataset
-
-    def _stratified_split_no_test(
-        self, dataset: TensorDataset, val_size=0.2
-    ) -> tuple[TensorDataset, TensorDataset]:
+        self, dataset: LazyPickleDataset, val_size=0.2
+    ) -> tuple[LazyPickleDataset, LazyPickleDataset]:
         X = dataset.X
         y = dataset.y
 
@@ -253,8 +183,8 @@ class GestureModelTrainer:
             random_state=42,
         )
 
-        train_dataset = TensorDataset(X[train_idx], y[train_idx])
-        val_dataset = TensorDataset(X[val_idx], y[val_idx])
+        train_dataset = LazyPickleDataset(X[train_idx], y[train_idx])
+        val_dataset = LazyPickleDataset(X[val_idx], y[val_idx])
 
         self.logger.debug("Dataset distribution:")
         self.logger.debug(f"> Train: {Counter(y[train_idx].numpy())}")
