@@ -1,40 +1,27 @@
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from src.dataset_utils import SHREC_TEST_DATASET_FOLDER
+from sklearn.metrics import ConfusionMatrixDisplay
+from matplotlib import pyplot as plt
+from src.dataset_utils import SHREC_TEST_DATASET_FOLDER, GestureLabel
+import argparse
 
-# -----------------------------
-# Config
-# -----------------------------
-sequences = 72
+num_sequence = 72
 min_overlap_ratio = 0.5
-num_gest = 17
-
-gestures = [
-    "ONE",
-    "TWO",
-    "THREE",
-    "FOUR",
-    "OK",
-    "MENU",
-    "LEFT",
-    "RIGHT",
-    "CIRCLE",
-    "V",
-    "CROSS",
-    "GRAB",
-    "PINCH",
-    "TAP",
-    "DENY",
-    "KNOB",
-    "EXPAND",
+gestures = [  # only dynamic gestures
+    GestureLabel.LEFT,
+    GestureLabel.RIGHT,
+    GestureLabel.CIRCLE,
+    GestureLabel.V,
+    GestureLabel.CROSS,
+    GestureLabel.GRAB,
+    GestureLabel.PINCH,
+    GestureLabel.TAP,
+    GestureLabel.DENY,
+    GestureLabel.KNOB,
+    GestureLabel.EXPAND,
 ]
+num_gest = len(gestures)
 
 
-# -----------------------------
-# Helper function to read annotations/results
-# -----------------------------
 def read_annotations(file_path):
     data = []
     with open(file_path, "r") as f:
@@ -43,96 +30,103 @@ def read_annotations(file_path):
             seq_id = int(parts[0])
             gestures_list = parts[1:-1]  # exclude last empty
             data.append([seq_id, gestures_list])
+
+    data.sort(key=lambda x: x[0])  # sort by sequence ID
     return data
 
 
-# -----------------------------
-# Load results and annotations
-# -----------------------------
-results = read_annotations("./src/gtcn/datasets/generated_annotations.txt")
-annotations = read_annotations(SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt")
-annotations.sort(key=lambda x: x[0])  # sort by sequence id
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Evaluate generated annotation with ground truth."
+    )
+    parser.add_argument(
+        "--apath",
+        type=int,
+        default="./src/gtcn/datasets/generated_annotations.txt",
+        help="path of generated annotation file.",
+    )
+    args = parser.parse_args()
 
-# -----------------------------
-# Initialize metrics
-# -----------------------------
-confmat = np.zeros((18, 18), dtype=int)  # 17 gestures + 1 non-gesture class
-class_results = np.zeros(
-    (num_gest, 6), dtype=float
-)  # Total, Correct, Missed, Misclassified, FalsePositive, Jaccard
-jaccard_counts = np.zeros(num_gest)
+    # load annotations
+    prediction = read_annotations(args.apath)
+    truth = read_annotations(SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt")
 
-# -----------------------------
-# Main evaluation loop
-# -----------------------------
-for s in range(sequences):
-    A = annotations[s][1]
-    R = results[s][1]
+    # init metrics
+    confmat = np.zeros((num_gest + 1, num_gest + 1), dtype=int)
+    class_results = np.zeros(
+        (num_gest, 6), dtype=float
+    )  # Total, Correct, Missed, Misclassified, FalsePositive, Jaccard
+    jaccard_counts = np.zeros(num_gest)
 
-    if len(R) == 0:
-        for i in range(0, len(A), 3):
-            label = A[i]
-            idx = gestures.index(label)
-            class_results[idx, 0] += 1
+    # evaluate each sequence
+    for s in range(num_sequence):
+        A = truth[s][1]
+        R = prediction[s][1]
 
-    found = np.zeros(len(A) // 3)
+        if len(R) == 0:
+            for i in range(0, len(A), 3):
+                label = A[i]
+                idx = gestures.index(label)
+                class_results[idx, 0] += 1
 
-    for r in range(0, len(R), 3):
-        RR = R[r : r + 3]
-        detected = False
-        countA = 0
+        found = np.zeros(len(A) // 3)
 
-        for a in range(0, len(A), 3):
-            AA = A[a : a + 3]
-            if r == 0:
-                idx_A = gestures.index(AA[0])
-                class_results[idx_A, 0] += 1  # Total
+        for r in range(0, len(R), 3):
+            RR = R[r : r + 3]
+            detected = False
+            countA = 0
 
-            countA += 1
+            for a in range(0, len(A), 3):
+                AA = A[a : a + 3]
+                if r == 0:
+                    idx_A = gestures.index(AA[0])
+                    class_results[idx_A, 0] += 1  # Total
 
-            AA_len = int(AA[2]) - int(AA[1])
-            overlap = min(int(AA[2]), int(RR[2])) - max(int(AA[1]), int(RR[1]))
-            overlap_ratio = overlap / AA_len if AA_len > 0 else 0
+                countA += 1
 
-            # Jaccard index
-            if overlap > 0 and RR[0] == AA[0]:
-                U = max(int(AA[2]), int(RR[2])) - min(int(AA[1]), int(RR[1]))
-                idx_g = gestures.index(AA[0])
-                class_results[idx_g, 5] += overlap / U
-                jaccard_counts[idx_g] += 1
+                AA_len = int(AA[2]) - int(AA[1])
+                overlap = min(int(AA[2]), int(RR[2])) - max(int(AA[1]), int(RR[1]))
+                overlap_ratio = overlap / AA_len if AA_len > 0 else 0
 
-            if overlap_ratio > min_overlap_ratio:
-                detected = True
+                # Jaccard index
+                if overlap > 0 and RR[0] == AA[0]:
+                    U = max(int(AA[2]), int(RR[2])) - min(int(AA[1]), int(RR[1]))
+                    idx_g = gestures.index(AA[0])
+                    class_results[idx_g, 5] += overlap / U
+                    jaccard_counts[idx_g] += 1
+
+                if overlap_ratio > min_overlap_ratio:
+                    detected = True
+                    idx_AA = gestures.index(AA[0])
+
+                    if RR[0] == AA[0]:
+                        if found[countA - 1] != 1:
+                            idx_RR = gestures.index(RR[0])
+                            confmat[idx_RR, idx_AA] += 1
+                            found[countA - 1] = 1
+                            class_results[idx_AA, 1] += 1  # Correct
+                        else:
+                            idx_RR = 17  # Non-gesture row
+                            confmat[idx_RR, idx_AA] += 1
+                    else:
+                        class_results[idx_AA, 3] += 1  # Misclassified
+                        if found[countA - 1] != 1:
+                            idx_RR = gestures.index(RR[0])
+                            confmat[idx_RR, idx_AA] += 1
+                        else:
+                            idx_RR = 17
+                            confmat[idx_RR, idx_AA] += 1
+
+            if not detected:
                 idx_AA = gestures.index(AA[0])
+                class_results[idx_AA, 4] += 1  # False positive
+                confmat[17, idx_AA] += 1  # Non-gesture row
 
-                if RR[0] == AA[0]:
-                    if found[countA - 1] != 1:
-                        idx_RR = gestures.index(RR[0])
-                        confmat[idx_RR, idx_AA] += 1
-                        found[countA - 1] = 1
-                        class_results[idx_AA, 1] += 1  # Correct
-                    else:
-                        idx_RR = 17  # Non-gesture row
-                        confmat[idx_RR, idx_AA] += 1
-                else:
-                    class_results[idx_AA, 3] += 1  # Misclassified
-                    if found[countA - 1] != 1:
-                        idx_RR = gestures.index(RR[0])
-                        confmat[idx_RR, idx_AA] += 1
-                    else:
-                        idx_RR = 17
-                        confmat[idx_RR, idx_AA] += 1
-
-        if not detected:
-            idx_AA = gestures.index(AA[0])
-            class_results[idx_AA, 4] += 1  # False positive
-            confmat[17, idx_AA] += 1  # Non-gesture row
-
-    for f, val in enumerate(found):
-        if val == 0:
-            idx_AA = gestures.index(A[f * 3])
-            class_results[idx_AA, 2] += 1  # Missed
-            confmat[idx_AA, 17] += 1  # Non-gesture col
+        for f, val in enumerate(found):
+            if val == 0:
+                idx_AA = gestures.index(A[f * 3])
+                class_results[idx_AA, 2] += 1  # Missed
+                confmat[idx_AA, 17] += 1  # Non-gesture col
 
 # -----------------------------
 # Final metrics
@@ -184,3 +178,4 @@ results_compact = np.vstack(
 ge = gestures + ["NONGESTURES"]
 disp = ConfusionMatrixDisplay(confmat, display_labels=ge)
 disp.plot(xticks_rotation=90)
+plt.show()

@@ -85,8 +85,7 @@ def train_final_model(params, epochs, batch_size=32):
 
         avg_loss = epoch_loss / len(train_loader)
 
-        if (epoch + 1) % 10 == 0:
-            print(f"Epoch [{epoch+1}/{epochs}], Loss: {avg_loss:.4f}")
+        print(f"Epoch [{epoch+1}/{epochs}], Loss: {avg_loss:.4f}")
 
         # Save best model
         if avg_loss < best_loss:
