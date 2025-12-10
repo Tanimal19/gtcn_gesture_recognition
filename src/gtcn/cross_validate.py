@@ -29,13 +29,15 @@ def _evaluate(model, loader, criterion, device):
 
     avg_loss = total_loss / len(loader.dataset)
 
-    report = classification_report(all_labels, all_preds, digits=3, output_dict=True)
+    report = classification_report(
+        all_labels, all_preds, digits=3, output_dict=True, zero_division=0
+    )
     cm = confusion_matrix(all_labels, all_preds)
 
     return avg_loss, report, cm
 
 
-def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams):
+def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams, num_folds=5):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # Load data
@@ -47,21 +49,32 @@ def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams):
     seq_ids = data["seq_ids"]
     num_classes = len(GTCNModel.GESTURES)
 
-    # Get unique sequences for LOSO
+    # Get unique sequences and group them into folds
     unique_seqs = np.unique(seq_ids)
     num_sequences = len(unique_seqs)
-    print(f"Performing Leave-One-Sequence-Out with {num_sequences} sequences")
+
+    # Shuffle sequences for better distribution across folds
+    np.random.seed(42)
+    shuffled_seqs = np.random.permutation(unique_seqs)
+
+    # Split sequences into folds
+    seq_folds = np.array_split(shuffled_seqs, num_folds)
+
+    print(f"Performing {num_folds}-Fold Grouped Cross-Validation")
+    print(f"Total sequences: {num_sequences}")
+    print(f"Sequences per fold: {[len(fold) for fold in seq_folds]}")
 
     fold_results = []
 
-    for fold, test_seq_id in enumerate(unique_seqs):
+    for fold_idx, test_seqs in enumerate(seq_folds):
         print(f"\n====================")
-        print(f" Fold {fold + 1}/{num_sequences} (Sequence {test_seq_id} held out)")
+        print(f" Fold {fold_idx + 1}/{num_folds}")
+        print(f" Validation sequences: {sorted(test_seqs.tolist())}")
         print(f"====================")
 
-        # Split by sequence: all windows from test_seq_id go to validation
-        train_mask = seq_ids != test_seq_id
-        val_mask = seq_ids == test_seq_id
+        # Split by sequence groups: all windows from test_seqs go to validation
+        train_mask = ~np.isin(seq_ids, test_seqs)
+        val_mask = np.isin(seq_ids, test_seqs)
 
         train_idx = np.where(train_mask)[0]
         val_idx = np.where(val_mask)[0]
@@ -87,19 +100,20 @@ def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams):
             )
             if (epoch + 1) % 5 == 0 or epoch == 0:
                 print(
-                    f"[Seq {test_seq_id}] Epoch {epoch+1}/{epochs} - Train Loss: {train_loss:.4f}"
+                    f"[Fold {fold_idx+1}] Epoch {epoch+1}/{epochs} - Train Loss: {train_loss:.4f}"
                 )
 
         # Evaluation
         val_loss, report, cm = _evaluate(model, val_loader, criterion, device)
 
-        print(f"\n[Seq {test_seq_id}] Validation Loss: {val_loss:.4f}")
-        print(f"[Seq {test_seq_id}] Macro F1: {report['macro avg']['f1-score']:.4f}")
-        print(f"[Seq {test_seq_id}] Accuracy: {report['accuracy']:.4f}")
+        print(f"\n[Fold {fold_idx+1}] Validation Loss: {val_loss:.4f}")
+        print(f"[Fold {fold_idx+1}] Macro F1: {report['macro avg']['f1-score']:.4f}")
+        print(f"[Fold {fold_idx+1}] Accuracy: {report['accuracy']:.4f}")
 
         fold_results.append(
             {
-                "seq_id": test_seq_id,
+                "fold": fold_idx + 1,
+                "test_seqs": sorted(test_seqs.tolist()),
                 "f1_score": report["macro avg"]["f1-score"],
                 "accuracy": report["accuracy"],
                 "report": report,
@@ -108,15 +122,16 @@ def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams):
         )
 
     print("\n====================")
-    print(" LOSO Cross-Validation Results")
+    print(f" {num_folds}-Fold Grouped Cross-Validation Results")
     print("====================")
 
     f1_scores = [r["f1_score"] for r in fold_results]
     accuracies = [r["accuracy"] for r in fold_results]
 
     for result in fold_results:
+        seqs_str = ",".join(map(str, result["test_seqs"]))
         print(
-            f"Seq {result['seq_id']}: F1={result['f1_score']:.4f}, Acc={result['accuracy']:.4f}"
+            f"Fold {result['fold']} (seqs {seqs_str}): F1={result['f1_score']:.4f}, Acc={result['accuracy']:.4f}"
         )
 
     print(f"\nAverage Macro F1: {np.mean(f1_scores):.4f} (±{np.std(f1_scores):.4f})")
@@ -148,5 +163,6 @@ if __name__ == "__main__":
             learning_rate=1e-3,
             epochs=10,
             model_params=params,
+            num_folds=5,  # Adjust this to change number of folds
         )
         print(f"Completed with time: {time.time() - start_time:.2f}s\n")
