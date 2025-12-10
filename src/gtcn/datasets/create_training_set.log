@@ -1,219 +1,219 @@
 + Processing sequence: 1
-  -> samples added: 166, Counter({np.int64(9): 81, np.int64(3): 45, np.int64(0): 40})
+  -> samples added: 101, Counter({np.int64(4): 81, np.int64(0): 20})
 + Processing sequence: 2
-  -> samples added: 140, Counter({np.int64(11): 50, np.int64(10): 50, np.int64(0): 40})
+  -> samples added: 140, Counter({np.int64(6): 50, np.int64(5): 50, np.int64(0): 40})
 + Processing sequence: 3
-  -> samples added: 37, Counter({np.int64(0): 20, np.int64(2): 17})
+  -> samples added: 0, Counter()
 + Processing sequence: 4
-  -> samples added: 160, Counter({np.int64(0): 60, np.int64(5): 57, np.int64(8): 23, np.int64(7): 20})
+  -> samples added: 83, Counter({np.int64(0): 40, np.int64(3): 23, np.int64(2): 20})
 + Processing sequence: 5
-  -> samples added: 60, Counter({np.int64(6): 40, np.int64(0): 20})
+  -> samples added: 60, Counter({np.int64(1): 40, np.int64(0): 20})
 + Processing sequence: 6
-  -> samples added: 106, Counter({np.int64(0): 40, np.int64(4): 37, np.int64(1): 29})
+  -> samples added: 0, Counter()
 + Processing sequence: 7
-  -> samples added: 75, Counter({np.int64(9): 55, np.int64(0): 20})
+  -> samples added: 75, Counter({np.int64(4): 55, np.int64(0): 20})
 + Processing sequence: 8
-  -> samples added: 95, Counter({np.int64(0): 40, np.int64(5): 35, np.int64(6): 20})
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(1): 20})
 + Processing sequence: 9
-  -> samples added: 108, Counter({np.int64(3): 45, np.int64(0): 40, np.int64(4): 23})
+  -> samples added: 0, Counter()
 + Processing sequence: 10
-  -> samples added: 106, Counter({np.int64(0): 60, np.int64(1): 19, np.int64(11): 14, np.int64(10): 13})
+  -> samples added: 67, Counter({np.int64(0): 40, np.int64(6): 14, np.int64(5): 13})
 + Processing sequence: 11
-  -> samples added: 48, Counter({np.int64(8): 28, np.int64(0): 20})
+  -> samples added: 48, Counter({np.int64(3): 28, np.int64(0): 20})
 + Processing sequence: 12
-  -> samples added: 147, Counter({np.int64(2): 56, np.int64(7): 51, np.int64(0): 40})
+  -> samples added: 71, Counter({np.int64(2): 51, np.int64(0): 20})
 + Processing sequence: 13
   -> samples added: 0, Counter()
 + Processing sequence: 14
-  -> samples added: 424, Counter({np.int64(9): 184, np.int64(0): 80, np.int64(5): 62, np.int64(1): 56, np.int64(4): 42})
+  -> samples added: 204, Counter({np.int64(4): 184, np.int64(0): 20})
 + Processing sequence: 15
-  -> samples added: 69, Counter({np.int64(0): 40, np.int64(6): 17, np.int64(2): 12})
+  -> samples added: 37, Counter({np.int64(0): 20, np.int64(1): 17})
 + Processing sequence: 16
-  -> samples added: 177, Counter({np.int64(3): 79, np.int64(0): 60, np.int64(8): 25, np.int64(11): 13})
+  -> samples added: 78, Counter({np.int64(0): 40, np.int64(3): 25, np.int64(6): 13})
 + Processing sequence: 17
-  -> samples added: 218, Counter({np.int64(10): 146, np.int64(0): 40, np.int64(7): 32})
+  -> samples added: 218, Counter({np.int64(5): 146, np.int64(0): 40, np.int64(2): 32})
 + Processing sequence: 18
-  -> samples added: 135, Counter({np.int64(3): 60, np.int64(0): 40, np.int64(2): 35})
+  -> samples added: 0, Counter()
 + Processing sequence: 19
-  -> samples added: 186, Counter({np.int64(10): 166, np.int64(0): 20})
+  -> samples added: 186, Counter({np.int64(5): 166, np.int64(0): 20})
 + Processing sequence: 20
-  -> samples added: 310, Counter({np.int64(9): 168, np.int64(0): 80, np.int64(8): 28, np.int64(1): 23, np.int64(11): 11})
+  -> samples added: 267, Counter({np.int64(4): 168, np.int64(0): 60, np.int64(3): 28, np.int64(6): 11})
 + Processing sequence: 21
-  -> samples added: 210, Counter({np.int64(0): 80, np.int64(5): 52, np.int64(4): 41, np.int64(7): 27, np.int64(6): 10})
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(2): 27, np.int64(1): 10})
 + Processing sequence: 22
-  -> samples added: 65, Counter({np.int64(0): 40, np.int64(6): 17, np.int64(11): 8})
+  -> samples added: 65, Counter({np.int64(0): 40, np.int64(1): 17, np.int64(6): 8})
 + Processing sequence: 23
-  -> samples added: 45, Counter({np.int64(1): 25, np.int64(0): 20})
+  -> samples added: 0, Counter()
 + Processing sequence: 24
-  -> samples added: 475, Counter({np.int64(9): 190, np.int64(10): 172, np.int64(0): 80, np.int64(2): 20, np.int64(8): 13})
+  -> samples added: 435, Counter({np.int64(4): 190, np.int64(5): 172, np.int64(0): 60, np.int64(3): 13})
 + Processing sequence: 25
-  -> samples added: 194, Counter({np.int64(3): 80, np.int64(0): 60, np.int64(4): 40, np.int64(7): 14})
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(2): 14})
 + Processing sequence: 26
-  -> samples added: 239, Counter({np.int64(0): 80, np.int64(5): 64, np.int64(3): 54, np.int64(8): 21, np.int64(6): 20})
+  -> samples added: 81, Counter({np.int64(0): 40, np.int64(3): 21, np.int64(1): 20})
 + Processing sequence: 27
-  -> samples added: 111, Counter({np.int64(0): 40, np.int64(5): 38, np.int64(4): 33})
+  -> samples added: 0, Counter()
 + Processing sequence: 28
-  -> samples added: 209, Counter({np.int64(0): 80, np.int64(1): 62, np.int64(2): 37, np.int64(7): 18, np.int64(11): 12})
+  -> samples added: 70, Counter({np.int64(0): 40, np.int64(2): 18, np.int64(6): 12})
 + Processing sequence: 29
-  -> samples added: 235, Counter({np.int64(9): 111, np.int64(10): 64, np.int64(0): 60})
+  -> samples added: 235, Counter({np.int64(4): 111, np.int64(5): 64, np.int64(0): 60})
 + Processing sequence: 30
-  -> samples added: 146, Counter({np.int64(0): 60, np.int64(4): 50, np.int64(8): 20, np.int64(7): 16})
+  -> samples added: 76, Counter({np.int64(0): 40, np.int64(3): 20, np.int64(2): 16})
 + Processing sequence: 31
-  -> samples added: 159, Counter({np.int64(5): 71, np.int64(0): 60, np.int64(6): 16, np.int64(11): 12})
+  -> samples added: 68, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(6): 12})
 + Processing sequence: 32
-  -> samples added: 149, Counter({np.int64(3): 73, np.int64(0): 40, np.int64(2): 36})
+  -> samples added: 0, Counter()
 + Processing sequence: 33
-  -> samples added: 393, Counter({np.int64(9): 115, np.int64(0): 100, np.int64(3): 78, np.int64(4): 50, np.int64(1): 40, np.int64(6): 10})
+  -> samples added: 165, Counter({np.int64(4): 115, np.int64(0): 40, np.int64(1): 10})
 + Processing sequence: 34
-  -> samples added: 82, Counter({np.int64(0): 40, np.int64(5): 32, np.int64(11): 10})
+  -> samples added: 30, Counter({np.int64(0): 20, np.int64(6): 10})
 + Processing sequence: 35
-  -> samples added: 185, Counter({np.int64(9): 82, np.int64(0): 60, np.int64(2): 27, np.int64(8): 16})
+  -> samples added: 138, Counter({np.int64(4): 82, np.int64(0): 40, np.int64(3): 16})
 + Processing sequence: 36
-  -> samples added: 202, Counter({np.int64(10): 75, np.int64(0): 60, np.int64(1): 45, np.int64(7): 22})
+  -> samples added: 137, Counter({np.int64(5): 75, np.int64(0): 40, np.int64(2): 22})
 + Processing sequence: 37
-  -> samples added: 91, Counter({np.int64(10): 71, np.int64(0): 20})
+  -> samples added: 91, Counter({np.int64(5): 71, np.int64(0): 20})
 + Processing sequence: 38
-  -> samples added: 32, Counter({np.int64(0): 20, np.int64(11): 12})
+  -> samples added: 32, Counter({np.int64(0): 20, np.int64(6): 12})
 + Processing sequence: 39
-  -> samples added: 151, Counter({np.int64(0): 60, np.int64(5): 57, np.int64(6): 19, np.int64(7): 15})
+  -> samples added: 74, Counter({np.int64(0): 40, np.int64(1): 19, np.int64(2): 15})
 + Processing sequence: 40
-  -> samples added: 34, Counter({np.int64(0): 20, np.int64(8): 14})
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(3): 14})
 + Processing sequence: 41
-  -> samples added: 196, Counter({np.int64(9): 83, np.int64(0): 60, np.int64(1): 30, np.int64(2): 23})
+  -> samples added: 103, Counter({np.int64(4): 83, np.int64(0): 20})
 + Processing sequence: 42
-  -> samples added: 123, Counter({np.int64(3): 54, np.int64(0): 40, np.int64(4): 29})
+  -> samples added: 0, Counter()
 + Processing sequence: 43
-  -> samples added: 69, Counter({np.int64(0): 40, np.int64(11): 15, np.int64(7): 14})
+  -> samples added: 69, Counter({np.int64(0): 40, np.int64(6): 15, np.int64(2): 14})
 + Processing sequence: 44
-  -> samples added: 114, Counter({np.int64(10): 51, np.int64(0): 40, np.int64(2): 23})
+  -> samples added: 71, Counter({np.int64(5): 51, np.int64(0): 20})
 + Processing sequence: 45
-  -> samples added: 132, Counter({np.int64(5): 50, np.int64(4): 42, np.int64(0): 40})
+  -> samples added: 0, Counter()
 + Processing sequence: 46
-  -> samples added: 75, Counter({np.int64(0): 40, np.int64(1): 22, np.int64(8): 13})
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(3): 13})
 + Processing sequence: 47
-  -> samples added: 109, Counter({np.int64(3): 59, np.int64(0): 40, np.int64(6): 10})
+  -> samples added: 30, Counter({np.int64(0): 20, np.int64(1): 10})
 + Processing sequence: 48
-  -> samples added: 73, Counter({np.int64(9): 53, np.int64(0): 20})
+  -> samples added: 73, Counter({np.int64(4): 53, np.int64(0): 20})
 + Processing sequence: 49
-  -> samples added: 101, Counter({np.int64(0): 60, np.int64(4): 17, np.int64(8): 14, np.int64(2): 10})
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(3): 14})
 + Processing sequence: 50
-  -> samples added: 146, Counter({np.int64(0): 60, np.int64(3): 55, np.int64(6): 16, np.int64(11): 15})
+  -> samples added: 71, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(6): 15})
 + Processing sequence: 51
-  -> samples added: 40, Counter({np.int64(0): 20, np.int64(1): 20})
+  -> samples added: 0, Counter()
 + Processing sequence: 52
-  -> samples added: 224, Counter({np.int64(9): 105, np.int64(0): 60, np.int64(5): 34, np.int64(7): 25})
+  -> samples added: 170, Counter({np.int64(4): 105, np.int64(0): 40, np.int64(2): 25})
 + Processing sequence: 53
-  -> samples added: 40, Counter({np.int64(0): 20, np.int64(10): 20})
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(5): 20})
 + Processing sequence: 54
-  -> samples added: 135, Counter({np.int64(0): 60, np.int64(5): 36, np.int64(4): 25, np.int64(2): 14})
+  -> samples added: 0, Counter()
 + Processing sequence: 55
-  -> samples added: 83, Counter({np.int64(0): 40, np.int64(1): 26, np.int64(8): 17})
+  -> samples added: 37, Counter({np.int64(0): 20, np.int64(3): 17})
 + Processing sequence: 56
-  -> samples added: 279, Counter({np.int64(10): 85, np.int64(9): 69, np.int64(3): 65, np.int64(0): 60})
+  -> samples added: 194, Counter({np.int64(5): 85, np.int64(4): 69, np.int64(0): 40})
 + Processing sequence: 57
-  -> samples added: 122, Counter({np.int64(0): 60, np.int64(7): 30, np.int64(6): 20, np.int64(11): 12})
+  -> samples added: 122, Counter({np.int64(0): 60, np.int64(2): 30, np.int64(1): 20, np.int64(6): 12})
 + Processing sequence: 58
-  -> samples added: 58, Counter({np.int64(4): 38, np.int64(0): 20})
+  -> samples added: 0, Counter()
 + Processing sequence: 59
-  -> samples added: 193, Counter({np.int64(10): 88, np.int64(0): 60, np.int64(1): 32, np.int64(8): 13})
+  -> samples added: 141, Counter({np.int64(5): 88, np.int64(0): 40, np.int64(3): 13})
 + Processing sequence: 60
-  -> samples added: 65, Counter({np.int64(0): 40, np.int64(7): 15, np.int64(11): 10})
+  -> samples added: 65, Counter({np.int64(0): 40, np.int64(2): 15, np.int64(6): 10})
 + Processing sequence: 61
-  -> samples added: 437, Counter({np.int64(9): 123, np.int64(6): 107, np.int64(0): 80, np.int64(3): 66, np.int64(5): 61})
+  -> samples added: 270, Counter({np.int64(4): 123, np.int64(1): 107, np.int64(0): 40})
 + Processing sequence: 62
-  -> samples added: 180, Counter({np.int64(0): 80, np.int64(3): 54, np.int64(9): 25, np.int64(11): 12, np.int64(2): 9})
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(4): 25, np.int64(6): 12})
 + Processing sequence: 63
-  -> samples added: 248, Counter({np.int64(10): 108, np.int64(0): 60, np.int64(5): 50, np.int64(7): 30})
+  -> samples added: 178, Counter({np.int64(5): 108, np.int64(0): 40, np.int64(2): 30})
 + Processing sequence: 64
-  -> samples added: 143, Counter({np.int64(0): 60, np.int64(2): 36, np.int64(8): 27, np.int64(4): 20})
+  -> samples added: 47, Counter({np.int64(3): 27, np.int64(0): 20})
 + Processing sequence: 65
-  -> samples added: 142, Counter({np.int64(0): 60, np.int64(6): 35, np.int64(10): 24, np.int64(1): 23})
+  -> samples added: 99, Counter({np.int64(0): 40, np.int64(1): 35, np.int64(5): 24})
 + Processing sequence: 66
-  -> samples added: 235, Counter({np.int64(3): 74, np.int64(0): 60, np.int64(9): 54, np.int64(7): 47})
+  -> samples added: 141, Counter({np.int64(4): 54, np.int64(2): 47, np.int64(0): 40})
 + Processing sequence: 67
-  -> samples added: 123, Counter({np.int64(0): 60, np.int64(1): 25, np.int64(2): 19, np.int64(8): 19})
+  -> samples added: 39, Counter({np.int64(0): 20, np.int64(3): 19})
 + Processing sequence: 68
-  -> samples added: 84, Counter({np.int64(0): 40, np.int64(6): 26, np.int64(11): 18})
+  -> samples added: 84, Counter({np.int64(0): 40, np.int64(1): 26, np.int64(6): 18})
 + Processing sequence: 69
-  -> samples added: 287, Counter({np.int64(0): 100, np.int64(9): 52, np.int64(5): 49, np.int64(6): 39, np.int64(4): 26, np.int64(8): 21})
+  -> samples added: 172, Counter({np.int64(0): 60, np.int64(4): 52, np.int64(1): 39, np.int64(3): 21})
 + Processing sequence: 70
-  -> samples added: 115, Counter({np.int64(10): 44, np.int64(0): 40, np.int64(7): 31})
+  -> samples added: 115, Counter({np.int64(5): 44, np.int64(0): 40, np.int64(2): 31})
 + Processing sequence: 71
-  -> samples added: 129, Counter({np.int64(3): 62, np.int64(0): 40, np.int64(11): 27})
+  -> samples added: 47, Counter({np.int64(6): 27, np.int64(0): 20})
 + Processing sequence: 72
-  -> samples added: 173, Counter({np.int64(0): 80, np.int64(5): 44, np.int64(4): 19, np.int64(1): 15, np.int64(2): 15})
+  -> samples added: 0, Counter()
 + Processing sequence: 73
-  -> samples added: 87, Counter({np.int64(0): 40, np.int64(4): 25, np.int64(7): 22})
+  -> samples added: 42, Counter({np.int64(2): 22, np.int64(0): 20})
 + Processing sequence: 74
-  -> samples added: 62, Counter({np.int64(3): 42, np.int64(0): 20})
+  -> samples added: 0, Counter()
 + Processing sequence: 75
-  -> samples added: 44, Counter({np.int64(8): 24, np.int64(0): 20})
+  -> samples added: 44, Counter({np.int64(3): 24, np.int64(0): 20})
 + Processing sequence: 76
-  -> samples added: 179, Counter({np.int64(9): 87, np.int64(5): 52, np.int64(0): 40})
+  -> samples added: 107, Counter({np.int64(4): 87, np.int64(0): 20})
 + Processing sequence: 77
-  -> samples added: 91, Counter({np.int64(0): 40, np.int64(10): 29, np.int64(6): 22})
+  -> samples added: 91, Counter({np.int64(0): 40, np.int64(5): 29, np.int64(1): 22})
 + Processing sequence: 78
-  -> samples added: 121, Counter({np.int64(0): 60, np.int64(1): 27, np.int64(2): 21, np.int64(11): 13})
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
 + Processing sequence: 79
-  -> samples added: 45, Counter({np.int64(10): 25, np.int64(0): 20})
+  -> samples added: 45, Counter({np.int64(5): 25, np.int64(0): 20})
 + Processing sequence: 80
-  -> samples added: 180, Counter({np.int64(0): 60, np.int64(9): 46, np.int64(5): 42, np.int64(6): 32})
+  -> samples added: 118, Counter({np.int64(4): 46, np.int64(0): 40, np.int64(1): 32})
 + Processing sequence: 81
-  -> samples added: 75, Counter({np.int64(0): 40, np.int64(2): 22, np.int64(11): 13})
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
 + Processing sequence: 82
-  -> samples added: 122, Counter({np.int64(3): 49, np.int64(0): 40, np.int64(8): 33})
+  -> samples added: 53, Counter({np.int64(3): 33, np.int64(0): 20})
 + Processing sequence: 83
   -> samples added: 0, Counter()
 + Processing sequence: 84
-  -> samples added: 147, Counter({np.int64(0): 60, np.int64(1): 31, np.int64(7): 30, np.int64(4): 26})
+  -> samples added: 50, Counter({np.int64(2): 30, np.int64(0): 20})
 + Processing sequence: 85
-  -> samples added: 48, Counter({np.int64(6): 28, np.int64(0): 20})
+  -> samples added: 48, Counter({np.int64(1): 28, np.int64(0): 20})
 + Processing sequence: 86
-  -> samples added: 121, Counter({np.int64(3): 61, np.int64(0): 40, np.int64(8): 20})
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(3): 20})
 + Processing sequence: 87
-  -> samples added: 123, Counter({np.int64(0): 60, np.int64(5): 32, np.int64(4): 18, np.int64(11): 13})
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
 + Processing sequence: 88
-  -> samples added: 116, Counter({np.int64(0): 60, np.int64(1): 23, np.int64(7): 18, np.int64(2): 15})
+  -> samples added: 38, Counter({np.int64(0): 20, np.int64(2): 18})
 + Processing sequence: 89
-  -> samples added: 222, Counter({np.int64(0): 80, np.int64(9): 65, np.int64(3): 53, np.int64(2): 13, np.int64(10): 11})
+  -> samples added: 116, Counter({np.int64(4): 65, np.int64(0): 40, np.int64(5): 11})
 + Processing sequence: 90
-  -> samples added: 83, Counter({np.int64(0): 40, np.int64(8): 27, np.int64(4): 16})
+  -> samples added: 47, Counter({np.int64(3): 27, np.int64(0): 20})
 + Processing sequence: 91
-  -> samples added: 108, Counter({np.int64(9): 45, np.int64(0): 40, np.int64(1): 23})
+  -> samples added: 65, Counter({np.int64(4): 45, np.int64(0): 20})
 + Processing sequence: 92
-  -> samples added: 124, Counter({np.int64(0): 60, np.int64(7): 33, np.int64(11): 16, np.int64(10): 15})
+  -> samples added: 124, Counter({np.int64(0): 60, np.int64(2): 33, np.int64(6): 16, np.int64(5): 15})
 + Processing sequence: 93
-  -> samples added: 108, Counter({np.int64(0): 40, np.int64(5): 37, np.int64(6): 31})
+  -> samples added: 51, Counter({np.int64(1): 31, np.int64(0): 20})
 + Processing sequence: 94
-  -> samples added: 104, Counter({np.int64(0): 40, np.int64(9): 32, np.int64(8): 32})
+  -> samples added: 104, Counter({np.int64(0): 40, np.int64(4): 32, np.int64(3): 32})
 + Processing sequence: 95
-  -> samples added: 70, Counter({np.int64(0): 40, np.int64(6): 16, np.int64(10): 14})
+  -> samples added: 70, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(5): 14})
 + Processing sequence: 96
-  -> samples added: 109, Counter({np.int64(0): 60, np.int64(1): 20, np.int64(11): 15, np.int64(2): 14})
+  -> samples added: 35, Counter({np.int64(0): 20, np.int64(6): 15})
 + Processing sequence: 97
-  -> samples added: 191, Counter({np.int64(0): 80, np.int64(3): 47, np.int64(5): 36, np.int64(4): 16, np.int64(7): 12})
+  -> samples added: 32, Counter({np.int64(0): 20, np.int64(2): 12})
 + Processing sequence: 98
-  -> samples added: 162, Counter({np.int64(0): 80, np.int64(3): 44, np.int64(2): 16, np.int64(11): 12, np.int64(10): 10})
+  -> samples added: 62, Counter({np.int64(0): 40, np.int64(6): 12, np.int64(5): 10})
 + Processing sequence: 99
-  -> samples added: 77, Counter({np.int64(0): 40, np.int64(8): 20, np.int64(7): 17})
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(3): 20, np.int64(2): 17})
 + Processing sequence: 100
-  -> samples added: 198, Counter({np.int64(0): 80, np.int64(5): 42, np.int64(9): 39, np.int64(4): 22, np.int64(1): 15})
+  -> samples added: 59, Counter({np.int64(4): 39, np.int64(0): 20})
 + Processing sequence: 101
-  -> samples added: 115, Counter({np.int64(7): 50, np.int64(0): 40, np.int64(6): 25})
+  -> samples added: 115, Counter({np.int64(2): 50, np.int64(0): 40, np.int64(1): 25})
 + Processing sequence: 102
-  -> samples added: 132, Counter({np.int64(0): 60, np.int64(4): 30, np.int64(3): 26, np.int64(8): 16})
+  -> samples added: 36, Counter({np.int64(0): 20, np.int64(3): 16})
 + Processing sequence: 103
-  -> samples added: 94, Counter({np.int64(0): 40, np.int64(5): 33, np.int64(10): 21})
+  -> samples added: 41, Counter({np.int64(5): 21, np.int64(0): 20})
 + Processing sequence: 104
-  -> samples added: 150, Counter({np.int64(0): 80, np.int64(9): 30, np.int64(2): 17, np.int64(1): 12, np.int64(11): 11})
+  -> samples added: 81, Counter({np.int64(0): 40, np.int64(4): 30, np.int64(6): 11})
 + Processing sequence: 105
-  -> samples added: 251, Counter({np.int64(9): 84, np.int64(0): 80, np.int64(3): 45, np.int64(6): 24, np.int64(11): 18})
+  -> samples added: 186, Counter({np.int64(4): 84, np.int64(0): 60, np.int64(1): 24, np.int64(6): 18})
 + Processing sequence: 106
-  -> samples added: 114, Counter({np.int64(0): 40, np.int64(5): 40, np.int64(6): 34})
+  -> samples added: 54, Counter({np.int64(1): 34, np.int64(0): 20})
 + Processing sequence: 107
-  -> samples added: 146, Counter({np.int64(0): 60, np.int64(6): 40, np.int64(4): 23, np.int64(1): 23})
+  -> samples added: 60, Counter({np.int64(1): 40, np.int64(0): 20})
 + Processing sequence: 108
-  -> samples added: 97, Counter({np.int64(0): 60, np.int64(2): 15, np.int64(10): 11, np.int64(8): 11})
-X.shape: (15063, 10, 11, 3), y.shape: (15063,)
-y label distribution: NONE:5280 LEFT:666 RIGHT:522 CIRCLE:1370 V:708 CROSS:1106 GRAB:674 PINCH:589 TAP:495 DENY:1978 KNOB:1313 EXPAND:362
-Saved to ./src/gtcn/datasets/train.pkl (19.13 MB)
+  -> samples added: 62, Counter({np.int64(0): 40, np.int64(5): 11, np.int64(3): 11})
+X.shape: (8291, 10, 11, 3), y.shape: (8291,)
+y label distribution: NONE:2880 GRAB:674 PINCH:589 TAP:495 DENY:1978 KNOB:1313 EXPAND:362
+Saved to ./src/gtcn/datasets/train.pkl (10.53 MB)

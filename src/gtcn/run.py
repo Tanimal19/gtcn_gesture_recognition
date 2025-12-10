@@ -1,12 +1,13 @@
 from src.gtcn.create_training_set import create_training_set
 from src.gtcn.optimize import find_optimize_params
-from src.gtcn.train import train_final_model
+from src.gtcn.train import train_model
+from src.dataset_utils import SHREC_TRAINING_DATASET_FOLDER
 
-create_training_set(
-    sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
-    ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-    max_sequence_id=None,
-)
+# create_training_set(
+#     sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
+#     ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
+#     max_sequence_id=None,
+# )
 
 # best_params = find_optimize_params(n_trials=20)
 example_params = {
@@ -19,6 +20,6 @@ example_params = {
     "CLASS_HIDDEN_DIM": 32,
     "learning_rate": 1.5e-3,
 }
-train_final_model(example_params, epochs=200)
+train_model(example_params, epochs=100)
 
 # nohup python -u -m src.gtcn.run &

@@ -1,5 +1,5 @@
 import torch
-import numpy as np
+import time
 import os
 from src.gtcn.model import GTCNModel, GTCNHyperParams
 from src.gtcn.train import BEST_MODEL_PATH
@@ -15,6 +15,9 @@ import argparse
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 ANNOTATION_PATH = "./src/gtcn/datasets/generated_annotations.txt"
+
+DROP_GESTURE_THRESHOLD = 5  # drop gestures shorter than this number of frames
+MERGE_FRAMES_THRESHOLD = 10  # if two same gestures are separated by less than this number of frames, merge them
 
 
 def load_model(model_path: str) -> GTCNModel:
@@ -79,7 +82,34 @@ def _merge_consecutive_gestures(
     if current_gesture is not None and current_gesture != GestureLabel.NONE:
         gestures.append((current_gesture, start_frame, end_frame))
 
-    return gestures
+    # Apply DROP_GESTURE_THRESHOLD: filter out short gestures
+    filtered_gestures = [
+        (gesture, start, end)
+        for gesture, start, end in gestures
+        if (end - start + 1) >= DROP_GESTURE_THRESHOLD
+    ]
+
+    # Apply MERGE_FRAMES_THRESHOLD: merge same gestures separated by small gaps
+    merged_gestures = []
+    prev_gesture, prev_start, prev_end = None, None, None
+    for i, (gesture, start, end) in enumerate(filtered_gestures):
+        if i == 0:
+            prev_gesture, prev_start, prev_end = gesture, start, end
+        else:
+            print(f"{prev_gesture}:{prev_end}, {gesture}:{start}")
+            gap = start - prev_end - 1
+
+            # If same gesture and gap is small enough, merge them
+            if gesture == prev_gesture and gap < MERGE_FRAMES_THRESHOLD:
+                print(
+                    f"Merging gestures {gesture.name} at frames {prev_end} and {end} with gap {gap}"
+                )
+                prev_end = end  # extend the end frame
+            else:
+                merged_gestures.append((prev_gesture, prev_start, prev_end))
+                prev_gesture, prev_start, prev_end = gesture, start, end
+
+    return merged_gestures
 
 
 def generate_annotations_for_sequence(
@@ -103,7 +133,7 @@ def generate_annotations_for_sequence(
 
     frame_predictions = {}
     for frame, pred in zip(sequence.frames, y_predictions):
-        frame_predictions[frame.frame_index] = GestureLabel(pred)
+        frame_predictions[frame.frame_index] = GTCNModel.GESTURES[pred]
 
     gestures = _merge_consecutive_gestures(frame_predictions)
 
@@ -155,4 +185,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    start_time = time.time()
     generate_annotations(model_path=args.model)
+    print(f"Annotation generation completed in {time.time() - start_time} seconds.")

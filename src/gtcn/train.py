@@ -5,6 +5,7 @@ import torch
 from torch.utils.data import DataLoader
 from src.gtcn.model import GTCNHyperParams, GTCNModel
 from src.gtcn.create_training_set import TrainingDataset, TRAINSET_PATH
+from src.dataset_utils import GestureLabel
 from collections import Counter
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -19,23 +20,23 @@ def compute_balanced_weights(y):
     print("\nLabel distribution:")
     for gesture in GTCNModel.GESTURES:
         idx = GTCNModel.GESTURES.index(gesture)
-        count = counts[idx] if counts[idx] > 0 else 1
-        weights[idx] = total / (len(GTCNModel.GESTURES) * count)
+        weights[idx] = 0.1 if gesture == GestureLabel.NONE else 1.0
         print(f"{gesture.name}: count={counts[idx]}, weight={weights[idx]:.4f};")
 
     return torch.tensor(weights, dtype=torch.float32)
 
 
-def train_final_model(params, epochs, batch_size=32):
+def train_model(params, epochs, batch_size=32):
     start_time = time.time()
 
-    print(f"Training final model with parameters {params}")
+    print(f"Training model with parameters {params}")
 
     # Load full dataset
     with open(TRAINSET_PATH, "rb") as f:
         data = pickle.load(f)
     X = data["X"]
     y = data["y"]
+    print(f"Loaded training data: X={X.shape}, y={y.shape}")
 
     # Create full training dataset
     train_loader = DataLoader(
@@ -63,10 +64,6 @@ def train_final_model(params, epochs, batch_size=32):
         lr=params["learning_rate"],
     )
 
-    with torch.no_grad():
-        h, A = model.gcn(x, A)
-        print("GCN output std:", h.std().item())
-
     # Training loop
     best_loss = float("inf")
     early_stop_counter = 0
@@ -82,7 +79,6 @@ def train_final_model(params, epochs, batch_size=32):
 
             logits = model(x)
             loss = criterion(logits, y_batch)
-            print(logits.shape, y_batch.shape, y_batch.dtype)
 
             optimizer.zero_grad()
             loss.backward()
@@ -131,4 +127,4 @@ if __name__ == "__main__":
         "CLASS_HIDDEN_DIM": 32,
         "learning_rate": 1.5e-3,
     }
-    train_final_model(example_params, epochs=10)
+    train_model(example_params, epochs=10)
