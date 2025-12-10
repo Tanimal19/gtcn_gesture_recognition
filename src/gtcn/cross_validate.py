@@ -170,4 +170,4 @@ print("Best Score:", study.best_trial.value)
 print("Best Params:", study.best_trial.params)
 print("Total Optimization Time: %.2f seconds" % (time.time() - start_time))
 
-# nohup python -u -m src.gtcn.cross_validate
+# nohup python -u -m src.gtcn.cross_validate &
