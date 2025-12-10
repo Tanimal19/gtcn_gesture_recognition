@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from src.gtcn.model import GTCNHyperParams, generate_adjacent_matrix
+from src.gtcn.model import generate_adjacent_matrix, GTCNModelParams
 from src.dataset_utils import GestureLabel, HandLandmark
 
 
@@ -193,7 +193,7 @@ class GTCNMHead(nn.Module):
                 x = layer(x)
             return x.mean(dim=2)  # global average pooling
 
-    class GestureClassifier(nn.Module):
+    class GestureMheadClassifier(nn.Module):
         """
         Gesture Classifier with:
         - gesture_head: logits for real gestures (exclude NONE)
@@ -211,11 +211,11 @@ class GTCNMHead(nn.Module):
 
         def forward(self, x):
             h = self.shared(x)
-            gesture_logits = self.gesture_head(h)  # (B, K)
+            gesture_logits = self.gesture_head(h)  # (B, num_real_gestures)
             none_logit = self.none_head(h).squeeze(-1)  # (B,)
             return gesture_logits, none_logit
 
-    def __init__(self, hyperparams: GTCNHyperParams):
+    def __init__(self, hyperparams: GTCNModelParams):
         super().__init__()
 
         self.gcn = self.GCNLayer(hyperparams.GCN_HIDDEN_DIM, hyperparams.GCN_DROPOUT)
@@ -227,7 +227,7 @@ class GTCNMHead(nn.Module):
             hyperparams.TCN_DILATIONS,
             hyperparams.TCN_DROPOUT,
         )
-        self.classifier = self.GestureClassifier(
+        self.classifier = self.GestureMheadClassifier(
             hyperparams.TCN_HIDDEN_DIM,
             hyperparams.CLASS_HIDDEN_DIM,
             len(self.GESTURES) - 1,  # exclude NONE
@@ -245,15 +245,3 @@ class GTCNMHead(nn.Module):
         gesture_logits, none_logit = self.classifier(feat)
 
         return gesture_logits, none_logit
-
-    @staticmethod
-    def predict(gesture_logits, none_logit, threshold=0.5):
-        none_prob = torch.sigmoid(none_logit)
-
-        if none_prob > threshold:
-            return GTCNMHead.GESTURES[0]  # NONE
-
-        # otherwise pick the best gesture
-        idx = torch.argmax(gesture_logits)
-        real_gesture = GTCNMHead.GESTURES[1:][idx]  # skip NONE
-        return real_gesture

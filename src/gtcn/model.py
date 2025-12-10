@@ -23,7 +23,7 @@ def generate_adjacent_matrix(
 
 
 @dataclass
-class GTCNHyperParams:
+class GTCNModelParams:
     id: str
     GCN_HIDDEN_DIM: int
     GCN_DROPOUT: float
@@ -240,7 +240,7 @@ class GTCNModel(nn.Module):
         def forward(self, x):
             return self.net(x)
 
-    def __init__(self, hyperparams: GTCNHyperParams):
+    def __init__(self, hyperparams: GTCNModelParams):
         super().__init__()
 
         self.gcn = self.GCNLayer(hyperparams.GCN_HIDDEN_DIM, hyperparams.GCN_DROPOUT)

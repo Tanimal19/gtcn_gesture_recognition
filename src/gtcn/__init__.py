@@ -1,0 +1,5 @@
+BASE_FOLDER = "./src/gtcn/"
+DEFAULT_TRAINSET_PATH = BASE_FOLDER + "datasets/" + "train.pkl"
+DEFAULT_TESTSET_PATH = BASE_FOLDER + "datasets/" + "test.pkl"
+DEFAULT_MODEL_PATH = BASE_FOLDER + "models/" + "model.pth"
+DEFAULT_ANNOTATION_PATH = BASE_FOLDER + "datasets/" + "annotations.txt"

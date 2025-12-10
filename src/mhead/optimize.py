@@ -5,10 +5,10 @@ import torch
 import numpy as np
 from torch.utils.data import DataLoader
 from src import DEVICE
-from src.gtcn import DEFAULT_TRAINSET_PATH
-from src.gtcn.model import GTCNModel, GTCNModelParams
 from src.gtcn.dataset import GTCNDataset
-from src.gtcn.train import compute_weights, train_one_epoch
+from src.mhead import DEFAULT_TRAINSET_PATH
+from src.mhead.model import GTCNMHead, GTCNModelParams
+from src.mhead.train import train_one_epoch
 
 
 RANDOM_SEED = 42
@@ -16,7 +16,7 @@ NUM_FOLDS = 5
 EPOCHS = 10  # per fold
 
 
-def validate(model, val_loader, criterion):
+def validate(model, val_loader, gesture_criterion, none_criterion, bce_weight=1.0):
     model.eval()
     val_loss = 0.0
     with torch.no_grad():
@@ -24,8 +24,22 @@ def validate(model, val_loader, criterion):
             x, y = batch
             x, y = x.to(DEVICE), y.to(DEVICE)
 
-            logits = model(x)
-            loss = criterion(logits, y)
+            gesture_logits, none_logit = model(x)
+
+            gesture_target = y.clone()
+            none_target = (y == 0).float()  # 1: none gesture, 0: real gesture
+
+            mask = y != 0  # all real gestures
+            if mask.any():
+                loss_gesture = gesture_criterion(
+                    gesture_logits[mask],
+                    gesture_target[mask] - 1,  # shift target to start from 0
+                )
+            else:
+                loss_gesture = torch.tensor(0.0, device=x.device)
+            loss_none = none_criterion(none_logit, none_target)
+
+            loss = loss_gesture + bce_weight * loss_none
             val_loss += loss.item()
 
     return val_loss / len(val_loader)
@@ -53,6 +67,7 @@ class Objective:
         )
 
         learning_rate = trial.suggest_float("learning_rate", 1e-4, 1e-2)
+        bce_weight = trial.suggest_float("bce_weight", 0.1, 0.5, 1.0)
 
         # load dataset
         with open(self.training_set_path, "rb") as f:
@@ -77,7 +92,7 @@ class Objective:
             train_idx = np.where(~np.isin(seq_ids, val_seqs))[0]
             val_idx = np.where(np.isin(seq_ids, val_seqs))[0]
 
-            model = GTCNModel(model_params).to(DEVICE)
+            model = GTCNMHead(model_params).to(DEVICE)
             train_loader = DataLoader(
                 GTCNDataset(X[train_idx], y[train_idx]), batch_size=32, shuffle=True
             )
@@ -85,8 +100,8 @@ class Objective:
                 GTCNDataset(X[val_idx], y[val_idx]), batch_size=32, shuffle=False
             )
 
-            weights = compute_weights(y[train_idx], "balanced").to(DEVICE)
-            criterion = torch.nn.CrossEntropyLoss(weight=weights)
+            gesture_criterion = torch.nn.CrossEntropyLoss()
+            none_criterion = torch.nn.BCEWithLogitsLoss()
             optimizer = torch.optim.Adam(
                 model.parameters(),
                 lr=learning_rate,
@@ -94,10 +109,19 @@ class Objective:
 
             # Train
             for _ in range(EPOCHS):
-                train_one_epoch(model, train_loader, criterion, optimizer)
+                train_one_epoch(
+                    model,
+                    train_loader,
+                    gesture_criterion,
+                    none_criterion,
+                    optimizer,
+                    bce_weight,
+                )
 
             # Validate
-            fold_loss = validate(model, val_loader, criterion)
+            fold_loss = validate(
+                model, val_loader, gesture_criterion, none_criterion, bce_weight
+            )
             scores.append(fold_loss)
 
             print(f"> loss: {fold_loss:.4f}")

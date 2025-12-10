@@ -3,7 +3,7 @@ import time
 import os
 from src.gtcn.model import GTCNModel, GTCNHyperParams
 from src.gtcn.train import DEFAULT_MODEL_PATH
-from src.gtcn.create_training_set import convert_sequence_to_X
+from gtcn.dataset import convert_sequence_to_X
 from src.dataset_utils import (
     DSequence,
     DAnnotation,
