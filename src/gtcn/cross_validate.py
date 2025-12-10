@@ -163,6 +163,9 @@ if __name__ == "__main__":
             learning_rate=1e-3,
             epochs=10,
             model_params=params,
-            num_folds=5,  # Adjust this to change number of folds
+            num_folds=5,
         )
         print(f"Completed with time: {time.time() - start_time:.2f}s\n")
+
+
+# nohup python -u -m src.gtcn.cross_validate
