@@ -55,13 +55,8 @@ class GTCNModel(nn.Module):
         HandLandmark.middleC,
         HandLandmark.middleEnd,
     ]
-    GESTURES = [  # none + dynamic gestures
+    GESTURES = [  # none + fine dynamic gestures
         GestureLabel.NONE,
-        GestureLabel.LEFT,
-        GestureLabel.RIGHT,
-        GestureLabel.CIRCLE,
-        GestureLabel.V,
-        GestureLabel.CROSS,
         GestureLabel.GRAB,
         GestureLabel.PINCH,
         GestureLabel.TAP,

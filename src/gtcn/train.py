@@ -8,17 +8,20 @@ from src.gtcn.create_training_set import TrainingDataset, TRAINSET_PATH
 from collections import Counter
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-BEST_MODEL_PATH = "./src/gtcn/models/best_model.pth"
+BEST_MODEL_PATH = "./src/gtcn/datasets/best_model.pth"
 
 
-def compute_balanced_weights(y, num_classes):
+def compute_balanced_weights(y):
     counts = Counter(y)
     total = len(y)
-    weights = np.zeros(num_classes, dtype=np.float32)
+    weights = np.zeros(len(GTCNModel.GESTURES), dtype=np.float32)
 
-    for cls in range(num_classes):
-        count = counts[cls] if counts[cls] > 0 else 1
-        weights[cls] = total / (num_classes * count)
+    print("\nLabel distribution:")
+    for gesture in GTCNModel.GESTURES:
+        idx = GTCNModel.GESTURES.index(gesture)
+        count = counts[idx] if counts[idx] > 0 else 1
+        weights[idx] = total / (len(GTCNModel.GESTURES) * count)
+        print(f"{gesture.name}: count={counts[idx]}, weight={weights[idx]:.4f};")
 
     return torch.tensor(weights, dtype=torch.float32)
 
@@ -26,7 +29,7 @@ def compute_balanced_weights(y, num_classes):
 def train_final_model(params, epochs, batch_size=32):
     start_time = time.time()
 
-    print(f"Training final model with best parameters {params}")
+    print(f"Training final model with parameters {params}")
 
     # Load full dataset
     with open(TRAINSET_PATH, "rb") as f:
@@ -53,13 +56,16 @@ def train_final_model(params, epochs, batch_size=32):
     model = GTCNModel(model_params).to(DEVICE)
 
     # Setup training
-    weights = compute_balanced_weights(y, len(GTCNModel.GESTURES)).to(DEVICE)
-    print(f"> Class weights: {weights.numpy()}")
+    weights = compute_balanced_weights(y).to(DEVICE)
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
     optimizer = torch.optim.Adam(
         model.parameters(),
         lr=params["learning_rate"],
     )
+
+    with torch.no_grad():
+        h, A = model.gcn(x, A)
+        print("GCN output std:", h.std().item())
 
     # Training loop
     best_loss = float("inf")
@@ -76,6 +82,7 @@ def train_final_model(params, epochs, batch_size=32):
 
             logits = model(x)
             loss = criterion(logits, y_batch)
+            print(logits.shape, y_batch.shape, y_batch.dtype)
 
             optimizer.zero_grad()
             loss.backward()
@@ -122,6 +129,6 @@ if __name__ == "__main__":
         "TCN_DILATIONS": (1, 2, 4, 8, 16),
         "TCN_DROPOUT": 0.3,
         "CLASS_HIDDEN_DIM": 32,
-        "learning_rate": 15e-3,
+        "learning_rate": 1.5e-3,
     }
     train_final_model(example_params, epochs=10)
