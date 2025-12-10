@@ -1,18 +1,17 @@
 import time
-import pickle
-import torch
-import numpy as np
-from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report, confusion_matrix
-from src.gtcn.model import GTCNModel, GTCNHyperParams
-
-import time
+import optuna
 import pickle
 import torch
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
 from src.gtcn.model import GTCNModel, GTCNHyperParams
 from collections import Counter
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"> Using device: {DEVICE}")
+
+RANDOM_SEED = 42
+NUM_FOLDS = 5
 
 
 class GTCNDataset(Dataset):
@@ -42,19 +41,6 @@ def _compute_balanced_weights(y, num_classes):
         weights[cls] = total / (num_classes * count)
 
     return torch.tensor(weights, dtype=torch.float32)
-
-
-import optuna
-import torch
-import torch.nn as nn
-from torch.utils.data import DataLoader, Subset
-from sklearn.model_selection import KFold
-from src.gtcn.model import GTCNModel, GTCNHyperParams
-
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
-RANDOM_SEED = 42
-NUM_FOLDS = 5
 
 
 def evaluate_model(
@@ -173,14 +159,15 @@ def objective(trial):
 # -----------------------------------------------------------
 # Run Optuna Random Search
 # -----------------------------------------------------------
+start_time = time.time()
 study = optuna.create_study(
     direction="minimize", sampler=optuna.samplers.RandomSampler()
 )
-study.optimize(objective, n_trials=50)
+study.optimize(objective, n_trials=20)
 
 print("Best Trial:", study.best_trial.number)
 print("Best Score:", study.best_trial.value)
 print("Best Params:", study.best_trial.params)
-
+print("Total Optimization Time: %.2f seconds" % (time.time() - start_time))
 
 # nohup python -u -m src.gtcn.cross_validate
