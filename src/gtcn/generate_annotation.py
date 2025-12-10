@@ -2,7 +2,7 @@ import torch
 import time
 import os
 from src.gtcn.model import GTCNModel, GTCNHyperParams
-from src.gtcn.train import BEST_MODEL_PATH
+from src.gtcn.train import DEFAULT_MODEL_PATH
 from src.gtcn.create_training_set import convert_sequence_to_X
 from src.dataset_utils import (
     DSequence,
@@ -180,7 +180,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--model",
         type=str,
-        default=BEST_MODEL_PATH,
+        default=DEFAULT_MODEL_PATH,
         help="Path to trained model checkpoint",
     )
     args = parser.parse_args()

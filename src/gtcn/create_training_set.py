@@ -13,8 +13,7 @@ import pickle
 import os
 import torch
 
-
-TRAINSET_PATH = "./src/gtcn/datasets/train.pkl"
+DEFAULT_TRAINSET_PATH = "./src/gtcn/datasets/train.pkl"
 
 
 class TrainingDataset(Dataset):
@@ -23,6 +22,8 @@ class TrainingDataset(Dataset):
         assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
         assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
         assert X.shape[3] == 3, "X coordinate dimension mismatch!"
+
+        print(f"> Creating TrainingDataset: X={X.shape}, y={y.shape}")
 
         self.X = torch.tensor(X, dtype=torch.float32)
         self.y = torch.tensor(y, dtype=torch.long)
@@ -34,16 +35,25 @@ class TrainingDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 
-def convert_sequence_to_X(sequence: DSequence) -> np.ndarray:
+def convert_sequence_to_X(sequence: DSequence, shift: int = 0) -> np.ndarray:
     X = []
-    for end_frame in range(len(sequence.frames)):
-        start_frame = end_frame - GTCNModel.WINDOW_LENGTH + 1
-        if start_frame >= 0:
+    for sample_frame in range(len(sequence.frames)):
+        start_frame = sample_frame - GTCNModel.WINDOW_LENGTH + 1 + shift
+        end_frame = start_frame + GTCNModel.WINDOW_LENGTH - 1
+
+        if start_frame >= 0 and end_frame < len(sequence.frames):
             window = sequence.frames[start_frame : end_frame + 1]
         else:
-            window = [sequence.frames[0]] * (-start_frame) + sequence.frames[
-                : end_frame + 1
-            ]
+            if end_frame >= len(sequence.frames):
+                window = sequence.frames[start_frame:] + [sequence.frames[-1]] * (
+                    end_frame - len(sequence.frames) + 1
+                )
+            elif start_frame < 0:
+                window = [sequence.frames[0]] * (-start_frame) + sequence.frames[
+                    : end_frame + 1
+                ]
+            else:
+                raise ValueError("Unexpected frame indices!")
 
         assert len(window) == GTCNModel.WINDOW_LENGTH
 
@@ -83,7 +93,13 @@ def convert_annotation_to_y(annotation: DAnnotation, num_frames: int) -> np.ndar
     return y
 
 
-def create_training_set(sequences_folder, ann_file, max_sequence_id=None):
+def create_training_set(
+    sequences_folder,
+    ann_file,
+    out_file=DEFAULT_TRAINSET_PATH,
+    shift=0,
+    max_sequence_id=None,
+):
     total_X = np.array([], dtype=np.float32).reshape(
         0, GTCNModel.WINDOW_LENGTH, len(GTCNModel.LANDMARKS), 3
     )
@@ -99,7 +115,7 @@ def create_training_set(sequences_folder, ann_file, max_sequence_id=None):
         sequence_file = sequences_folder + str(ann.sequence_id) + ".txt"
         sequence = parse_shrec_sequence_file(sequence_file)
 
-        X = convert_sequence_to_X(sequence)
+        X = convert_sequence_to_X(sequence, shift)
         y = convert_annotation_to_y(ann, len(sequence.frames))
 
         mask = y != -1
@@ -121,13 +137,13 @@ def create_training_set(sequences_folder, ann_file, max_sequence_id=None):
         distribution_str += f" {GTCNModel.GESTURES[label_idx].name}:{c[label_idx]}"
     print(distribution_str)
 
-    with open(TRAINSET_PATH, "wb") as f:
+    with open(out_file, "wb") as f:
         pickle.dump(
             {"X": total_X, "y": total_y, "seq_ids": total_seq_ids},
             f,
         )
-    file_size = os.path.getsize(TRAINSET_PATH) / (1024 * 1024)
-    print(f"Saved to {TRAINSET_PATH} ({file_size:.2f} MB)")
+    file_size = os.path.getsize(out_file) / (1024 * 1024)
+    print(f"Saved to {out_file} ({file_size:.2f} MB)")
 
 
 if __name__ == "__main__":

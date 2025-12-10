@@ -4,12 +4,12 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from src.gtcn.model import GTCNHyperParams, GTCNModel
-from src.gtcn.create_training_set import TrainingDataset, TRAINSET_PATH
+from src.gtcn.create_training_set import TrainingDataset, DEFAULT_TRAINSET_PATH
 from src.dataset_utils import GestureLabel
 from collections import Counter
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-BEST_MODEL_PATH = "./src/gtcn/datasets/best_model.pth"
+DEFAULT_MODEL_PATH = "./src/gtcn/datasets/best_model.pth"
 
 
 def compute_balanced_weights(y):
@@ -17,26 +17,31 @@ def compute_balanced_weights(y):
     total = len(y)
     weights = np.zeros(len(GTCNModel.GESTURES), dtype=np.float32)
 
-    print("\nLabel distribution:")
+    print("> Label distribution:")
     for gesture in GTCNModel.GESTURES:
         idx = GTCNModel.GESTURES.index(gesture)
         weights[idx] = 0.1 if gesture == GestureLabel.NONE else 1.0
-        print(f"{gesture.name}: count={counts[idx]}, weight={weights[idx]:.4f};")
+        print(f"  {gesture.name}: count={counts[idx]}, weight={weights[idx]:.4f};")
 
     return torch.tensor(weights, dtype=torch.float32)
 
 
-def train_model(params, epochs, batch_size=32):
+def train_model(
+    params,
+    epochs,
+    trainset_path=DEFAULT_TRAINSET_PATH,
+    model_path=DEFAULT_MODEL_PATH,
+    batch_size=32,
+):
     start_time = time.time()
 
     print(f"Training model with parameters {params}")
 
     # Load full dataset
-    with open(TRAINSET_PATH, "rb") as f:
+    with open(trainset_path, "rb") as f:
         data = pickle.load(f)
     X = data["X"]
     y = data["y"]
-    print(f"Loaded training data: X={X.shape}, y={y.shape}")
 
     # Create full training dataset
     train_loader = DataLoader(
@@ -101,7 +106,7 @@ def train_model(params, epochs, batch_size=32):
                     "loss": best_loss,
                     "hyperparams": model_params.__dict__,
                 },
-                BEST_MODEL_PATH,
+                model_path,
             )
             early_stop_counter = 0
         else:
