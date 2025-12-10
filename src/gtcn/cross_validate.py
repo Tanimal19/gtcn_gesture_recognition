@@ -3,44 +3,15 @@ import optuna
 import pickle
 import torch
 import numpy as np
-from torch.utils.data import DataLoader, Dataset
-from src.gtcn.model import GTCNModel, GTCNHyperParams
-from collections import Counter
+from torch.utils.data import DataLoader
+from src.gtcn.model import GTCNModel, GTCNDataset, GTCNHyperParams
+from src.gtcn.train import compute_balanced_weights
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"> Using device: {DEVICE}")
 
 RANDOM_SEED = 42
 NUM_FOLDS = 5
-
-
-class GTCNDataset(Dataset):
-    def __init__(self, X: np.ndarray, y: np.ndarray):
-        assert X.shape[0] == y.shape[0], "X and y length mismatch!"
-        assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
-        assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
-        assert X.shape[3] == 3, "X coordinate dimension mismatch!"
-
-        self.X = torch.tensor(X, dtype=torch.float32)
-        self.y = torch.tensor(y, dtype=torch.long)
-
-    def __len__(self):
-        return len(self.X)
-
-    def __getitem__(self, idx):
-        return self.X[idx], self.y[idx]
-
-
-def _compute_balanced_weights(y, num_classes):
-    counts = Counter(y)
-    total = len(y)
-    weights = np.zeros(num_classes, dtype=np.float32)
-
-    for cls in range(num_classes):
-        count = counts[cls] if counts[cls] > 0 else 1
-        weights[cls] = total / (num_classes * count)
-
-    return torch.tensor(weights, dtype=torch.float32)
 
 
 def evaluate_model(
@@ -56,9 +27,7 @@ def evaluate_model(
         GTCNDataset(X[val_idx], y[val_idx]), batch_size=batch_size, shuffle=False
     )
 
-    weights = _compute_balanced_weights(y[train_idx], len(GTCNModel.GESTURES)).to(
-        DEVICE
-    )
+    weights = compute_balanced_weights(y[train_idx], len(GTCNModel.GESTURES)).to(DEVICE)
 
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
     optimizer = torch.optim.Adam(
@@ -99,9 +68,6 @@ def evaluate_model(
     return val_loss / len(val_loader)
 
 
-# -----------------------------------------------------------
-# Optuna objective function
-# -----------------------------------------------------------
 def objective(trial):
 
     # ---- 隨機選 hyperparameters ----
@@ -136,7 +102,7 @@ def objective(trial):
     # perform k-fold cross-validation
     scores = []
     for fold_idx, val_seqs in enumerate(seq_folds):
-        print(f"\n====================")
+        print("\n" + "=" * 50)
         print(f" Fold {fold_idx + 1}/{NUM_FOLDS}")
         print(f" Validation sequences: {sorted(val_seqs.tolist())}")
 
@@ -151,18 +117,20 @@ def objective(trial):
     return sum(scores) / len(scores)
 
 
-# -----------------------------------------------------------
-# Run Optuna Random Search
-# -----------------------------------------------------------
-start_time = time.time()
-study = optuna.create_study(
-    direction="minimize", sampler=optuna.samplers.RandomSampler()
-)
-study.optimize(objective, n_trials=20)
+def find_optimize_params(n_trials):
+    start_time = time.time()
+    study = optuna.create_study(
+        direction="minimize", sampler=optuna.samplers.RandomSampler()
+    )
+    study.optimize(objective, n_trials)
 
-print("Best Trial:", study.best_trial.number)
-print("Best Score:", study.best_trial.value)
-print("Best Params:", study.best_trial.params)
-print("Total Optimization Time: %.2f seconds" % (time.time() - start_time))
+    print("Best Trial:", study.best_trial.number)
+    print("Best Score:", study.best_trial.value)
+    print("Best Params:", study.best_trial.params)
+    print("Total Optimization Time: %.2f seconds" % (time.time() - start_time))
 
-# nohup python -u -m src.gtcn.cross_validate &
+    return study.best_trial.params
+
+
+if __name__ == "__main__":
+    find_optimize_params(n_trials=10)

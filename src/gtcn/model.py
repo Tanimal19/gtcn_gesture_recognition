@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from src.dataset_utils import GestureLabel, HandLandmark
+from torch.utils.data import Dataset
 from dataclasses import dataclass
 
 
@@ -32,6 +33,23 @@ class GTCNHyperParams:
     TCN_DILATIONS: tuple[int]
     TCN_DROPOUT: float
     CLASS_HIDDEN_DIM: int
+
+
+class GTCNDataset(Dataset):
+    def __init__(self, X: np.ndarray, y: np.ndarray):
+        assert X.shape[0] == y.shape[0], "X and y length mismatch!"
+        assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
+        assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
+        assert X.shape[3] == 3, "X coordinate dimension mismatch!"
+
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y, dtype=torch.long)
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
 
 
 class GTCNModel(nn.Module):
