@@ -74,10 +74,10 @@ def evaluate_model(
     for _ in range(EPOCHS):
         model.train()
         for batch in train_loader:
-            x, edge_index, y = batch
-            x, edge_index, y = x.to(DEVICE), edge_index.to(DEVICE), y.to(DEVICE)
+            x, y = batch
+            x, y = x.to(DEVICE), y.to(DEVICE)
 
-            logits = model(x, edge_index)
+            logits = model(x)
             loss = criterion(logits, y)
 
             optimizer.zero_grad()
@@ -89,10 +89,10 @@ def evaluate_model(
     val_loss = 0.0
     with torch.no_grad():
         for batch in val_loader:
-            x, edge_index, y = batch
-            x, edge_index, y = x.to(DEVICE), edge_index.to(DEVICE), y.to(DEVICE)
+            x, y = batch
+            x, y = x.to(DEVICE), y.to(DEVICE)
 
-            logits = model(x, edge_index)
+            logits = model(x)
             loss = criterion(logits, y)
             val_loss += loss.item()
 
@@ -112,8 +112,7 @@ def objective(trial):
         TCN_HIDDEN_DIM=trial.suggest_categorical("TCN_HIDDEN_DIM", [32, 64, 128]),
         TCN_KERNEL_SIZE=trial.suggest_categorical("TCN_KERNEL_SIZE", [3, 5]),
         TCN_DILATIONS=trial.suggest_categorical(
-            "TCN_DILATIONS",
-            [(1,2,4), (1,2,4,8), (1,2,4,8,16)]
+            "TCN_DILATIONS", [(1, 2, 4), (1, 2, 4, 8), (1, 2, 4, 8, 16)]
         ),
         TCN_DROPOUT=trial.suggest_float("TCN_DROPOUT", 0.1, 0.4),
         CLASS_HIDDEN_DIM=trial.suggest_categorical("CLASS_HIDDEN_DIM", [32, 64, 128]),
