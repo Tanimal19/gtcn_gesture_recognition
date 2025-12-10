@@ -141,4 +141,5 @@ def parse_shrec_annotations_file(
                 )
             )
 
+    results.sort(key=lambda x: x.sequence_id)
     return results

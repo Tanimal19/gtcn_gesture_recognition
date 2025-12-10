@@ -1,7 +1,11 @@
 import numpy as np
 from sklearn.metrics import ConfusionMatrixDisplay
 from matplotlib import pyplot as plt
-from src.dataset_utils import SHREC_TEST_DATASET_FOLDER, GestureLabel
+from src.dataset_utils import (
+    SHREC_TEST_DATASET_FOLDER,
+    GestureLabel,
+    parse_shrec_annotations_file,
+)
 import argparse
 
 num_sequence = 72
@@ -20,16 +24,18 @@ gestures = [  # only dynamic gestures
     GestureLabel.EXPAND,
 ]
 num_gest = len(gestures)
+none_gest_idx = num_gest
 
 
-def read_annotations(file_path):
+def read_annotations(filepath):
+    anns = parse_shrec_annotations_file(filepath, gestures)
+
     data = []
-    with open(file_path, "r") as f:
-        for line in f:
-            parts = line.strip().split(";")
-            seq_id = int(parts[0])
-            gestures_list = parts[1:-1]  # exclude last empty
-            data.append([seq_id, gestures_list])
+    for ann in anns:
+        gestures_list = []
+        for gesture in ann.gestures:
+            gestures_list.extend([gesture[0], gesture[1], gesture[2]])
+        data.append([ann.sequence_id, gestures_list])
 
     data.sort(key=lambda x: x[0])  # sort by sequence ID
     return data
@@ -41,8 +47,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--apath",
-        type=int,
-        default="./src/gtcn/datasets/generated_annotations.txt",
+        type=str,
         help="path of generated annotation file.",
     )
     args = parser.parse_args()
@@ -106,76 +111,87 @@ if __name__ == "__main__":
                             found[countA - 1] = 1
                             class_results[idx_AA, 1] += 1  # Correct
                         else:
-                            idx_RR = 17  # Non-gesture row
-                            confmat[idx_RR, idx_AA] += 1
+                            # Non-gesture row
+                            confmat[none_gest_idx, idx_AA] += 1
                     else:
                         class_results[idx_AA, 3] += 1  # Misclassified
                         if found[countA - 1] != 1:
                             idx_RR = gestures.index(RR[0])
                             confmat[idx_RR, idx_AA] += 1
                         else:
-                            idx_RR = 17
-                            confmat[idx_RR, idx_AA] += 1
+                            confmat[none_gest_idx, idx_AA] += 1
 
             if not detected:
                 idx_AA = gestures.index(AA[0])
                 class_results[idx_AA, 4] += 1  # False positive
-                confmat[17, idx_AA] += 1  # Non-gesture row
+                confmat[none_gest_idx, idx_AA] += 1  # Non-gesture row
 
         for f, val in enumerate(found):
             if val == 0:
                 idx_AA = gestures.index(A[f * 3])
                 class_results[idx_AA, 2] += 1  # Missed
-                confmat[idx_AA, 17] += 1  # Non-gesture col
+                confmat[idx_AA, none_gest_idx] += 1  # Non-gesture col
 
-# -----------------------------
-# Final metrics
-# -----------------------------
-for i in range(num_gest):
-    class_results[i, 5] = class_results[i, 5] / (
-        jaccard_counts[i]
-        + class_results[i, 2]
-        + class_results[i, 3]
-        + class_results[i, 4]
+    # finalize metrics
+    for i in range(num_gest):
+        class_results[i, 5] = class_results[i, 5] / (
+            jaccard_counts[i]
+            + class_results[i, 2]
+            + class_results[i, 3]
+            + class_results[i, 4]
+        )
+
+    class_precision = class_results[:, 1] / (
+        class_results[:, 1] + class_results[:, 2] + class_results[:, 4]
+    )
+    class_recall = class_results[:, 1] / (class_results[:, 1] + class_results[:, 3])
+    correct_score = np.sum(class_results[:, 1]) / np.sum(class_results[:, 0])
+    misclassified_rate = np.sum(class_results[:, 3]) / np.sum(class_results[:, 0])
+    false_positive_rate = np.sum(class_results[:, 4]) / np.sum(class_results[:, 0])
+
+    print("\n=== Per-class results ===")
+    print(
+        f"{'Gesture':<15} {'Total':<7} {'Correct':<9} {'Missed':<7} {'Misclassified':<15} {'FalsePositive':<15} {'Jaccard':<10} {'Precision':<10} {'Recall':<10}"
+    )
+    print(
+        f"{'Overall':<15} {int(np.sum(class_results[:,0])):<7} {int(np.sum(class_results[:,1])):<9} {int(np.sum(class_results[:,2])):<7} {int(np.sum(class_results[:,3])):<15} {int(np.sum(class_results[:,4])):<15} {'-':<10} {'-':<10} {'-':<10}"
+    )
+    for i, g in enumerate(gestures):
+        precision = class_precision[i] if not np.isnan(class_precision[i]) else 0.0
+        recall = class_recall[i] if not np.isnan(class_recall[i]) else 0.0
+        print(
+            f"{g.name:<15} {int(class_results[i,0]):<7} {int(class_results[i,1]):<9} {int(class_results[i,2]):<7} {int(class_results[i,3]):<15} {int(class_results[i,4]):<15} {class_results[i,5]:<10.4f} {precision:<10.4f} {recall:<10.4f}"
+        )
+
+    results_compact = np.column_stack(
+        [
+            class_results[:, 1] / 16,
+            (class_results[:, 3] + class_results[:, 4]) / 16,
+            class_results[:, 1]
+            / (
+                class_results[:, 1]
+                + class_results[:, 2]
+                + class_results[:, 3]
+                + class_results[:, 4]
+            ),
+        ]
+    )
+    results_compact = np.vstack(
+        [
+            results_compact,
+            [
+                np.sum(results_compact[:, 0]) / num_gest,
+                np.sum(results_compact[:, 1]) / num_gest,
+                np.nansum(results_compact[:, 2]) / num_gest,
+            ],
+        ]
     )
 
-class_precision = class_results[:, 1] / (
-    class_results[:, 1] + class_results[:, 2] + class_results[:, 4]
-)
-class_recall = class_results[:, 1] / (class_results[:, 1] + class_results[:, 3])
-
-correct_score = np.sum(class_results[:, 1]) / np.sum(class_results[:, 0])
-misclassified_rate = np.sum(class_results[:, 3]) / np.sum(class_results[:, 0])
-false_positive_rate = np.sum(class_results[:, 4]) / np.sum(class_results[:, 0])
-
-results_compact = np.column_stack(
-    [
-        class_results[:, 1] / 16,
-        (class_results[:, 3] + class_results[:, 4]) / 16,
-        class_results[:, 1]
-        / (
-            class_results[:, 1]
-            + class_results[:, 2]
-            + class_results[:, 3]
-            + class_results[:, 4]
-        ),
-    ]
-)
-results_compact = np.vstack(
-    [
-        results_compact,
-        [
-            np.sum(results_compact[:, 0]) / 17,
-            np.sum(results_compact[:, 1]) / 17,
-            np.nansum(results_compact[:, 2]) / 17,
-        ],
-    ]
-)
-
-# -----------------------------
-# Confusion matrix display
-# -----------------------------
-ge = gestures + ["NONGESTURES"]
-disp = ConfusionMatrixDisplay(confmat, display_labels=ge)
-disp.plot(xticks_rotation=90)
-plt.show()
+    # -----------------------------
+    # Confusion matrix display
+    # -----------------------------
+    ge = [g.name for g in gestures] + ["NONGESTURES"]
+    disp = ConfusionMatrixDisplay(confmat, display_labels=ge)
+    disp.plot(xticks_rotation=90)
+    plt.tight_layout()
+    plt.show()
