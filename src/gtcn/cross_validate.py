@@ -136,16 +136,16 @@ def objective(trial):
     # perform k-fold cross-validation
     scores = []
     for fold_idx, val_seqs in enumerate(seq_folds):
-        print(f"====================")
+        print(f"\n====================")
         print(f" Fold {fold_idx + 1}/{NUM_FOLDS}")
         print(f" Validation sequences: {sorted(val_seqs.tolist())}")
-        print(f"====================")
 
         train_idx = np.where(~np.isin(seq_ids, val_seqs))[0]
         val_idx = np.where(np.isin(seq_ids, val_seqs))[0]
 
         model = GTCNModel(model_params).to(DEVICE)
         fold_loss = evaluate_model(model, training_params, train_idx, val_idx, data)
+        print(f"Loss: {fold_loss:.4f}")
         scores.append(fold_loss)
 
     return sum(scores) / len(scores)
