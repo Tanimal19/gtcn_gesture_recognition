@@ -74,13 +74,8 @@ class DAnnotation:
     ]  # (gesture_label, start_frame_index, end_frame_index)
 
 
-# --------------------------------------
-# Parsing SHREC21 files to dataclasses
-# --------------------------------------
-VALUES_PER_LANDMARK = 7  # x,y,z,qx,qy,qz,qw
-
-
 def parse_shrec_sequence_file(filepath: str) -> DSequence:
+    values_per_landmark = 7  # x,y,z,qx,qy,qz,qw
     sequence_id = os.path.splitext(os.path.basename(filepath))[0]
 
     frames: List[DSequenceFrame] = []
@@ -93,12 +88,12 @@ def parse_shrec_sequence_file(filepath: str) -> DSequence:
         if not line:
             continue
         values = [float(v) for v in line.split(";") if v]
-        assert len(values) == len(HandLandmark) * VALUES_PER_LANDMARK
+        assert len(values) == len(HandLandmark) * values_per_landmark
 
         landmarks = {}
 
         for i, lm in enumerate(HandLandmark):
-            base = i * VALUES_PER_LANDMARK
+            base = i * values_per_landmark
             x, y, z = values[base : base + 3]  # ignore quaternion
             landmarks[lm] = (x, y, z)
 

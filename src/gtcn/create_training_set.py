@@ -2,48 +2,88 @@ from src.dataset_utils import (
     parse_shrec_sequence_file,
     parse_shrec_annotations_file,
     DAnnotation,
-    DSequenceFrame,
+    DSequence,
     SHREC_TRAINING_DATASET_FOLDER,
 )
 from src.gtcn.model import GTCNModel
-from typing import List
+from torch.utils.data import Dataset
 from collections import Counter
 import numpy as np
 import pickle
 import os
+import torch
 
 
-def convert_window_to_X(window: List[DSequenceFrame]) -> np.ndarray:
-    num_landmarks = len(GTCNModel.LANDMARKS)
-    X = np.zeros((GTCNModel.WINDOW_LENGTH, num_landmarks, 3), dtype=np.float32)
+TRAINSET_PATH = "./src/gtcn/datasets/train.pkl"
 
-    for t, frame in enumerate(window):
-        for i, lm in enumerate(GTCNModel.LANDMARKS):
-            coord = frame.landmarks[lm]
-            X[t, i, :] = np.array(coord, dtype=np.float32)
 
-    # output shape: (WINDOW_LENGTH, num_landmarks, 3)
+class TrainingDataset(Dataset):
+    def __init__(self, X: np.ndarray, y: np.ndarray):
+        assert X.shape[0] == y.shape[0], "X and y length mismatch!"
+        assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
+        assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
+        assert X.shape[3] == 3, "X coordinate dimension mismatch!"
+
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y, dtype=torch.long)
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
+
+
+def convert_sequence_to_X(sequence: DSequence) -> np.ndarray:
+    X = []
+    for end_frame in range(len(sequence.frames)):
+        start_frame = end_frame - GTCNModel.WINDOW_LENGTH + 1
+        if start_frame >= 0:
+            window = sequence.frames[start_frame : end_frame + 1]
+        else:
+            window = [sequence.frames[0]] * (-start_frame) + sequence.frames[
+                : end_frame + 1
+            ]
+
+        assert len(window) == GTCNModel.WINDOW_LENGTH
+
+        num_landmarks = len(GTCNModel.LANDMARKS)
+        x = np.zeros((GTCNModel.WINDOW_LENGTH, num_landmarks, 3), dtype=np.float32)
+
+        for t, frame in enumerate(window):
+            for i, lm in enumerate(GTCNModel.LANDMARKS):
+                coord = frame.landmarks[lm]
+                x[t, i, :] = np.array(coord, dtype=np.float32)
+
+        X.append(x)
+
+    X = np.array(X)
+
+    # output shape: (total_frames, WINDOW_LENGTH, num_landmarks, 3)
+    assert X.shape[0] == len(sequence.frames), "X length mismatch!"
+    assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
+    assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
+    assert X.shape[3] == 3, "X coordinate dimension mismatch!"
+
     return X
 
 
-def convert_annotation_to_y(annotation: DAnnotation, total_frames: int) -> np.ndarray:
-    y = np.full(total_frames, -1, dtype=np.long)
+def convert_annotation_to_y(annotation: DAnnotation, num_frames: int) -> np.ndarray:
+    y = np.full(num_frames, -1, dtype=np.long)
 
     for label, start_frame, end_frame in annotation.gestures:
         pre_start = max(0, start_frame - GTCNModel.WINDOW_LENGTH)
-        post_end = min(total_frames, end_frame + GTCNModel.WINDOW_LENGTH)
+        post_end = min(num_frames, end_frame + GTCNModel.WINDOW_LENGTH)
         y[pre_start:post_end] = 0  # non gesture
         y[start_frame:end_frame] = GTCNModel.GESTURES.index(label)
 
     # output shape: (total_frames,)
+    assert y.shape[0] == num_frames, "y length mismatch!"
+
     return y
 
 
-def create_training_set(
-    sequences_folder, ann_file, output_folder, max_sequence_id=None
-):
-    os.makedirs(output_folder, exist_ok=True)
-
+def create_training_set(sequences_folder, ann_file, max_sequence_id=None):
     total_X = np.array([], dtype=np.float32).reshape(
         0, GTCNModel.WINDOW_LENGTH, len(GTCNModel.LANDMARKS), 3
     )
@@ -59,20 +99,7 @@ def create_training_set(
         sequence_file = sequences_folder + str(ann.sequence_id) + ".txt"
         sequence = parse_shrec_sequence_file(sequence_file)
 
-        # Convert each window in the sequence to X
-        X = []
-        for end_frame in range(len(sequence.frames)):
-            start_frame = end_frame - GTCNModel.WINDOW_LENGTH + 1
-            if start_frame >= 0:
-                window = sequence.frames[start_frame : end_frame + 1]
-            else:
-                window = [sequence.frames[0]] * (-start_frame) + sequence.frames[
-                    : end_frame + 1
-                ]
-
-            assert len(window) == GTCNModel.WINDOW_LENGTH
-            X.append(convert_window_to_X(window))
-
+        X = convert_sequence_to_X(sequence)
         y = convert_annotation_to_y(ann, len(sequence.frames))
 
         mask = y != -1
@@ -93,20 +120,18 @@ def create_training_set(
         distribution_str += f" {GTCNModel.GESTURES[label_idx].name}:{c[label_idx]}"
     print(distribution_str)
 
-    output_file = output_folder + "train.pkl"
-    with open(output_file, "wb") as f:
+    with open(TRAINSET_PATH, "wb") as f:
         pickle.dump(
             {"X": total_X, "y": total_y, "seq_ids": total_seq_ids},
             f,
         )
-    file_size = os.path.getsize(output_file) / (1024 * 1024)
-    print(f"Saved to {output_file} ({file_size:.2f} MB)")
+    file_size = os.path.getsize(TRAINSET_PATH) / (1024 * 1024)
+    print(f"Saved to {TRAINSET_PATH} ({file_size:.2f} MB)")
 
 
 if __name__ == "__main__":
     create_training_set(
         sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
         ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-        output_folder="./src/gtcn/datasets/",
         max_sequence_id=None,
     )

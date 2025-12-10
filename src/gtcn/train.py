@@ -3,11 +3,12 @@ import pickle
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
-from src.gtcn.model import GTCNHyperParams, GTCNDataset, GTCNModel
+from src.gtcn.model import GTCNHyperParams, GTCNModel
+from src.gtcn.create_training_set import TrainingDataset, TRAINSET_PATH
 from collections import Counter
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-print(f"> Using device: {DEVICE}")
+BEST_MODEL_PATH = "./src/gtcn/models/best_model.pth"
 
 
 def compute_balanced_weights(y, num_classes):
@@ -25,18 +26,18 @@ def compute_balanced_weights(y, num_classes):
 def train_final_model(params, epochs, batch_size=32):
     start_time = time.time()
 
-    print("\n" + "=" * 50)
     print(f"Training final model with best parameters {params}")
 
     # Load full dataset
-    with open("./src/gtcn/datasets/train.pkl", "rb") as f:
+    with open(TRAINSET_PATH, "rb") as f:
         data = pickle.load(f)
-
     X = data["X"]
     y = data["y"]
 
     # Create full training dataset
-    train_loader = DataLoader(GTCNDataset(X, y), batch_size=batch_size, shuffle=True)
+    train_loader = DataLoader(
+        TrainingDataset(X, y), batch_size=batch_size, shuffle=True
+    )
 
     # Extract model and training params
     model_params = GTCNHyperParams(
@@ -49,7 +50,6 @@ def train_final_model(params, epochs, batch_size=32):
         TCN_DROPOUT=params["TCN_DROPOUT"],
         CLASS_HIDDEN_DIM=params["CLASS_HIDDEN_DIM"],
     )
-
     model = GTCNModel(model_params).to(DEVICE)
 
     # Setup training
@@ -98,7 +98,7 @@ def train_final_model(params, epochs, batch_size=32):
                     "loss": best_loss,
                     "hyperparams": model_params.__dict__,
                 },
-                "./src/gtcn/models/best_model.pth",
+                BEST_MODEL_PATH,
             )
             early_stop_counter = 0
         else:
@@ -113,6 +113,7 @@ def train_final_model(params, epochs, batch_size=32):
 
 
 if __name__ == "__main__":
+    print(f"> Using device: {DEVICE}")
     example_params = {
         "GCN_HIDDEN_DIM": 16,
         "GCN_DROPOUT": 0.2,
