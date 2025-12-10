@@ -51,6 +51,7 @@ def create_training_set(
         0, GTCNModel.WINDOW_LENGTH, len(GTCNModel.LANDMARKS), 3
     )
     total_y = np.array([], dtype=np.long)
+    total_seq_ids = np.array([], dtype=np.int32)  # Track sequence IDs
 
     annotations = parse_shrec_annotations_file(ann_file, GTCNModel.GESTURES)
     for ann in annotations:
@@ -80,9 +81,13 @@ def create_training_set(
         mask = y != -1
         X = np.array(X)[mask]
         y = y[mask]
+        seq_ids = np.full(
+            len(y), ann.sequence_id, dtype=np.int32
+        )  # Create sequence ID array
 
         total_X = np.concatenate((total_X, X), axis=0)
         total_y = np.concatenate((total_y, y), axis=0)
+        total_seq_ids = np.concatenate((total_seq_ids, seq_ids), axis=0)
 
     print(f"X.shape: {total_X.shape}, y.shape: {total_y.shape}")
     c = Counter(total_y)
@@ -90,11 +95,12 @@ def create_training_set(
     for label_idx in range(len(GTCNModel.GESTURES)):
         distribution_str += f" {GTCNModel.GESTURES[label_idx].name}:{c[label_idx]}"
     print(distribution_str)
+    print(f"Number of unique sequences: {len(np.unique(total_seq_ids))}")
 
     output_file = output_folder + f"train.pkl"
     with open(output_file, "wb") as f:
         pickle.dump(
-            {"X": total_X, "y": total_y},
+            {"X": total_X, "y": total_y, "seq_ids": total_seq_ids},
             f,
         )
     file_size = os.path.getsize(output_file) / (1024 * 1024)

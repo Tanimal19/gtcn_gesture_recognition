@@ -3,7 +3,6 @@ import pickle
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report, confusion_matrix
 from src.gtcn.model import GTCNModel, GTCNHyperParams
 from src.gtcn.create_set import DATASET_FOLDER
@@ -36,7 +35,7 @@ def _evaluate(model, loader, criterion, device):
     return avg_loss, report, cm
 
 
-def cross_validate(learning_rate, epochs, folds, model_params: GTCNHyperParams):
+def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # Load data
@@ -45,16 +44,29 @@ def cross_validate(learning_rate, epochs, folds, model_params: GTCNHyperParams):
 
     X = data["X"]
     y = data["y"]
+    seq_ids = data["seq_ids"]
     num_classes = len(GTCNModel.GESTURES)
 
-    skf = StratifiedKFold(n_splits=folds, shuffle=True, random_state=42)
+    # Get unique sequences for LOSO
+    unique_seqs = np.unique(seq_ids)
+    num_sequences = len(unique_seqs)
+    print(f"Performing Leave-One-Sequence-Out with {num_sequences} sequences")
 
     fold_results = []
 
-    for fold, (train_idx, val_idx) in enumerate(skf.split(X, y)):
+    for fold, test_seq_id in enumerate(unique_seqs):
         print(f"\n====================")
-        print(f" Fold {fold + 1}/{folds}")
+        print(f" Fold {fold + 1}/{num_sequences} (Sequence {test_seq_id} held out)")
         print(f"====================")
+
+        # Split by sequence: all windows from test_seq_id go to validation
+        train_mask = seq_ids != test_seq_id
+        val_mask = seq_ids == test_seq_id
+
+        train_idx = np.where(train_mask)[0]
+        val_idx = np.where(val_mask)[0]
+
+        print(f"Train samples: {len(train_idx)}, Val samples: {len(val_idx)}")
 
         # Prepare data
         train_ds = SequenceDataset(X[train_idx], y[train_idx])
@@ -73,30 +85,44 @@ def cross_validate(learning_rate, epochs, folds, model_params: GTCNHyperParams):
             train_loss = _train_one_epoch(
                 model, train_loader, criterion, optimizer, device
             )
-            print(
-                f"[Fold {fold+1}] Epoch {epoch+1}/{epochs} - Train Loss: {train_loss:.4f}"
-            )
+            if (epoch + 1) % 5 == 0 or epoch == 0:
+                print(
+                    f"[Seq {test_seq_id}] Epoch {epoch+1}/{epochs} - Train Loss: {train_loss:.4f}"
+                )
 
         # Evaluation
         val_loss, report, cm = _evaluate(model, val_loader, criterion, device)
 
-        print(f"\n[Fold {fold+1}] Validation Loss: {val_loss:.4f}")
-        print("\nClassification Report:")
-        print(report)
+        print(f"\n[Seq {test_seq_id}] Validation Loss: {val_loss:.4f}")
+        print(f"[Seq {test_seq_id}] Macro F1: {report['macro avg']['f1-score']:.4f}")
+        print(f"[Seq {test_seq_id}] Accuracy: {report['accuracy']:.4f}")
 
-        print("Confusion Matrix:")
-        print(cm)
-
-        fold_results.append(report["macro avg"]["f1-score"])
+        fold_results.append(
+            {
+                "seq_id": test_seq_id,
+                "f1_score": report["macro avg"]["f1-score"],
+                "accuracy": report["accuracy"],
+                "report": report,
+                "cm": cm,
+            }
+        )
 
     print("\n====================")
-    print(" Final Cross-Validation Results")
+    print(" LOSO Cross-Validation Results")
     print("====================")
 
-    for i, f1 in enumerate(fold_results):
-        print(f"Fold {i+1}: Macro F1 = {f1:.4f}")
+    f1_scores = [r["f1_score"] for r in fold_results]
+    accuracies = [r["accuracy"] for r in fold_results]
 
-    print(f"\nAverage Macro F1: {np.mean(fold_results):.4f}")
+    for result in fold_results:
+        print(
+            f"Seq {result['seq_id']}: F1={result['f1_score']:.4f}, Acc={result['accuracy']:.4f}"
+        )
+
+    print(f"\nAverage Macro F1: {np.mean(f1_scores):.4f} (±{np.std(f1_scores):.4f})")
+    print(f"Average Accuracy: {np.mean(accuracies):.4f} (±{np.std(accuracies):.4f})")
+
+    return fold_results
 
 
 if __name__ == "__main__":
@@ -118,10 +144,9 @@ if __name__ == "__main__":
 
     for params in model_params_list:
         print(f"Training GTCN Model with params ID: {params.id}")
-        cross_validate(
+        results = cross_validate(
             learning_rate=1e-3,
             epochs=10,
-            folds=5,
             model_params=params,
         )
-        print(f"Completed with time: {time.time() - start_time}\n")
+        print(f"Completed with time: {time.time() - start_time:.2f}s\n")
