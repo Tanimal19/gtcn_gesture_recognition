@@ -22,7 +22,7 @@ def compute_balanced_weights(y, num_classes):
     return torch.tensor(weights, dtype=torch.float32)
 
 
-def train_final_model(params, epochs=200, batch_size=32):
+def train_final_model(params, epochs, batch_size=32):
     start_time = time.time()
 
     print("\n" + "=" * 50)
@@ -116,4 +116,4 @@ if __name__ == "__main__":
         "learning_rate": 1e-3,
         "weight_decay": 1e-4,
     }
-    train_final_model(example_params, epochs=10, batch_size=32)
+    train_final_model(example_params, epochs=10)

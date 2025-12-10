@@ -1,0 +1,13 @@
+> Using device: cuda
+> Using device: cuda
+[I 2025-12-10 10:51:55,897] A new study created in memory with name: no-name-111a7895-a59a-4c65-a11d-4f8ec36c2930
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains (1, 2, 4) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains (1, 2, 4, 8) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains (1, 2, 4, 8, 16) which is of type tuple.
+  warnings.warn(message)
+
+==================================================
+ Fold 1/5
+ Validation sequences: [1, 5, 11, 12, 14, 20, 32, 35, 44, 46, 49, 57, 66, 67, 69, 80, 81, 82, 84, 96, 100, 103]
