@@ -1,0 +1,49 @@
+
+=== Per-class results ===
+Gesture         Total   Correct   Missed  Misclassified   FalsePositive   Jaccard    Precision  Recall    
+Overall         94      55        39      8               3564            -          -          -         
+GRAB            16      6         10      3               601             0.0068     0.0097     0.6667    
+PINCH           16      14        2       0               762             0.0133     0.0180     1.0000    
+TAP             14      10        4       1               638             0.0106     0.0153     0.9091    
+DENY            16      16        0       0               392             0.0233     0.0392     1.0000    
+KNOB            16      4         12      3               662             0.0088     0.0059     0.5714    
+EXPAND          16      5         11      1               509             0.0114     0.0095     0.8333    
+
+
+> Using device: cpu
+Model Hyperparameters: GTCNHyperParams(id='best_model', GCN_HIDDEN_DIM=32, GCN_DROPOUT=0.2, TCN_HIDDEN_DIM=128, TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASS_HIDDEN_DIM=128)
+> Creating TrainingDataset: X=(6146, 10, 11, 3), y=(6146,)
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.5821    0.2951    0.3917      1850
+           1     0.2305    0.4238    0.2986       453
+           2     0.6858    0.7862    0.7326       608
+           3     0.5199    0.6200    0.5655       421
+           4     0.7669    0.9744    0.8583      1249
+           5     0.7100    0.7382    0.7238      1207
+           6     0.4701    0.4385    0.4538       358
+
+    accuracy                         0.6089      6146
+   macro avg     0.5665    0.6109    0.5749      6146
+weighted avg     0.6183    0.6089    0.5941      6146
+
+
+Classification Report after Majority Vote Smoothing:
+              precision    recall  f1-score   support
+
+           0     0.5711    0.2995    0.3929      1850
+           1     0.2201    0.4018    0.2844       453
+           2     0.6980    0.7944    0.7431       608
+           3     0.5458    0.6366    0.5877       421
+           4     0.7639    0.9712    0.8551      1249
+           5     0.7126    0.7415    0.7268      1207
+           6     0.4907    0.4413    0.4647       358
+
+    accuracy                         0.6106      6146
+   macro avg     0.5717    0.6123    0.5792      6146
+weighted avg     0.6183    0.6106    0.5966      6146
+
+
+Evaluation completed in 2.49 seconds.

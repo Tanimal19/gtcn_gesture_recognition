@@ -1,0 +1,15 @@
+> Using device: cpu
+Training model with parameters {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': (1, 2, 4, 8, 16), 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.0015}
+> Creating TrainingDataset: X=(8291, 10, 11, 3), y=(8291,)
+Epoch [1/10], Loss: 1.9391
+Epoch [2/10], Loss: 1.8984
+Epoch [3/10], Loss: 1.8663
+Epoch [4/10], Loss: 1.8167
+Epoch [5/10], Loss: 1.6899
+Epoch [6/10], Loss: 1.3708
+Epoch [7/10], Loss: 1.1501
+Epoch [8/10], Loss: 1.0182
+Epoch [9/10], Loss: 0.9351
+Epoch [10/10], Loss: 0.8283
+
+Training completed in 62.52 seconds.

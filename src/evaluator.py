@@ -11,11 +11,6 @@ import argparse
 num_sequence = 72
 min_overlap_ratio = 0.5
 gestures = [  # only dynamic gestures
-    GestureLabel.LEFT,
-    GestureLabel.RIGHT,
-    GestureLabel.CIRCLE,
-    GestureLabel.V,
-    GestureLabel.CROSS,
     GestureLabel.GRAB,
     GestureLabel.PINCH,
     GestureLabel.TAP,
