@@ -1,0 +1,647 @@
++ Processing sequence: 1
+  -> samples added: 101, Counter({np.int64(4): 81, np.int64(0): 20})
++ Processing sequence: 2
+  -> samples added: 140, Counter({np.int64(6): 50, np.int64(5): 50, np.int64(0): 40})
++ Processing sequence: 3
+  -> samples added: 0, Counter()
++ Processing sequence: 4
+  -> samples added: 83, Counter({np.int64(0): 40, np.int64(3): 23, np.int64(2): 20})
++ Processing sequence: 5
+  -> samples added: 60, Counter({np.int64(1): 40, np.int64(0): 20})
++ Processing sequence: 6
+  -> samples added: 0, Counter()
++ Processing sequence: 7
+  -> samples added: 75, Counter({np.int64(4): 55, np.int64(0): 20})
++ Processing sequence: 8
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(1): 20})
++ Processing sequence: 9
+  -> samples added: 0, Counter()
++ Processing sequence: 10
+  -> samples added: 67, Counter({np.int64(0): 40, np.int64(6): 14, np.int64(5): 13})
++ Processing sequence: 11
+  -> samples added: 48, Counter({np.int64(3): 28, np.int64(0): 20})
++ Processing sequence: 12
+  -> samples added: 71, Counter({np.int64(2): 51, np.int64(0): 20})
++ Processing sequence: 13
+  -> samples added: 0, Counter()
++ Processing sequence: 14
+  -> samples added: 204, Counter({np.int64(4): 184, np.int64(0): 20})
++ Processing sequence: 15
+  -> samples added: 37, Counter({np.int64(0): 20, np.int64(1): 17})
++ Processing sequence: 16
+  -> samples added: 78, Counter({np.int64(0): 40, np.int64(3): 25, np.int64(6): 13})
++ Processing sequence: 17
+  -> samples added: 218, Counter({np.int64(5): 146, np.int64(0): 40, np.int64(2): 32})
++ Processing sequence: 18
+  -> samples added: 0, Counter()
++ Processing sequence: 19
+  -> samples added: 186, Counter({np.int64(5): 166, np.int64(0): 20})
++ Processing sequence: 20
+  -> samples added: 267, Counter({np.int64(4): 168, np.int64(0): 60, np.int64(3): 28, np.int64(6): 11})
++ Processing sequence: 21
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(2): 27, np.int64(1): 10})
++ Processing sequence: 22
+  -> samples added: 65, Counter({np.int64(0): 40, np.int64(1): 17, np.int64(6): 8})
++ Processing sequence: 23
+  -> samples added: 0, Counter()
++ Processing sequence: 24
+  -> samples added: 435, Counter({np.int64(4): 190, np.int64(5): 172, np.int64(0): 60, np.int64(3): 13})
++ Processing sequence: 25
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(2): 14})
++ Processing sequence: 26
+  -> samples added: 81, Counter({np.int64(0): 40, np.int64(3): 21, np.int64(1): 20})
++ Processing sequence: 27
+  -> samples added: 0, Counter()
++ Processing sequence: 28
+  -> samples added: 70, Counter({np.int64(0): 40, np.int64(2): 18, np.int64(6): 12})
++ Processing sequence: 29
+  -> samples added: 235, Counter({np.int64(4): 111, np.int64(5): 64, np.int64(0): 60})
++ Processing sequence: 30
+  -> samples added: 76, Counter({np.int64(0): 40, np.int64(3): 20, np.int64(2): 16})
++ Processing sequence: 31
+  -> samples added: 68, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(6): 12})
++ Processing sequence: 32
+  -> samples added: 0, Counter()
++ Processing sequence: 33
+  -> samples added: 165, Counter({np.int64(4): 115, np.int64(0): 40, np.int64(1): 10})
++ Processing sequence: 34
+  -> samples added: 30, Counter({np.int64(0): 20, np.int64(6): 10})
++ Processing sequence: 35
+  -> samples added: 138, Counter({np.int64(4): 82, np.int64(0): 40, np.int64(3): 16})
++ Processing sequence: 36
+  -> samples added: 137, Counter({np.int64(5): 75, np.int64(0): 40, np.int64(2): 22})
++ Processing sequence: 37
+  -> samples added: 91, Counter({np.int64(5): 71, np.int64(0): 20})
++ Processing sequence: 38
+  -> samples added: 32, Counter({np.int64(0): 20, np.int64(6): 12})
++ Processing sequence: 39
+  -> samples added: 74, Counter({np.int64(0): 40, np.int64(1): 19, np.int64(2): 15})
++ Processing sequence: 40
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(3): 14})
++ Processing sequence: 41
+  -> samples added: 103, Counter({np.int64(4): 83, np.int64(0): 20})
++ Processing sequence: 42
+  -> samples added: 0, Counter()
++ Processing sequence: 43
+  -> samples added: 69, Counter({np.int64(0): 40, np.int64(6): 15, np.int64(2): 14})
++ Processing sequence: 44
+  -> samples added: 71, Counter({np.int64(5): 51, np.int64(0): 20})
++ Processing sequence: 45
+  -> samples added: 0, Counter()
++ Processing sequence: 46
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(3): 13})
++ Processing sequence: 47
+  -> samples added: 30, Counter({np.int64(0): 20, np.int64(1): 10})
++ Processing sequence: 48
+  -> samples added: 73, Counter({np.int64(4): 53, np.int64(0): 20})
++ Processing sequence: 49
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(3): 14})
++ Processing sequence: 50
+  -> samples added: 71, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(6): 15})
++ Processing sequence: 51
+  -> samples added: 0, Counter()
++ Processing sequence: 52
+  -> samples added: 170, Counter({np.int64(4): 105, np.int64(0): 40, np.int64(2): 25})
++ Processing sequence: 53
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(5): 20})
++ Processing sequence: 54
+  -> samples added: 0, Counter()
++ Processing sequence: 55
+  -> samples added: 37, Counter({np.int64(0): 20, np.int64(3): 17})
++ Processing sequence: 56
+  -> samples added: 194, Counter({np.int64(5): 85, np.int64(4): 69, np.int64(0): 40})
++ Processing sequence: 57
+  -> samples added: 122, Counter({np.int64(0): 60, np.int64(2): 30, np.int64(1): 20, np.int64(6): 12})
++ Processing sequence: 58
+  -> samples added: 0, Counter()
++ Processing sequence: 59
+  -> samples added: 141, Counter({np.int64(5): 88, np.int64(0): 40, np.int64(3): 13})
++ Processing sequence: 60
+  -> samples added: 65, Counter({np.int64(0): 40, np.int64(2): 15, np.int64(6): 10})
++ Processing sequence: 61
+  -> samples added: 270, Counter({np.int64(4): 123, np.int64(1): 107, np.int64(0): 40})
++ Processing sequence: 62
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(4): 25, np.int64(6): 12})
++ Processing sequence: 63
+  -> samples added: 178, Counter({np.int64(5): 108, np.int64(0): 40, np.int64(2): 30})
++ Processing sequence: 64
+  -> samples added: 0, Counter()
++ Processing sequence: 65
+  -> samples added: 99, Counter({np.int64(0): 40, np.int64(1): 35, np.int64(5): 24})
++ Processing sequence: 66
+  -> samples added: 141, Counter({np.int64(4): 54, np.int64(2): 47, np.int64(0): 40})
++ Processing sequence: 67
+  -> samples added: 39, Counter({np.int64(0): 20, np.int64(3): 19})
++ Processing sequence: 68
+  -> samples added: 84, Counter({np.int64(0): 40, np.int64(1): 26, np.int64(6): 18})
++ Processing sequence: 69
+  -> samples added: 172, Counter({np.int64(0): 60, np.int64(4): 52, np.int64(1): 39, np.int64(3): 21})
++ Processing sequence: 70
+  -> samples added: 115, Counter({np.int64(5): 44, np.int64(0): 40, np.int64(2): 31})
++ Processing sequence: 71
+  -> samples added: 47, Counter({np.int64(6): 27, np.int64(0): 20})
++ Processing sequence: 72
+  -> samples added: 0, Counter()
++ Processing sequence: 73
+  -> samples added: 42, Counter({np.int64(2): 22, np.int64(0): 20})
++ Processing sequence: 74
+  -> samples added: 0, Counter()
++ Processing sequence: 75
+  -> samples added: 44, Counter({np.int64(3): 24, np.int64(0): 20})
++ Processing sequence: 76
+  -> samples added: 107, Counter({np.int64(4): 87, np.int64(0): 20})
++ Processing sequence: 77
+  -> samples added: 91, Counter({np.int64(0): 40, np.int64(5): 29, np.int64(1): 22})
++ Processing sequence: 78
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
++ Processing sequence: 79
+  -> samples added: 45, Counter({np.int64(5): 25, np.int64(0): 20})
++ Processing sequence: 80
+  -> samples added: 118, Counter({np.int64(4): 46, np.int64(0): 40, np.int64(1): 32})
++ Processing sequence: 81
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
++ Processing sequence: 82
+  -> samples added: 53, Counter({np.int64(3): 33, np.int64(0): 20})
++ Processing sequence: 83
+  -> samples added: 0, Counter()
++ Processing sequence: 84
+  -> samples added: 50, Counter({np.int64(2): 30, np.int64(0): 20})
++ Processing sequence: 85
+  -> samples added: 48, Counter({np.int64(1): 28, np.int64(0): 20})
++ Processing sequence: 86
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(3): 20})
++ Processing sequence: 87
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
++ Processing sequence: 88
+  -> samples added: 38, Counter({np.int64(0): 20, np.int64(2): 18})
++ Processing sequence: 89
+  -> samples added: 116, Counter({np.int64(4): 65, np.int64(0): 40, np.int64(5): 11})
++ Processing sequence: 90
+  -> samples added: 47, Counter({np.int64(3): 27, np.int64(0): 20})
++ Processing sequence: 91
+  -> samples added: 65, Counter({np.int64(4): 45, np.int64(0): 20})
++ Processing sequence: 92
+  -> samples added: 124, Counter({np.int64(0): 60, np.int64(2): 33, np.int64(6): 16, np.int64(5): 15})
++ Processing sequence: 93
+  -> samples added: 51, Counter({np.int64(1): 31, np.int64(0): 20})
++ Processing sequence: 94
+  -> samples added: 104, Counter({np.int64(0): 40, np.int64(4): 32, np.int64(3): 32})
++ Processing sequence: 95
+  -> samples added: 70, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(5): 14})
++ Processing sequence: 96
+  -> samples added: 35, Counter({np.int64(0): 20, np.int64(6): 15})
++ Processing sequence: 97
+  -> samples added: 32, Counter({np.int64(0): 20, np.int64(2): 12})
++ Processing sequence: 98
+  -> samples added: 62, Counter({np.int64(0): 40, np.int64(6): 12, np.int64(5): 10})
++ Processing sequence: 99
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(3): 20, np.int64(2): 17})
++ Processing sequence: 100
+  -> samples added: 59, Counter({np.int64(4): 39, np.int64(0): 20})
++ Processing sequence: 101
+  -> samples added: 115, Counter({np.int64(2): 50, np.int64(0): 40, np.int64(1): 25})
++ Processing sequence: 102
+  -> samples added: 36, Counter({np.int64(0): 20, np.int64(3): 16})
++ Processing sequence: 103
+  -> samples added: 41, Counter({np.int64(5): 21, np.int64(0): 20})
++ Processing sequence: 104
+  -> samples added: 81, Counter({np.int64(0): 40, np.int64(4): 30, np.int64(6): 11})
++ Processing sequence: 105
+  -> samples added: 186, Counter({np.int64(4): 84, np.int64(0): 60, np.int64(1): 24, np.int64(6): 18})
++ Processing sequence: 106
+  -> samples added: 54, Counter({np.int64(1): 34, np.int64(0): 20})
++ Processing sequence: 107
+  -> samples added: 60, Counter({np.int64(1): 40, np.int64(0): 20})
++ Processing sequence: 108
+  -> samples added: 62, Counter({np.int64(0): 40, np.int64(5): 11, np.int64(3): 11})
+X.shape: (8244, 10, 11, 3), y.shape: (8244,)
+y label distribution: NONE:2860 GRAB:674 PINCH:589 TAP:468 DENY:1978 KNOB:1313 EXPAND:362
+Saved to ./src/gtcn/datasets/train.pkl (10.47 MB)
++ Processing sequence: 1
+  -> samples added: 101, Counter({np.int64(4): 81, np.int64(0): 20})
++ Processing sequence: 2
+  -> samples added: 140, Counter({np.int64(6): 50, np.int64(5): 50, np.int64(0): 40})
++ Processing sequence: 3
+  -> samples added: 0, Counter()
++ Processing sequence: 4
+  -> samples added: 83, Counter({np.int64(0): 40, np.int64(3): 23, np.int64(2): 20})
++ Processing sequence: 5
+  -> samples added: 60, Counter({np.int64(1): 40, np.int64(0): 20})
++ Processing sequence: 6
+  -> samples added: 0, Counter()
++ Processing sequence: 7
+  -> samples added: 75, Counter({np.int64(4): 55, np.int64(0): 20})
++ Processing sequence: 8
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(1): 20})
++ Processing sequence: 9
+  -> samples added: 0, Counter()
++ Processing sequence: 10
+  -> samples added: 67, Counter({np.int64(0): 40, np.int64(6): 14, np.int64(5): 13})
++ Processing sequence: 11
+  -> samples added: 48, Counter({np.int64(3): 28, np.int64(0): 20})
++ Processing sequence: 12
+  -> samples added: 71, Counter({np.int64(2): 51, np.int64(0): 20})
++ Processing sequence: 13
+  -> samples added: 0, Counter()
++ Processing sequence: 14
+  -> samples added: 204, Counter({np.int64(4): 184, np.int64(0): 20})
++ Processing sequence: 15
+  -> samples added: 37, Counter({np.int64(0): 20, np.int64(1): 17})
++ Processing sequence: 16
+  -> samples added: 78, Counter({np.int64(0): 40, np.int64(3): 25, np.int64(6): 13})
++ Processing sequence: 17
+  -> samples added: 218, Counter({np.int64(5): 146, np.int64(0): 40, np.int64(2): 32})
++ Processing sequence: 18
+  -> samples added: 0, Counter()
++ Processing sequence: 19
+  -> samples added: 186, Counter({np.int64(5): 166, np.int64(0): 20})
++ Processing sequence: 20
+  -> samples added: 267, Counter({np.int64(4): 168, np.int64(0): 60, np.int64(3): 28, np.int64(6): 11})
++ Processing sequence: 21
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(2): 27, np.int64(1): 10})
++ Processing sequence: 22
+  -> samples added: 65, Counter({np.int64(0): 40, np.int64(1): 17, np.int64(6): 8})
++ Processing sequence: 23
+  -> samples added: 0, Counter()
++ Processing sequence: 24
+  -> samples added: 435, Counter({np.int64(4): 190, np.int64(5): 172, np.int64(0): 60, np.int64(3): 13})
++ Processing sequence: 25
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(2): 14})
++ Processing sequence: 26
+  -> samples added: 81, Counter({np.int64(0): 40, np.int64(3): 21, np.int64(1): 20})
++ Processing sequence: 27
+  -> samples added: 0, Counter()
++ Processing sequence: 28
+  -> samples added: 70, Counter({np.int64(0): 40, np.int64(2): 18, np.int64(6): 12})
++ Processing sequence: 29
+  -> samples added: 235, Counter({np.int64(4): 111, np.int64(5): 64, np.int64(0): 60})
++ Processing sequence: 30
+  -> samples added: 76, Counter({np.int64(0): 40, np.int64(3): 20, np.int64(2): 16})
++ Processing sequence: 31
+  -> samples added: 68, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(6): 12})
++ Processing sequence: 32
+  -> samples added: 0, Counter()
++ Processing sequence: 33
+  -> samples added: 165, Counter({np.int64(4): 115, np.int64(0): 40, np.int64(1): 10})
++ Processing sequence: 34
+  -> samples added: 30, Counter({np.int64(0): 20, np.int64(6): 10})
++ Processing sequence: 35
+  -> samples added: 138, Counter({np.int64(4): 82, np.int64(0): 40, np.int64(3): 16})
++ Processing sequence: 36
+  -> samples added: 137, Counter({np.int64(5): 75, np.int64(0): 40, np.int64(2): 22})
++ Processing sequence: 37
+  -> samples added: 91, Counter({np.int64(5): 71, np.int64(0): 20})
++ Processing sequence: 38
+  -> samples added: 32, Counter({np.int64(0): 20, np.int64(6): 12})
++ Processing sequence: 39
+  -> samples added: 74, Counter({np.int64(0): 40, np.int64(1): 19, np.int64(2): 15})
++ Processing sequence: 40
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(3): 14})
++ Processing sequence: 41
+  -> samples added: 103, Counter({np.int64(4): 83, np.int64(0): 20})
++ Processing sequence: 42
+  -> samples added: 0, Counter()
++ Processing sequence: 43
+  -> samples added: 69, Counter({np.int64(0): 40, np.int64(6): 15, np.int64(2): 14})
++ Processing sequence: 44
+  -> samples added: 71, Counter({np.int64(5): 51, np.int64(0): 20})
++ Processing sequence: 45
+  -> samples added: 0, Counter()
++ Processing sequence: 46
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(3): 13})
++ Processing sequence: 47
+  -> samples added: 30, Counter({np.int64(0): 20, np.int64(1): 10})
++ Processing sequence: 48
+  -> samples added: 73, Counter({np.int64(4): 53, np.int64(0): 20})
++ Processing sequence: 49
+  -> samples added: 34, Counter({np.int64(0): 20, np.int64(3): 14})
++ Processing sequence: 50
+  -> samples added: 71, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(6): 15})
++ Processing sequence: 51
+  -> samples added: 0, Counter()
++ Processing sequence: 52
+  -> samples added: 170, Counter({np.int64(4): 105, np.int64(0): 40, np.int64(2): 25})
++ Processing sequence: 53
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(5): 20})
++ Processing sequence: 54
+  -> samples added: 0, Counter()
++ Processing sequence: 55
+  -> samples added: 37, Counter({np.int64(0): 20, np.int64(3): 17})
++ Processing sequence: 56
+  -> samples added: 194, Counter({np.int64(5): 85, np.int64(4): 69, np.int64(0): 40})
++ Processing sequence: 57
+  -> samples added: 122, Counter({np.int64(0): 60, np.int64(2): 30, np.int64(1): 20, np.int64(6): 12})
++ Processing sequence: 58
+  -> samples added: 0, Counter()
++ Processing sequence: 59
+  -> samples added: 141, Counter({np.int64(5): 88, np.int64(0): 40, np.int64(3): 13})
++ Processing sequence: 60
+  -> samples added: 65, Counter({np.int64(0): 40, np.int64(2): 15, np.int64(6): 10})
++ Processing sequence: 61
+  -> samples added: 270, Counter({np.int64(4): 123, np.int64(1): 107, np.int64(0): 40})
++ Processing sequence: 62
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(4): 25, np.int64(6): 12})
++ Processing sequence: 63
+  -> samples added: 178, Counter({np.int64(5): 108, np.int64(0): 40, np.int64(2): 30})
++ Processing sequence: 64
+  -> samples added: 0, Counter()
++ Processing sequence: 65
+  -> samples added: 99, Counter({np.int64(0): 40, np.int64(1): 35, np.int64(5): 24})
++ Processing sequence: 66
+  -> samples added: 141, Counter({np.int64(4): 54, np.int64(2): 47, np.int64(0): 40})
++ Processing sequence: 67
+  -> samples added: 39, Counter({np.int64(0): 20, np.int64(3): 19})
++ Processing sequence: 68
+  -> samples added: 84, Counter({np.int64(0): 40, np.int64(1): 26, np.int64(6): 18})
++ Processing sequence: 69
+  -> samples added: 172, Counter({np.int64(0): 60, np.int64(4): 52, np.int64(1): 39, np.int64(3): 21})
++ Processing sequence: 70
+  -> samples added: 115, Counter({np.int64(5): 44, np.int64(0): 40, np.int64(2): 31})
++ Processing sequence: 71
+  -> samples added: 47, Counter({np.int64(6): 27, np.int64(0): 20})
++ Processing sequence: 72
+  -> samples added: 0, Counter()
++ Processing sequence: 73
+  -> samples added: 42, Counter({np.int64(2): 22, np.int64(0): 20})
++ Processing sequence: 74
+  -> samples added: 0, Counter()
++ Processing sequence: 75
+  -> samples added: 44, Counter({np.int64(3): 24, np.int64(0): 20})
++ Processing sequence: 76
+  -> samples added: 107, Counter({np.int64(4): 87, np.int64(0): 20})
++ Processing sequence: 77
+  -> samples added: 91, Counter({np.int64(0): 40, np.int64(5): 29, np.int64(1): 22})
++ Processing sequence: 78
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
++ Processing sequence: 79
+  -> samples added: 45, Counter({np.int64(5): 25, np.int64(0): 20})
++ Processing sequence: 80
+  -> samples added: 118, Counter({np.int64(4): 46, np.int64(0): 40, np.int64(1): 32})
++ Processing sequence: 81
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
++ Processing sequence: 82
+  -> samples added: 53, Counter({np.int64(3): 33, np.int64(0): 20})
++ Processing sequence: 83
+  -> samples added: 0, Counter()
++ Processing sequence: 84
+  -> samples added: 50, Counter({np.int64(2): 30, np.int64(0): 20})
++ Processing sequence: 85
+  -> samples added: 48, Counter({np.int64(1): 28, np.int64(0): 20})
++ Processing sequence: 86
+  -> samples added: 40, Counter({np.int64(0): 20, np.int64(3): 20})
++ Processing sequence: 87
+  -> samples added: 33, Counter({np.int64(0): 20, np.int64(6): 13})
++ Processing sequence: 88
+  -> samples added: 38, Counter({np.int64(0): 20, np.int64(2): 18})
++ Processing sequence: 89
+  -> samples added: 116, Counter({np.int64(4): 65, np.int64(0): 40, np.int64(5): 11})
++ Processing sequence: 90
+  -> samples added: 47, Counter({np.int64(3): 27, np.int64(0): 20})
++ Processing sequence: 91
+  -> samples added: 65, Counter({np.int64(4): 45, np.int64(0): 20})
++ Processing sequence: 92
+  -> samples added: 124, Counter({np.int64(0): 60, np.int64(2): 33, np.int64(6): 16, np.int64(5): 15})
++ Processing sequence: 93
+  -> samples added: 51, Counter({np.int64(1): 31, np.int64(0): 20})
++ Processing sequence: 94
+  -> samples added: 104, Counter({np.int64(0): 40, np.int64(4): 32, np.int64(3): 32})
++ Processing sequence: 95
+  -> samples added: 70, Counter({np.int64(0): 40, np.int64(1): 16, np.int64(5): 14})
++ Processing sequence: 96
+  -> samples added: 35, Counter({np.int64(0): 20, np.int64(6): 15})
++ Processing sequence: 97
+  -> samples added: 32, Counter({np.int64(0): 20, np.int64(2): 12})
++ Processing sequence: 98
+  -> samples added: 62, Counter({np.int64(0): 40, np.int64(6): 12, np.int64(5): 10})
++ Processing sequence: 99
+  -> samples added: 77, Counter({np.int64(0): 40, np.int64(3): 20, np.int64(2): 17})
++ Processing sequence: 100
+  -> samples added: 59, Counter({np.int64(4): 39, np.int64(0): 20})
++ Processing sequence: 101
+  -> samples added: 115, Counter({np.int64(2): 50, np.int64(0): 40, np.int64(1): 25})
++ Processing sequence: 102
+  -> samples added: 36, Counter({np.int64(0): 20, np.int64(3): 16})
++ Processing sequence: 103
+  -> samples added: 41, Counter({np.int64(5): 21, np.int64(0): 20})
++ Processing sequence: 104
+  -> samples added: 81, Counter({np.int64(0): 40, np.int64(4): 30, np.int64(6): 11})
++ Processing sequence: 105
+  -> samples added: 186, Counter({np.int64(4): 84, np.int64(0): 60, np.int64(1): 24, np.int64(6): 18})
++ Processing sequence: 106
+  -> samples added: 54, Counter({np.int64(1): 34, np.int64(0): 20})
++ Processing sequence: 107
+  -> samples added: 60, Counter({np.int64(1): 40, np.int64(0): 20})
++ Processing sequence: 108
+  -> samples added: 62, Counter({np.int64(0): 40, np.int64(5): 11, np.int64(3): 11})
+X.shape: (8244, 10, 11, 3), y.shape: (8244,)
+y label distribution: NONE:2860 GRAB:674 PINCH:589 TAP:468 DENY:1978 KNOB:1313 EXPAND:362
+Saved to ./src/gtcn/datasets/train_s5.pkl (10.47 MB)
+[I 2025-12-10 18:01:17,662] A new study created in memory with name: no-name-0adf1309-96b6-49d7-94af-792f319a41d0
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [1, 2, 4] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [1, 2, 4, 8] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [1, 2, 4, 8, 16] which is of type list.
+  warnings.warn(message)
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating TrainingDataset: X=(6557, 10, 11, 3), y=(6557,)
+> Creating TrainingDataset: X=(1687, 10, 11, 3), y=(1687,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 1.8714
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating TrainingDataset: X=(6774, 10, 11, 3), y=(6774,)
+> Creating TrainingDataset: X=(1470, 10, 11, 3), y=(1470,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 1.4141
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating TrainingDataset: X=(6429, 10, 11, 3), y=(6429,)
+> Creating TrainingDataset: X=(1815, 10, 11, 3), y=(1815,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 0.9734
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating TrainingDataset: X=(6806, 10, 11, 3), y=(6806,)
+> Creating TrainingDataset: X=(1438, 10, 11, 3), y=(1438,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 1.2160
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating TrainingDataset: X=(6410, 10, 11, 3), y=(6410,)
+> Creating TrainingDataset: X=(1834, 10, 11, 3), y=(1834,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 1.3146
+[I 2025-12-10 18:03:20,950] Trial 0 finished with value: 1.3579077922477136 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.008097758121481948}. Best is trial 0 with value: 1.3579077922477136.
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [1, 2, 4] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [1, 2, 4, 8] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [1, 2, 4, 8, 16] which is of type list.
+  warnings.warn(message)
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating TrainingDataset: X=(6557, 10, 11, 3), y=(6557,)
+> Creating TrainingDataset: X=(1687, 10, 11, 3), y=(1687,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 1.1996
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating TrainingDataset: X=(6774, 10, 11, 3), y=(6774,)
+> Creating TrainingDataset: X=(1470, 10, 11, 3), y=(1470,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 0.8390
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating TrainingDataset: X=(6429, 10, 11, 3), y=(6429,)
+> Creating TrainingDataset: X=(1815, 10, 11, 3), y=(1815,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 0.9770
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating TrainingDataset: X=(6806, 10, 11, 3), y=(6806,)
+> Creating TrainingDataset: X=(1438, 10, 11, 3), y=(1438,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 0.9773
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating TrainingDataset: X=(6410, 10, 11, 3), y=(6410,)
+> Creating TrainingDataset: X=(1834, 10, 11, 3), y=(1834,)
+> Label distribution:
+  NONE: count=2860, weight=0.1000;
+  GRAB: count=674, weight=1.0000;
+  PINCH: count=589, weight=1.0000;
+  TAP: count=468, weight=1.0000;
+  DENY: count=1978, weight=1.0000;
+  KNOB: count=1313, weight=1.0000;
+  EXPAND: count=362, weight=1.0000;
+> loss: 1.3395
+[I 2025-12-10 18:05:10,150] Trial 1 finished with value: 1.0664906533021459 and parameters: {'GCN_HIDDEN_DIM': 64, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 32, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.003311567464714288}. Best is trial 1 with value: 1.0664906533021459.
+
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+=
+Optimization completed in 232.49 seconds.
+Best Trial: 1
+Best Score: 1.0664906533021459
+Best Params: {'GCN_HIDDEN_DIM': 64, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 32, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.003311567464714288}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/gtcn/run.py", line 26, in <module>
+    train_model(trainset_path=regular_best_params, model_path="./src/gtcn/datasets/model.pth", epochs=2)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: train_model() missing 1 required positional argument: 'params'

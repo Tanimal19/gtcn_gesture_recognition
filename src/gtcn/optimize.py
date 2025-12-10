@@ -124,7 +124,7 @@ def find_optimize_params(n_trials, training_set_path=DEFAULT_TRAINSET_PATH):
     )
     study.optimize(objective, n_trials)
 
-    print("\n=" * 50)
+    print("=" * 50)
     print(f"Optimization completed in {time.time() - start_time:.2f} seconds.")
     print("Best Trial:", study.best_trial.number)
     print("Best Score:", study.best_trial.value)

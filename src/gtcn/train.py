@@ -29,7 +29,7 @@ def compute_balanced_weights(y):
 def train_model(
     params,
     epochs,
-    trainset_path=DEFAULT_TRAINSET_PATH,
+    training_set_path=DEFAULT_TRAINSET_PATH,
     model_path=DEFAULT_MODEL_PATH,
     batch_size=32,
 ):
@@ -38,7 +38,7 @@ def train_model(
     print(f"Training model with parameters {params}")
 
     # Load full dataset
-    with open(trainset_path, "rb") as f:
+    with open(training_set_path, "rb") as f:
         data = pickle.load(f)
     X = data["X"]
     y = data["y"]

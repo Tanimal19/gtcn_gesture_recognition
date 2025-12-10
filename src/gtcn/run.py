@@ -21,15 +21,15 @@ create_training_set(
 
 # optimize and train regular training set
 regular_best_params = find_optimize_params(
-    n_trials=40, training_set_path=regular_training_set_path
+    n_trials=2, training_set_path=regular_training_set_path
 )
-train_model(regular_best_params, epochs=300)
+train_model(params=regular_best_params, training_set_path=regular_training_set_path, model_path="./src/gtcn/datasets/model.pth", epochs=2)
 
 # optimize and train shift=5 training set
 shift5_best_params = find_optimize_params(
-    n_trials=40, training_set_path=shift5_training_set_path
+    n_trials=2, training_set_path=shift5_training_set_path
 )
-train_model(shift5_best_params, epochs=300)
+train_model(params=shift5_best_params, training_set_path=shift5_training_set_path, model_path="./src/gtcn/datasets/model_s5.pth", epochs=2)
 
 
 # nohup python -u -m src.gtcn.run &
