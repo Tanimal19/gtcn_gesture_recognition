@@ -157,6 +157,7 @@ if __name__ == "__main__":
         ),
     ]
 
+    
     for params in model_params_list:
         print(f"Training GTCN Model with params ID: {params.id}")
         results = cross_validate(
