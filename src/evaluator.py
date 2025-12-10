@@ -194,4 +194,5 @@ if __name__ == "__main__":
     disp = ConfusionMatrixDisplay(confmat, display_labels=ge)
     disp.plot(xticks_rotation=90)
     plt.tight_layout()
+    plt.savefig("confusion_matrix.png")
     plt.show()

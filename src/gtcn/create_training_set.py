@@ -112,6 +112,7 @@ def create_training_set(sequences_folder, ann_file, max_sequence_id=None):
         total_X = np.concatenate((total_X, X), axis=0)
         total_y = np.concatenate((total_y, y), axis=0)
         total_seq_ids = np.concatenate((total_seq_ids, seq_ids), axis=0)
+        print(f"  -> samples added: {len(y)}, {Counter(y)}")
 
     print(f"X.shape: {total_X.shape}, y.shape: {total_y.shape}")
     c = Counter(total_y)

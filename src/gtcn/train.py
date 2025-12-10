@@ -54,11 +54,11 @@ def train_final_model(params, epochs, batch_size=32):
 
     # Setup training
     weights = compute_balanced_weights(y, len(GTCNModel.GESTURES)).to(DEVICE)
+    print(f"> Class weights: {weights.numpy()}")
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
     optimizer = torch.optim.Adam(
         model.parameters(),
         lr=params["learning_rate"],
-        weight_decay=params["weight_decay"],
     )
 
     # Training loop
@@ -116,13 +116,12 @@ if __name__ == "__main__":
     print(f"> Using device: {DEVICE}")
     example_params = {
         "GCN_HIDDEN_DIM": 16,
-        "GCN_DROPOUT": 0.2,
-        "TCN_HIDDEN_DIM": 32,
-        "TCN_KERNEL_SIZE": 3,
-        "TCN_DILATIONS": (1, 3, 9),
-        "TCN_DROPOUT": 0.2,
+        "GCN_DROPOUT": 0.3,
+        "TCN_HIDDEN_DIM": 128,
+        "TCN_KERNEL_SIZE": 5,
+        "TCN_DILATIONS": (1, 2, 4, 8, 16),
+        "TCN_DROPOUT": 0.3,
         "CLASS_HIDDEN_DIM": 32,
-        "learning_rate": 1e-3,
-        "weight_decay": 1e-4,
+        "learning_rate": 15e-3,
     }
     train_final_model(example_params, epochs=10)

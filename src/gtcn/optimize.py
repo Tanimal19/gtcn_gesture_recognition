@@ -16,7 +16,7 @@ EPOCHS = 10  # per fold
 
 
 def evaluate_model(
-    model: GTCNModel, training_params, train_idx, val_idx, data, batch_size=32
+    model: GTCNModel, learning_rate, train_idx, val_idx, data, batch_size=32
 ):
     X = data["X"]
     y = data["y"]
@@ -31,11 +31,7 @@ def evaluate_model(
     weights = compute_balanced_weights(y[train_idx], len(GTCNModel.GESTURES)).to(DEVICE)
 
     criterion = torch.nn.CrossEntropyLoss(weight=weights)
-    optimizer = torch.optim.Adam(
-        model.parameters(),
-        lr=training_params["learning_rate"],
-        weight_decay=training_params["weight_decay"],
-    )
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     model = model.to(DEVICE)
 
@@ -81,10 +77,8 @@ def objective(trial):
         TCN_DROPOUT=trial.suggest_categorical("TCN_DROPOUT", [0.2, 0.3]),
         CLASS_HIDDEN_DIM=trial.suggest_categorical("CLASS_HIDDEN_DIM", [32, 64, 128]),
     )
-    training_params = {
-        "learning_rate": trial.suggest_float("learning_rate", 1e-4, 1e-2),
-        "weight_decay": trial.suggest_float("weight_decay", 1e-5, 1e-3),
-    }
+
+    learning_rate = trial.suggest_float("learning_rate", 1e-4, 1e-2)
 
     # load dataset
     with open(TRAINSET_PATH, "rb") as f:
@@ -108,7 +102,7 @@ def objective(trial):
         val_idx = np.where(np.isin(seq_ids, val_seqs))[0]
 
         model = GTCNModel(model_params).to(DEVICE)
-        fold_loss = evaluate_model(model, training_params, train_idx, val_idx, data)
+        fold_loss = evaluate_model(model, learning_rate, train_idx, val_idx, data)
         print(f"> loss: {fold_loss:.4f}")
         scores.append(fold_loss)
 

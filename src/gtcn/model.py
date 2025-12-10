@@ -41,7 +41,7 @@ class GTCNModel(nn.Module):
     Output: (B, num_gestures)
     """
 
-    WINDOW_LENGTH = 20
+    WINDOW_LENGTH = 10
     LANDMARKS = [
         HandLandmark.thumbA,
         HandLandmark.thumbB,
