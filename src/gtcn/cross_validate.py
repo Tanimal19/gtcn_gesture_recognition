@@ -113,18 +113,14 @@ def objective(trial):
         TCN_KERNEL_SIZE=trial.suggest_categorical("TCN_KERNEL_SIZE", [3, 5]),
         TCN_DILATIONS=trial.suggest_categorical(
             "TCN_DILATIONS",
-            [
-                [1, 2, 4],
-                [1, 2, 4, 8],
-                [1, 2, 4, 8, 16],
-            ],
+            [(1,2,4), (1,2,4,8), (1,2,4,8,16)]
         ),
         TCN_DROPOUT=trial.suggest_float("TCN_DROPOUT", 0.1, 0.4),
         CLASS_HIDDEN_DIM=trial.suggest_categorical("CLASS_HIDDEN_DIM", [32, 64, 128]),
     )
     training_params = {
-        "learning_rate": trial.suggest_loguniform("learning_rate", 1e-4, 1e-2),
-        "weight_decay": trial.suggest_loguniform("weight_decay", 1e-5, 1e-3),
+        "learning_rate": trial.suggest_float("learning_rate", 1e-4, 1e-2),
+        "weight_decay": trial.suggest_float("weight_decay", 1e-5, 1e-3),
     }
 
     # load dataset

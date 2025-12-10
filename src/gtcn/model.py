@@ -29,7 +29,7 @@ class GTCNHyperParams:
     GCN_DROPOUT: float
     TCN_HIDDEN_DIM: int
     TCN_KERNEL_SIZE: int
-    TCN_DILATIONS: list[int]
+    TCN_DILATIONS: tuple[int]
     TCN_DROPOUT: float
     CLASS_HIDDEN_DIM: int
 
@@ -254,7 +254,7 @@ class GTCNModel(nn.Module):
             hyperparams.GCN_HIDDEN_DIM,
             hyperparams.TCN_HIDDEN_DIM,
             hyperparams.TCN_KERNEL_SIZE,
-            hyperparams.TCN_DILATIONS,
+            list(hyperparams.TCN_DILATIONS),
             hyperparams.TCN_DROPOUT,
         )
         self.classifier = self.GestureClassifier(
