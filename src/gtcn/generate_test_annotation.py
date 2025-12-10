@@ -200,8 +200,6 @@ def generate_annotations_for_sequence(
 
 def evaluate_and_generate_annotations(
     model_path: str,
-    test_folder: str = SHREC_TEST_DATASET_FOLDER,
-    output_file: Optional[str] = None,
     min_gesture_length: int = 5,
 ) -> List[DAnnotation]:
     """
@@ -209,19 +207,18 @@ def evaluate_and_generate_annotations(
 
     Args:
         model_path: Path to trained model checkpoint
-        test_folder: Folder containing test sequences
-        output_file: Optional path to save generated annotations
         min_gesture_length: Minimum number of frames for a valid gesture
 
     Returns:
         List of DAnnotation objects for all test sequences
     """
+
     # Load model
     print(f"\nLoading model from {model_path}...")
     model = load_model(model_path)
 
     # Get all test sequences
-    sequences_folder = os.path.join(test_folder, "sequences")
+    sequences_folder = os.path.join(SHREC_TEST_DATASET_FOLDER, "sequences")
     sequence_files = sorted(
         [f for f in os.listdir(sequences_folder) if f.endswith(".txt")]
     )
@@ -244,7 +241,7 @@ def evaluate_and_generate_annotations(
             f"Sequence {sequence.sequence_id}: {len(annotation.gestures)} gestures detected"
         )
 
-    # Save annotations to file if specified
+    output_file = "./src/gtcn/datasets/generated_annotations.txt"
     if output_file:
         save_annotations(annotations, output_file)
         print(f"\nAnnotations saved to {output_file}")
@@ -303,8 +300,7 @@ def compare_with_ground_truth(
     return stats
 
 
-def main():
-    """Main evaluation function."""
+if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Evaluate GTCN model on test data")
@@ -313,18 +309,6 @@ def main():
         type=str,
         default="./src/gtcn/models/best_model.pth",
         help="Path to trained model checkpoint",
-    )
-    parser.add_argument(
-        "--test-folder",
-        type=str,
-        default=SHREC_TEST_DATASET_FOLDER,
-        help="Folder containing test sequences",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        default="./outputs/generated_annotations.txt",
-        help="Output file for generated annotations",
     )
     parser.add_argument(
         "--min-length",
@@ -343,14 +327,12 @@ def main():
     # Generate annotations
     annotations = evaluate_and_generate_annotations(
         model_path=args.model,
-        test_folder=args.test_folder,
-        output_file=args.output,
         min_gesture_length=args.min_length,
     )
 
     # Compare with ground truth if requested
     if args.compare_gt:
-        gt_file = os.path.join(args.test_folder, "annotations_revised.txt")
+        gt_file = os.path.join(SHREC_TEST_DATASET_FOLDER, "annotations_revised.txt")
         if os.path.exists(gt_file):
             print("\n" + "=" * 50)
             print("Comparison with Ground Truth")
@@ -375,8 +357,4 @@ def main():
         else:
             print(f"Ground truth file not found: {gt_file}")
 
-    print("\n✓ Evaluation complete!")
-
-
-if __name__ == "__main__":
-    main()
+    print("\nEvaluation complete!")

@@ -63,6 +63,9 @@ def train_final_model(params, epochs, batch_size=32):
 
     # Training loop
     best_loss = float("inf")
+    early_stop_counter = 0
+    early_stop_patience = 10
+
     for epoch in range(epochs):
         model.train()
         epoch_loss = 0.0
@@ -98,6 +101,12 @@ def train_final_model(params, epochs, batch_size=32):
                 },
                 "./src/gtcn/models/best_model.pth",
             )
+            early_stop_counter = 0
+        else:
+            early_stop_counter += 1
+            if early_stop_counter >= early_stop_patience:
+                print("Early stopping triggered.")
+                break
 
     print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
 
