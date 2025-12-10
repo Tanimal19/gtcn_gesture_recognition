@@ -1,3 +1,4 @@
+import time
 import pickle
 import numpy as np
 import torch
@@ -22,6 +23,8 @@ def compute_balanced_weights(y, num_classes):
 
 
 def train_final_model(params, epochs=200, batch_size=32):
+    start_time = time.time()
+
     print("\n" + "=" * 50)
     print(f"Training final model with best parameters {params}")
 
@@ -96,4 +99,21 @@ def train_final_model(params, epochs=200, batch_size=32):
                 "./src/gtcn/models/best_model.pth",
             )
 
+    print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
+
     return model
+
+
+if __name__ == "__main__":
+    example_params = {
+        "GCN_HIDDEN_DIM": 16,
+        "GCN_DROPOUT": 0.2,
+        "TCN_HIDDEN_DIM": 32,
+        "TCN_KERNEL_SIZE": 3,
+        "TCN_DILATIONS": (1, 3, 9),
+        "TCN_DROPOUT": 0.2,
+        "CLASS_HIDDEN_DIM": 32,
+        "learning_rate": 1e-3,
+        "weight_decay": 1e-4,
+    }
+    train_final_model(example_params, epochs=10, batch_size=32)

@@ -17,7 +17,6 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 
 def load_model(model_path: str) -> GTCNModel:
-    """Load trained GTCN model from checkpoint."""
     checkpoint = torch.load(model_path, map_location=DEVICE)
 
     # Reconstruct hyperparameters
@@ -39,9 +38,7 @@ def load_model(model_path: str) -> GTCNModel:
     model.eval()
 
     print(f"Loaded model from {model_path}")
-    print(
-        f"Trained for {checkpoint['epoch']} epochs with loss: {checkpoint['loss']:.4f}"
-    )
+    print(f"Model Hyperparameters: {hyperparams}")
 
     return model
 

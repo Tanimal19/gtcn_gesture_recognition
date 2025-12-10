@@ -127,7 +127,7 @@ def find_optimize_params(n_trials):
     print("Best Trial:", study.best_trial.number)
     print("Best Score:", study.best_trial.value)
     print("Best Params:", study.best_trial.params)
-    print("Total Optimization Time: %.2f seconds" % (time.time() - start_time))
+    print(f"\nOptimization completed in {time.time() - start_time:.2f} seconds.")
 
     return study.best_trial.params
 

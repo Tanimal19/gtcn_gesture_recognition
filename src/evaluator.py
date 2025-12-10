@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from src.dataset_utils import SHREC_TEST_DATASET_FOLDER
 
 # -----------------------------
 # Config
@@ -47,8 +49,8 @@ def read_annotations(file_path):
 # -----------------------------
 # Load results and annotations
 # -----------------------------
-results = read_annotations("annotations2.txt")
-annotations = read_annotations("annotations.txt")
+results = read_annotations("./src/gtcn/datasets/generated_annotations.txt")
+annotations = read_annotations(SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt")
 annotations.sort(key=lambda x: x[0])  # sort by sequence id
 
 # -----------------------------
