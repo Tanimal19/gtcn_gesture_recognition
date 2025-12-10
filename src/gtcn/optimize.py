@@ -74,13 +74,13 @@ def objective(trial):
     model_params = GTCNHyperParams(
         id=f"trial_{trial.number}",
         GCN_HIDDEN_DIM=trial.suggest_categorical("GCN_HIDDEN_DIM", [16, 32, 64]),
-        GCN_DROPOUT=trial.suggest_float("GCN_DROPOUT", 0.1, 0.4),
+        GCN_DROPOUT=trial.suggest_categorical("GCN_DROPOUT", [0.2, 0.3]),
         TCN_HIDDEN_DIM=trial.suggest_categorical("TCN_HIDDEN_DIM", [32, 64, 128]),
         TCN_KERNEL_SIZE=trial.suggest_categorical("TCN_KERNEL_SIZE", [3, 5]),
         TCN_DILATIONS=trial.suggest_categorical(
-            "TCN_DILATIONS", [(1, 2, 4), (1, 2, 4, 8), (1, 2, 4, 8, 16)]
+            "TCN_DILATIONS", [[1, 2, 4], [1, 2, 4, 8], [1, 2, 4, 8, 16]]
         ),
-        TCN_DROPOUT=trial.suggest_float("TCN_DROPOUT", 0.1, 0.4),
+        TCN_DROPOUT=trial.suggest_categorical("TCN_DROPOUT", [0.2, 0.3]),
         CLASS_HIDDEN_DIM=trial.suggest_categorical("CLASS_HIDDEN_DIM", [32, 64, 128]),
     )
     training_params = {
