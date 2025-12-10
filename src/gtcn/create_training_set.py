@@ -13,9 +13,6 @@ import pickle
 import os
 
 
-DATASET_FOLDER = "./src/gtcn/datasets/"
-
-
 def convert_window_to_X(window: List[DSequenceFrame]) -> np.ndarray:
     num_landmarks = len(GTCNModel.LANDMARKS)
     X = np.zeros((GTCNModel.WINDOW_LENGTH, num_landmarks, 3), dtype=np.float32)
@@ -95,9 +92,8 @@ def create_training_set(
     for label_idx in range(len(GTCNModel.GESTURES)):
         distribution_str += f" {GTCNModel.GESTURES[label_idx].name}:{c[label_idx]}"
     print(distribution_str)
-    print(f"Number of unique sequences: {len(np.unique(total_seq_ids))}")
 
-    output_file = output_folder + f"train.pkl"
+    output_file = output_folder + "train.pkl"
     with open(output_file, "wb") as f:
         pickle.dump(
             {"X": total_X, "y": total_y, "seq_ids": total_seq_ids},
@@ -111,6 +107,6 @@ if __name__ == "__main__":
     create_training_set(
         sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
         ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-        output_folder=DATASET_FOLDER,
+        output_folder="./src/gtcn/datasets/",
         max_sequence_id=None,
     )

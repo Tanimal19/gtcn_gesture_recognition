@@ -5,168 +5,182 @@ import numpy as np
 from torch.utils.data import DataLoader
 from sklearn.metrics import classification_report, confusion_matrix
 from src.gtcn.model import GTCNModel, GTCNHyperParams
-from src.gtcn.create_set import DATASET_FOLDER
-from src.gtcn.train import SequenceDataset, _compute_balanced_weights, _train_one_epoch
+
+import time
+import pickle
+import torch
+import numpy as np
+from torch.utils.data import DataLoader, Dataset
+from src.gtcn.model import GTCNModel, GTCNHyperParams
+from collections import Counter
 
 
-def _evaluate(model, loader, criterion, device):
-    model.eval()
-    total_loss = 0
-    all_preds = []
-    all_labels = []
+class GTCNDataset(Dataset):
+    def __init__(self, X: np.ndarray, y: np.ndarray):
+        assert X.shape[0] == y.shape[0], "X and y length mismatch!"
+        assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
+        assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
+        assert X.shape[3] == 3, "X coordinate dimension mismatch!"
 
-    with torch.no_grad():
-        for X, y in loader:
-            X, y = X.to(device), y.to(device)
-            logits = model(X)
+        self.X = torch.tensor(X, dtype=torch.float32)
+        self.y = torch.tensor(y, dtype=torch.long)
 
-            loss = criterion(logits, y)
-            total_loss += loss.item() * X.size(0)
+    def __len__(self):
+        return len(self.X)
 
-            preds = torch.argmax(logits, dim=1)
-            all_preds.extend(preds.cpu().numpy())
-            all_labels.extend(y.cpu().numpy())
-
-    avg_loss = total_loss / len(loader.dataset)
-
-    report = classification_report(
-        all_labels, all_preds, digits=3, output_dict=True, zero_division=0
-    )
-    cm = confusion_matrix(all_labels, all_preds)
-
-    return avg_loss, report, cm
+    def __getitem__(self, idx):
+        return self.X[idx], self.y[idx]
 
 
-def cross_validate(learning_rate, epochs, model_params: GTCNHyperParams, num_folds=5):
-    device = "cuda" if torch.cuda.is_available() else "cpu"
+def _compute_balanced_weights(y, num_classes):
+    counts = Counter(y)
+    total = len(y)
+    weights = np.zeros(num_classes, dtype=np.float32)
 
-    # Load data
-    with open(DATASET_FOLDER + "train.pkl", "rb") as f:
-        data = pickle.load(f)
+    for cls in range(num_classes):
+        count = counts[cls] if counts[cls] > 0 else 1
+        weights[cls] = total / (num_classes * count)
 
+    return torch.tensor(weights, dtype=torch.float32)
+
+
+import optuna
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader, Subset
+from sklearn.model_selection import KFold
+from src.gtcn.model import GTCNModel, GTCNHyperParams
+
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+RANDOM_SEED = 42
+NUM_FOLDS = 5
+
+
+def evaluate_model(
+    model: GTCNModel, training_params, train_idx, val_idx, data, batch_size=32
+):
     X = data["X"]
     y = data["y"]
+
+    train_loader = DataLoader(
+        GTCNDataset(X[train_idx], y[train_idx]), batch_size=batch_size, shuffle=True
+    )
+    val_loader = DataLoader(
+        GTCNDataset(X[val_idx], y[val_idx]), batch_size=batch_size, shuffle=False
+    )
+
+    weights = _compute_balanced_weights(y[train_idx], len(GTCNModel.GESTURES)).to(
+        DEVICE
+    )
+
+    criterion = torch.nn.CrossEntropyLoss(weight=weights)
+    optimizer = torch.optim.Adam(
+        model.parameters(),
+        lr=training_params["learning_rate"],
+        weight_decay=training_params["weight_decay"],
+    )
+
+    EPOCHS = 10  # random search 不要太多，後面 final training 才用多 epoch
+    model = model.to(DEVICE)
+
+    # ---------- Train ----------
+    for _ in range(EPOCHS):
+        model.train()
+        for batch in train_loader:
+            x, edge_index, y = batch
+            x, edge_index, y = x.to(DEVICE), edge_index.to(DEVICE), y.to(DEVICE)
+
+            logits = model(x, edge_index)
+            loss = criterion(logits, y)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+
+    # ---------- Validate ----------
+    model.eval()
+    val_loss = 0.0
+    with torch.no_grad():
+        for batch in val_loader:
+            x, edge_index, y = batch
+            x, edge_index, y = x.to(DEVICE), edge_index.to(DEVICE), y.to(DEVICE)
+
+            logits = model(x, edge_index)
+            loss = criterion(logits, y)
+            val_loss += loss.item()
+
+    return val_loss / len(val_loader)
+
+
+# -----------------------------------------------------------
+# Optuna objective function
+# -----------------------------------------------------------
+def objective(trial):
+
+    # ---- 隨機選 hyperparameters ----
+    model_params = GTCNHyperParams(
+        id=f"trial_{trial.number}",
+        GCN_HIDDEN_DIM=trial.suggest_categorical("GCN_HIDDEN_DIM", [16, 32, 64]),
+        GCN_DROPOUT=trial.suggest_float("GCN_DROPOUT", 0.1, 0.4),
+        TCN_HIDDEN_DIM=trial.suggest_categorical("TCN_HIDDEN_DIM", [32, 64, 128]),
+        TCN_KERNEL_SIZE=trial.suggest_categorical("TCN_KERNEL_SIZE", [3, 5]),
+        TCN_DILATIONS=trial.suggest_categorical(
+            "TCN_DILATIONS",
+            [
+                [1, 2, 4],
+                [1, 2, 4, 8],
+                [1, 2, 4, 8, 16],
+            ],
+        ),
+        TCN_DROPOUT=trial.suggest_float("TCN_DROPOUT", 0.1, 0.4),
+        CLASS_HIDDEN_DIM=trial.suggest_categorical("CLASS_HIDDEN_DIM", [32, 64, 128]),
+    )
+    training_params = {
+        "learning_rate": trial.suggest_loguniform("learning_rate", 1e-4, 1e-2),
+        "weight_decay": trial.suggest_loguniform("weight_decay", 1e-5, 1e-3),
+    }
+
+    # load dataset
+    with open("./src/gtcn/datasets/train.pkl", "rb") as f:
+        data = pickle.load(f)
+
+    # determine sequences in each fold
     seq_ids = data["seq_ids"]
-    num_classes = len(GTCNModel.GESTURES)
-
-    # Get unique sequences and group them into folds
     unique_seqs = np.unique(seq_ids)
-    num_sequences = len(unique_seqs)
-
-    # Shuffle sequences for better distribution across folds
-    np.random.seed(42)
+    np.random.seed(RANDOM_SEED)
     shuffled_seqs = np.random.permutation(unique_seqs)
+    seq_folds = np.array_split(shuffled_seqs, NUM_FOLDS)
 
-    # Split sequences into folds
-    seq_folds = np.array_split(shuffled_seqs, num_folds)
-
-    print(f"Performing {num_folds}-Fold Grouped Cross-Validation")
-    print(f"Total sequences: {num_sequences}")
-    print(f"Sequences per fold: {[len(fold) for fold in seq_folds]}")
-
-    fold_results = []
-
-    for fold_idx, test_seqs in enumerate(seq_folds):
-        print(f"\n====================")
-        print(f" Fold {fold_idx + 1}/{num_folds}")
-        print(f" Validation sequences: {sorted(test_seqs.tolist())}")
+    # perform k-fold cross-validation
+    scores = []
+    for fold_idx, val_seqs in enumerate(seq_folds):
+        print(f"====================")
+        print(f" Fold {fold_idx + 1}/{NUM_FOLDS}")
+        print(f" Validation sequences: {sorted(val_seqs.tolist())}")
         print(f"====================")
 
-        # Split by sequence groups: all windows from test_seqs go to validation
-        train_mask = ~np.isin(seq_ids, test_seqs)
-        val_mask = np.isin(seq_ids, test_seqs)
+        train_idx = np.where(~np.isin(seq_ids, val_seqs))[0]
+        val_idx = np.where(np.isin(seq_ids, val_seqs))[0]
 
-        train_idx = np.where(train_mask)[0]
-        val_idx = np.where(val_mask)[0]
+        model = GTCNModel(model_params).to(DEVICE)
+        fold_loss = evaluate_model(model, training_params, train_idx, val_idx, data)
+        scores.append(fold_loss)
 
-        print(f"Train samples: {len(train_idx)}, Val samples: {len(val_idx)}")
-
-        # Prepare data
-        train_ds = SequenceDataset(X[train_idx], y[train_idx])
-        val_ds = SequenceDataset(X[val_idx], y[val_idx])
-        train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
-        val_loader = DataLoader(val_ds, batch_size=32, shuffle=False)
-
-        weights = _compute_balanced_weights(y[train_idx], num_classes).to(device)
-
-        model = GTCNModel(model_params).to(device)
-        criterion = torch.nn.CrossEntropyLoss(weight=weights)
-        optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
-        # Training
-        for epoch in range(epochs):
-            train_loss = _train_one_epoch(
-                model, train_loader, criterion, optimizer, device
-            )
-            if (epoch + 1) % 5 == 0 or epoch == 0:
-                print(
-                    f"[Fold {fold_idx+1}] Epoch {epoch+1}/{epochs} - Train Loss: {train_loss:.4f}"
-                )
-
-        # Evaluation
-        val_loss, report, cm = _evaluate(model, val_loader, criterion, device)
-
-        print(f"\n[Fold {fold_idx+1}] Validation Loss: {val_loss:.4f}")
-        print(f"[Fold {fold_idx+1}] Macro F1: {report['macro avg']['f1-score']:.4f}")
-        print(f"[Fold {fold_idx+1}] Accuracy: {report['accuracy']:.4f}")
-
-        fold_results.append(
-            {
-                "fold": fold_idx + 1,
-                "test_seqs": sorted(test_seqs.tolist()),
-                "f1_score": report["macro avg"]["f1-score"],
-                "accuracy": report["accuracy"],
-                "report": report,
-                "cm": cm,
-            }
-        )
-
-    print("\n====================")
-    print(f" {num_folds}-Fold Grouped Cross-Validation Results")
-    print("====================")
-
-    f1_scores = [r["f1_score"] for r in fold_results]
-    accuracies = [r["accuracy"] for r in fold_results]
-
-    for result in fold_results:
-        seqs_str = ",".join(map(str, result["test_seqs"]))
-        print(
-            f"Fold {result['fold']} (seqs {seqs_str}): F1={result['f1_score']:.4f}, Acc={result['accuracy']:.4f}"
-        )
-
-    print(f"\nAverage Macro F1: {np.mean(f1_scores):.4f} (±{np.std(f1_scores):.4f})")
-    print(f"Average Accuracy: {np.mean(accuracies):.4f} (±{np.std(accuracies):.4f})")
-
-    return fold_results
+    return sum(scores) / len(scores)
 
 
-if __name__ == "__main__":
-    start_time = time.time()
+# -----------------------------------------------------------
+# Run Optuna Random Search
+# -----------------------------------------------------------
+study = optuna.create_study(
+    direction="minimize", sampler=optuna.samplers.RandomSampler()
+)
+study.optimize(objective, n_trials=50)
 
-    # cross validation to find best hyperparameters
-    model_params_list = [
-        GTCNHyperParams(
-            id="default",
-            GCN_HIDDEN_DIM=16,
-            GCN_DROPOUT=0.2,
-            TCN_HIDDEN_DIM=64,
-            TCN_KERNEL_SIZE=3,
-            TCN_DILATIONS=[1, 2, 4, 8],
-            TCN_DROPOUT=0.2,
-            CLASS_HIDDEN_DIM=64,
-        ),
-    ]
-
-    
-    for params in model_params_list:
-        print(f"Training GTCN Model with params ID: {params.id}")
-        results = cross_validate(
-            learning_rate=1e-3,
-            epochs=10,
-            model_params=params,
-            num_folds=5,
-        )
-        print(f"Completed with time: {time.time() - start_time:.2f}s\n")
+print("Best Trial:", study.best_trial.number)
+print("Best Score:", study.best_trial.value)
+print("Best Params:", study.best_trial.params)
 
 
 # nohup python -u -m src.gtcn.cross_validate
