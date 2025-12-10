@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from src.dataset_utils import GestureLabel, HandLandmark
+from dataclasses import dataclass
 
 
 def generate_adjacent_matrix(
@@ -21,6 +22,18 @@ def generate_adjacent_matrix(
     return adj
 
 
+@dataclass
+class GTCNHyperParams:
+    id: str
+    GCN_HIDDEN_DIM: int
+    GCN_DROPOUT: float
+    TCN_HIDDEN_DIM: int
+    TCN_KERNEL_SIZE: int
+    TCN_DILATIONS: list[int]
+    TCN_DROPOUT: float
+    CLASS_HIDDEN_DIM: int
+
+
 class GTCNModel(nn.Module):
     """
     Gesture Recognition Network\n
@@ -29,9 +42,6 @@ class GTCNModel(nn.Module):
     """
 
     WINDOW_LENGTH = 20
-    GCN_HIDDEN_DIM = 16  # GCN hidden dimension
-    TCN_HIDDEN_DIM = 64  # TCN hidden dimension
-    CLASS_HIDDEN_DIM = 32  # Classifier hidden dimension
     LANDMARKS = [
         HandLandmark.thumbA,
         HandLandmark.thumbB,
@@ -83,13 +93,19 @@ class GTCNModel(nn.Module):
             (HandLandmark.indexEnd, HandLandmark.middleEnd),
         ]
 
-        def __init__(self, hidden_dim):
+        def __init__(self, hidden_dim, dropout):
             super().__init__()
             in_dim = 3
             out_dim = hidden_dim
 
             self.W1 = nn.Linear(in_dim, out_dim, bias=False)
             self.W2 = nn.Linear(in_dim, out_dim, bias=False)
+
+            # residual projection
+            self.res_proj = nn.Linear(in_dim, out_dim, bias=False)
+
+            # dropout
+            self.dropout = nn.Dropout(dropout)
 
             # adjacency matrices (fixed)
             A1 = torch.tensor(
@@ -112,7 +128,13 @@ class GTCNModel(nn.Module):
             AX2 = torch.matmul(self.A2, X)
 
             out = self.W1(AX1) + self.W2(AX2)
-            return F.relu(out)
+
+            res = self.res_proj(X)
+
+            out = F.relu(out + res)
+            out = self.dropout(out)
+
+            return out
 
     class FingerPooling(nn.Module):
         """
@@ -136,49 +158,74 @@ class GTCNModel(nn.Module):
                 pooled.append(X[:, idxs].mean(dim=1))
             return torch.stack(pooled, dim=1)
 
+    class TCNBlock(nn.Module):
+        """
+        Temporal Convolutional Network Block\n
+        Input: (B, in_ch, T)\n
+        Output: (B, out_ch, T)
+        """
+
+        def __init__(self, in_ch, out_ch, kernel_size, dilation, dropout):
+            super().__init__()
+            pad = dilation * (kernel_size - 1)
+
+            self.conv = nn.Conv1d(
+                in_ch, out_ch, kernel_size=kernel_size, dilation=dilation, padding=0
+            )
+
+            self.padding = pad
+
+            self.dropout = nn.Dropout(dropout)
+
+            self.res_proj = None
+            if in_ch != out_ch:
+                self.res_proj = nn.Conv1d(in_ch, out_ch, kernel_size=1)
+
+        def forward(self, x):
+            res = x
+
+            # manual right padding
+            x = F.pad(x, (0, self.padding))
+
+            out = self.conv(x)
+            out = F.relu(out)
+            out = self.dropout(out)
+
+            if self.res_proj is not None:
+                res = self.res_proj(res)
+
+            return F.relu(out + res)
+
     class TemporalConvNet(nn.Module):
         """
-        Temporal Convolution Network\n
-        Input: (B, gcn_hidden_dim*3, window_length)\n
-        Output: (B, tcn_hidden_dim) after GAP
+        Temporal Convolutional Network (multiple TCN blocks)\n
+        Input: (B, gcn_hidden_dim*3, T)\n
+        Output: (B, tcn_hidden_dim)
         """
 
-        KERNEL_SIZE = 3
-        DILATIONS = [1, 3, 9, 27]
-
-        def __init__(self, hidden_dim):
+        def __init__(self, gcn_hidden_dim, hidden_dim, kernel_size, dilations, dropout):
             super().__init__()
-            in_ch = GTCNModel.GCN_HIDDEN_DIM * 3
-            out_ch = hidden_dim
-
-            self.padding = [d * (self.KERNEL_SIZE - 1) for d in self.DILATIONS]
-
+            in_ch = gcn_hidden_dim * 3
             layers = []
-            for d in self.DILATIONS:
+
+            for d in dilations:
                 layers.append(
-                    nn.Sequential(
-                        nn.Conv1d(
-                            in_ch,
-                            out_ch,
-                            kernel_size=self.KERNEL_SIZE,
-                            padding=0,  # we will pad manually
-                            dilation=d,
-                        ),
-                        nn.ReLU(),
+                    GTCNModel.TCNBlock(
+                        in_ch,
+                        hidden_dim,
+                        kernel_size=kernel_size,
+                        dilation=d,
+                        dropout=dropout,
                     )
                 )
-                in_ch = out_ch
+                in_ch = hidden_dim
 
             self.layers = nn.ModuleList(layers)
 
         def forward(self, x):
-            for conv, p in zip(self.layers, self.padding):
-                x = F.pad(x, (0, p))  # pad at the end
-                x = conv(x)
-
-            # Global Average Pooling (over window_length)
-            x = x.mean(dim=2)
-            return x
+            for layer in self.layers:
+                x = layer(x)
+            return x.mean(dim=2)  # global average pooling
 
     class GestureClassifier(nn.Module):
         """
@@ -187,13 +234,10 @@ class GTCNModel(nn.Module):
         Output: (B, num_gestures)
         """
 
-        def __init__(self, hidden_dim, num_gestures):
+        def __init__(self, tcn_hidden_dim, hidden_dim, num_gestures):
             super().__init__()
-
-            in_dim = GTCNModel.TCN_HIDDEN_DIM
-
             self.net = nn.Sequential(
-                nn.Linear(in_dim, hidden_dim),
+                nn.Linear(tcn_hidden_dim, hidden_dim),
                 nn.ReLU(),
                 nn.Linear(hidden_dim, num_gestures),
             )
@@ -201,14 +245,20 @@ class GTCNModel(nn.Module):
         def forward(self, x):
             return self.net(x)
 
-    def __init__(self):
+    def __init__(self, hyperparams: GTCNHyperParams):
         super().__init__()
 
-        self.gcn = self.GCNLayer(self.GCN_HIDDEN_DIM)
+        self.gcn = self.GCNLayer(hyperparams.GCN_HIDDEN_DIM, hyperparams.GCN_DROPOUT)
         self.pool = self.FingerPooling()
-        self.tcn = self.TemporalConvNet(self.TCN_HIDDEN_DIM)
+        self.tcn = self.TemporalConvNet(
+            hyperparams.GCN_HIDDEN_DIM,
+            hyperparams.TCN_HIDDEN_DIM,
+            hyperparams.TCN_KERNEL_SIZE,
+            hyperparams.TCN_DILATIONS,
+            hyperparams.TCN_DROPOUT,
+        )
         self.classifier = self.GestureClassifier(
-            self.CLASS_HIDDEN_DIM, len(self.GESTURES)
+            hyperparams.TCN_HIDDEN_DIM, hyperparams.CLASS_HIDDEN_DIM, len(self.GESTURES)
         )
 
     def forward(self, x):

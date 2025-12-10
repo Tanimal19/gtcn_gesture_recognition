@@ -1,14 +1,10 @@
-import os
-import sys
+import time
 import pickle
 import torch
-import time
 import numpy as np
-from torch import nn
 from torch.utils.data import DataLoader, Dataset
-from sklearn.model_selection import train_test_split
-from src.gtcn.model import GTCNModel
-from gtcn.create_set import DATASET_FOLDER
+from src.gtcn.model import GTCNModel, GTCNHyperParams
+from src.gtcn.create_set import DATASET_FOLDER
 from collections import Counter
 
 
@@ -29,44 +25,26 @@ class SequenceDataset(Dataset):
         return self.X[idx], self.y[idx]
 
 
-def stratified_split(
-    X: np.ndarray, y: np.ndarray, val_size=0.2
-) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    N = len(y)
-    indices = list(range(N))
-
-    train_idx, val_idx = train_test_split(
-        indices,
-        test_size=val_size,
-        stratify=y,
-        random_state=42,
-    )
-
-    print("> y label distribution:")
-    print(f"\ttrain: {Counter(y[train_idx])}")
-    print(f"\tval: {Counter(y[val_idx])}")
-
-    return (X[train_idx], y[train_idx], X[val_idx], y[val_idx])
-
-
-def compute_class_weights(y, num_classes):
+def _compute_balanced_weights(y, num_classes):
     counts = Counter(y)
+    total = len(y)
     weights = np.zeros(num_classes, dtype=np.float32)
+
     for cls in range(num_classes):
-        weights[cls] = 1.0 / (counts[cls] if counts[cls] > 0 else 1.0)
-    weights = weights / weights.sum() * num_classes
+        count = counts[cls] if counts[cls] > 0 else 1
+        weights[cls] = total / (num_classes * count)
+
     return torch.tensor(weights, dtype=torch.float32)
 
 
-def train_one_epoch(model, loader, criterion, optimizer, device):
+def _train_one_epoch(model, loader, criterion, optimizer, device):
     model.train()
     total_loss = 0
 
     for X, y in loader:
-        X = X.to(device)
-        y = y.to(device)
-
+        X, y = X.to(device), y.to(device)
         optimizer.zero_grad()
+
         logits = model(X)
         loss = criterion(logits, y)
         loss.backward()
@@ -77,65 +55,48 @@ def train_one_epoch(model, loader, criterion, optimizer, device):
     return total_loss / len(loader.dataset)
 
 
-def validate_one_epoch(model, loader, criterion, device):
-    model.eval()
-    total_loss = 0
-    correct = 0
-
-    with torch.no_grad():
-        for X, y in loader:
-            X = X.to(device)
-            y = y.to(device)
-
-            logits = model(X)
-            loss = criterion(logits, y)
-            total_loss += loss.item() * X.size(0)
-
-            preds = torch.argmax(logits, dim=1)
-            correct += (preds == y).sum().item()
-
-    avg_loss = total_loss / len(loader.dataset)
-    acc = correct / len(loader.dataset)
-
-    return avg_loss, acc
-
-
-def train_epochs(learning_rate=1e-3, epochs=10):
+def train(learning_rate, epochs, model_params: GTCNHyperParams):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Using device: {device}")
 
-    model = GTCNModel().to(device)
-
-    # loading training data
     with open(DATASET_FOLDER + "train.pkl", "rb") as f:
         data = pickle.load(f)
-    class_weights = compute_class_weights(
-        data["y"], num_classes=len(GTCNModel.GESTURES)
-    )
-    X_train, y_train, X_val, y_val = stratified_split(
-        data["X"], data["y"], val_size=0.2
-    )
-    train_ds = SequenceDataset(X_train, y_train)
-    val_ds = SequenceDataset(X_val, y_val)
-    train_loader = DataLoader(train_ds, batch_size=32, shuffle=False)
-    val_loader = DataLoader(val_ds, batch_size=32, shuffle=False)
+    X = data["X"]
+    y = data["y"]
+    num_classes = len(GTCNModel.GESTURES)
 
+    class_weights = _compute_balanced_weights(y, num_classes).to(device)
+    train_ds = SequenceDataset(X, y)
+    train_loader = DataLoader(train_ds, batch_size=32, shuffle=True)
+
+    model = GTCNModel(model_params).to(device)
     criterion = torch.nn.CrossEntropyLoss(weight=class_weights.to(device))
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-    best_loss = float("inf")
     for epoch in range(epochs):
-        loss = train_one_epoch(model, train_loader, criterion, optimizer, device)
-        val_loss, val_acc = validate_one_epoch(model, val_loader, criterion, device)
-        print(
-            f"Epoch {epoch+1}/{epochs} - Train Loss: {loss:.4f}, Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.4f}"
-        )
+        train_loss = _train_one_epoch(model, train_loader, criterion, optimizer, device)
+        print(f"Epoch {epoch+1}/{epochs} - Train Loss: {train_loss:.4f}")
 
-        if val_loss < best_loss:
-            best_loss = val_loss
-            torch.save(model.state_dict(), DATASET_FOLDER + "best_model.pth")
-            print("  > Saved best model.")
+    torch.save(model.state_dict(), DATASET_FOLDER + f"gtcn_{model_params.id}.pth")
 
 
 if __name__ == "__main__":
-    train_epochs(learning_rate=1e-3, epochs=20)
+    start_time = time.time()
+
+    model_params = GTCNHyperParams(
+        id="default",
+        GCN_HIDDEN_DIM=16,
+        GCN_DROPOUT=0.2,
+        TCN_HIDDEN_DIM=64,
+        TCN_KERNEL_SIZE=3,
+        TCN_DILATIONS=[1, 2, 4, 8],
+        TCN_DROPOUT=0.2,
+        CLASS_HIDDEN_DIM=64,
+    )
+
+    train(
+        learning_rate=1e-3,
+        epochs=10,
+        model_params=model_params,
+    )
+    print(f"Training completed in {time.time() - start_time} seconds.")
