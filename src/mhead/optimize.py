@@ -67,7 +67,7 @@ class Objective:
         )
 
         learning_rate = trial.suggest_float("learning_rate", 1e-4, 1e-2)
-        bce_weight = trial.suggest_float("bce_weight", 0.1, 0.5, 1.0)
+        bce_weight = trial.suggest_categorical("bce_weight", [0.1, 0.5, 1.0])
 
         # load dataset
         with open(self.training_set_path, "rb") as f:
