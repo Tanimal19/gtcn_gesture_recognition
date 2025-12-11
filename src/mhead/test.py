@@ -5,8 +5,8 @@ import numpy as np
 from torch.utils.data import DataLoader
 from sklearn.metrics import classification_report
 from src import DEVICE
+from src.gtcn import DEFAULT_TESTSET_PATH, DEFAULT_MODEL_PATH
 from src.gtcn.dataset import GTCNDataset
-from src.mhead import DEFAULT_TESTSET_PATH, DEFAULT_MODEL_PATH
 from src.mhead.model import GTCNMHead, GTCNModelParams
 
 

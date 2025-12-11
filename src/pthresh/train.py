@@ -3,14 +3,13 @@ import pickle
 import torch
 from torch.utils.data import DataLoader
 from src import DEVICE
-from src.gtcn import DEFAULT_TRAINSET_PATH, DEFAULT_MODEL_PATH
+from src.gtcn import DEFAULT_TRAINSET_PATH
+from src.pthresh import DEFAULT_MODEL_PATH
 from src.gtcn.dataset import GTCNDataset
-from src.mhead.model import GTCNModelParams, GTCNMHead
+from src.pthresh.model import GTCNPThresh, GTCNModelParams
 
 
-def train_one_epoch(
-    model, train_loader, gesture_criterion, none_criterion, optimizer, bce_weight=1.0
-):
+def train_one_epoch(model, train_loader, criterion, optimizer):
     model.train()
     epoch_loss = 0.0
 
@@ -18,22 +17,13 @@ def train_one_epoch(
         x, y_batch = batch
         x, y_batch = x.to(DEVICE), y_batch.to(DEVICE)
 
-        gesture_logits, none_logit = model(x)
-
-        gesture_target = y_batch.clone()
-        none_target = (y_batch == 0).float()  # 1: none gesture, 0: real gesture
+        gesture_logits, _ = model(x)
 
         mask = y_batch != 0  # all real gestures
-        if mask.any():
-            loss_gesture = gesture_criterion(
-                gesture_logits[mask],
-                gesture_target[mask] - 1,  # shift target to start from 0
-            )
-        else:
-            loss_gesture = torch.tensor(0.0, device=x.device)
-        loss_none = none_criterion(none_logit, none_target)
+        if not mask.any():
+            continue
 
-        loss = loss_gesture + bce_weight * loss_none
+        loss = criterion(gesture_logits[mask], y_batch[mask] - 1)
 
         optimizer.zero_grad()
         loss.backward()
@@ -48,20 +38,22 @@ def train_one_epoch(
 def train_model(params, epochs, training_set_path, model_path, batch_size=32):
     start_time = time.time()
 
-    print(f"Training GTCNMHead model with parameters {params}")
+    print(f"Training GTCNPThresh model with parameters:")
+    for k, v in params.items():
+        print(f"  {k}: {v}")
 
-    # Load full dataset
+    # Load dataset
     with open(training_set_path, "rb") as f:
         data = pickle.load(f)
     X = data["X"]
     y = data["y"]
 
-    # Create full training dataset
+    # Create DataLoader
     train_loader = DataLoader(GTCNDataset(X, y), batch_size=batch_size, shuffle=True)
 
-    # Extract model and training params
+    # Initialize model
     model_params = GTCNModelParams(
-        id="best_model",
+        id="pthresh_model",
         GCN_HIDDEN_DIM=params["GCN_HIDDEN_DIM"],
         GCN_DROPOUT=params["GCN_DROPOUT"],
         TCN_HIDDEN_DIM=params["TCN_HIDDEN_DIM"],
@@ -70,15 +62,11 @@ def train_model(params, epochs, training_set_path, model_path, batch_size=32):
         TCN_DROPOUT=params["TCN_DROPOUT"],
         CLASS_HIDDEN_DIM=params["CLASS_HIDDEN_DIM"],
     )
-    model = GTCNMHead(model_params).to(DEVICE)
+    model = GTCNPThresh(model_params).to(DEVICE)
 
     # Setup training
-    gesture_criterion = torch.nn.CrossEntropyLoss()
-    none_criterion = torch.nn.BCEWithLogitsLoss()
-    optimizer = torch.optim.Adam(
-        model.parameters(),
-        lr=params["learning_rate"],
-    )
+    criterion = torch.nn.CrossEntropyLoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=params["learning_rate"])
 
     # Training loop
     best_loss = float("inf")
@@ -86,14 +74,7 @@ def train_model(params, epochs, training_set_path, model_path, batch_size=32):
     early_stop_patience = 10
 
     for epoch in range(epochs):
-        epoch_loss = train_one_epoch(
-            model,
-            train_loader,
-            gesture_criterion,
-            none_criterion,
-            optimizer,
-            params["bce_weight"],
-        )
+        epoch_loss = train_one_epoch(model, train_loader, criterion, optimizer)
         print(f"Epoch [{epoch+1}/{epochs}], Loss: {epoch_loss:.4f}")
 
         # Save best model
@@ -118,24 +99,23 @@ def train_model(params, epochs, training_set_path, model_path, batch_size=32):
 
     print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
 
-    return model
+    return model, best_loss
 
 
 if __name__ == "__main__":
-    example_params = {
-        "GCN_HIDDEN_DIM": 16,
-        "GCN_DROPOUT": 0.3,
-        "TCN_HIDDEN_DIM": 64,
-        "TCN_KERNEL_SIZE": 5,
-        "TCN_DILATIONS": (1, 2, 4, 8, 16),
-        "TCN_DROPOUT": 0.3,
-        "CLASS_HIDDEN_DIM": 32,
-        "learning_rate": 1e-3,
-        "bce_weight": 1.0,
+    params = {
+        "GCN_HIDDEN_DIM": 32,
+        "GCN_DROPOUT": 0.2,
+        "TCN_HIDDEN_DIM": 128,
+        "TCN_KERNEL_SIZE": 3,
+        "TCN_DILATIONS": [1, 2, 4, 8],
+        "TCN_DROPOUT": 0.2,
+        "CLASS_HIDDEN_DIM": 64,
+        "learning_rate": 0.001,
     }
     train_model(
-        example_params,
+        params,
+        epochs=10,
         training_set_path=DEFAULT_TRAINSET_PATH,
         model_path=DEFAULT_MODEL_PATH,
-        epochs=10,
     )

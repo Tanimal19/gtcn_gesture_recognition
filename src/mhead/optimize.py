@@ -5,8 +5,8 @@ import torch
 import numpy as np
 from torch.utils.data import DataLoader
 from src import DEVICE
+from src.gtcn import DEFAULT_TRAINSET_PATH
 from src.gtcn.dataset import GTCNDataset
-from src.mhead import DEFAULT_TRAINSET_PATH
 from src.mhead.model import GTCNMHead, GTCNModelParams
 from src.mhead.train import train_one_epoch
 
@@ -129,13 +129,15 @@ class Objective:
         return sum(scores) / len(scores)
 
 
-def find_optimize_params(study_name, n_trials, training_set_path):
+def run_optimize(study_name, n_trials, training_set_path):
     start_time = time.time()
 
     print(f"Starting study '{study_name}' with {n_trials} trials...")
     objective = Objective(study_name, training_set_path)
     study = optuna.create_study(
-        direction="minimize", sampler=optuna.samplers.RandomSampler()
+        study_name=study_name,
+        direction="minimize",
+        sampler=optuna.samplers.RandomSampler(),
     )
     study.optimize(objective, n_trials)
 
@@ -149,8 +151,8 @@ def find_optimize_params(study_name, n_trials, training_set_path):
 
 
 if __name__ == "__main__":
-    find_optimize_params(
-        study_name="default",
+    run_optimize(
+        study_name="mhead_optimization",
         n_trials=10,
         training_set_path=DEFAULT_TRAINSET_PATH,
     )

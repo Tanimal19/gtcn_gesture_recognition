@@ -12,7 +12,7 @@ from src.gtcn.test import test_model as test_gtcn_model
 from src.mhead.test import test_model as test_mhead_model
 
 
-training_set_path = "./src/gtcn/datasets/training.pkl"
+training_set_path = "./src/gtcn/datasets/train.pkl"
 test_set_path = "./src/gtcn/datasets/test.pkl"
 gtcn_model_path = "./src/gtcn/models/best_model.pth"
 mhead_model_path = "./src/mhead/models/best_model.pth"

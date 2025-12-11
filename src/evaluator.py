@@ -41,14 +41,14 @@ if __name__ == "__main__":
         description="Evaluate generated annotation with ground truth."
     )
     parser.add_argument(
-        "--apath",
+        "--ann",
         type=str,
         help="path of generated annotation file.",
     )
     args = parser.parse_args()
 
     # load annotations
-    prediction = read_annotations(args.apath)
+    prediction = read_annotations(args.ann)
     truth = read_annotations(SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt")
 
     # init metrics

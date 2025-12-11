@@ -5,9 +5,9 @@ from src.gtcn.model import generate_adjacent_matrix, GTCNModelParams
 from src.dataset_utils import GestureLabel, HandLandmark
 
 
-class GTCNMHead(nn.Module):
+class GTCNPThresh(nn.Module):
     """
-    Gesture Recognition Network with Multi Head Classifier\n
+    Gesture Recognition Network with Probability Threshold\n
     Input: (B, window_length, num_landmarks, 3)\n
     Output: (B, num_gestures)
     """
@@ -76,13 +76,13 @@ class GTCNMHead(nn.Module):
             # adjacency matrices (fixed)
             A1 = torch.tensor(
                 generate_adjacent_matrix(
-                    GTCNMHead.LANDMARKS, self.INSIDE_FINGER_CONNECTIONS
+                    GTCNPThresh.LANDMARKS, self.INSIDE_FINGER_CONNECTIONS
                 ),
                 dtype=torch.float32,
             )
             A2 = torch.tensor(
                 generate_adjacent_matrix(
-                    GTCNMHead.LANDMARKS, self.BETWEEN_FINGER_CONNECTIONS
+                    GTCNPThresh.LANDMARKS, self.BETWEEN_FINGER_CONNECTIONS
                 ),
                 dtype=torch.float32,
             )
@@ -176,7 +176,7 @@ class GTCNMHead(nn.Module):
 
             for d in dilations:
                 layers.append(
-                    GTCNMHead.TCNBlock(
+                    GTCNPThresh.TCNBlock(
                         in_ch,
                         hidden_dim,
                         kernel_size=kernel_size,
@@ -195,9 +195,9 @@ class GTCNMHead(nn.Module):
 
     class GestureMheadClassifier(nn.Module):
         """
-        Gesture Classifier with:
+        Gesture Classifier with probability threshold for NONE detection.
         - gesture_head: logits for real gestures (exclude NONE)
-        - none_head: a single logit indicating NONE likelihood
+        - threshold: if max probability < threshold, predict NONE
         """
 
         def __init__(self, tcn_hidden_dim, hidden_dim, num_real_gestures):
@@ -207,13 +207,12 @@ class GTCNMHead(nn.Module):
                 nn.ReLU(),
             )
             self.gesture_head = nn.Linear(hidden_dim, num_real_gestures)
-            self.none_head = nn.Linear(hidden_dim, 1)
 
         def forward(self, x):
             h = self.shared(x)
             gesture_logits = self.gesture_head(h)  # (B, num_real_gestures)
-            none_logit = self.none_head(h).squeeze(-1)  # (B,)
-            return gesture_logits, none_logit
+            gesture_probs = F.softmax(gesture_logits, dim=-1)  # (B, num_real_gestures)
+            return gesture_logits, gesture_probs
 
     def __init__(self, hyperparams: GTCNModelParams):
         super().__init__()
@@ -242,6 +241,6 @@ class GTCNMHead(nn.Module):
         g = g.reshape(B, T, -1)  # (B, T, gcn_hidden_dim*3)
         g = g.transpose(1, 2)  # (B, gcn_hidden_dim*3, T)
         feat = self.tcn(g)  # (B, tcn_hidden_dim)
-        gesture_logits, none_logit = self.classifier(feat)
+        gesture_logits, gesture_probs = self.classifier(feat)
 
-        return gesture_logits, none_logit
+        return gesture_logits, gesture_probs

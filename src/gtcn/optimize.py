@@ -105,7 +105,7 @@ class Objective:
         return sum(scores) / len(scores)
 
 
-def find_optimize_params(study_name, n_trials, training_set_path):
+def run_optimize(study_name, n_trials, training_set_path):
     start_time = time.time()
 
     print(f"Starting study '{study_name}' with {n_trials} trials...")
@@ -125,7 +125,7 @@ def find_optimize_params(study_name, n_trials, training_set_path):
 
 
 if __name__ == "__main__":
-    find_optimize_params(
+    run_optimize(
         study_name="default",
         n_trials=10,
         training_set_path=DEFAULT_TRAINSET_PATH,
