@@ -61,7 +61,7 @@ def predict_with_threshold(model, x, threshold):
     return preds, max_probs
 
 
-def evaluate_model(model_path, test_set_path, threshold=0.5, batch_size=32):
+def test_model(model_path, test_set_path, threshold=0.5, batch_size=32):
     """
     Evaluate trained model on test set.
 
@@ -169,9 +169,9 @@ if __name__ == "__main__":
     from src.pthresh import DEFAULT_MODEL_PATH
     from src.gtcn import DEFAULT_TESTSET_PATH
 
-    results = evaluate_model(
-        model_path=DEFAULT_MODEL_PATH,
+    results = test_model(
+        model_path="./src/pthresh/models/best_model.pth",
         test_set_path=DEFAULT_TESTSET_PATH,
-        threshold=0.5,
+        threshold=0.6,
         batch_size=32,
     )
