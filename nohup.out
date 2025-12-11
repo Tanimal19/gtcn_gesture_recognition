@@ -2785,3 +2785,810 @@ Fold 3/5
 > val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
 > Creating GestureDataset with 6429 samples.
 > Creating GestureDataset with 1815 samples.
+> loss: 1.8241
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 2.5225
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.8810
+[I 2025-12-11 10:25:16,584] Trial 17 finished with value: 2.249207590179918 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.00989233693062233, 'bce_weight': 1.0}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.4626
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 0.8850
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.7542
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.1344
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 0.8616
+[I 2025-12-11 10:27:30,313] Trial 18 finished with value: 1.0195512662144066 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.0030842232900163873, 'bce_weight': 0.5}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.7483
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.3678
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.1558
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.6163
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.8637
+[I 2025-12-11 10:29:46,150] Trial 19 finished with value: 1.5503833679978025 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.0029023958764880084, 'bce_weight': 1.0}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.1565
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.3349
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.0140
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.0864
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.3421
+[I 2025-12-11 10:32:06,852] Trial 20 finished with value: 1.1867712605494527 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.008023493613690424, 'bce_weight': 0.1}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 2.0298
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.9927
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.6047
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.8369
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 2.1470
+[I 2025-12-11 10:34:20,942] Trial 21 finished with value: 1.9222387988708654 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.0010127681596227478, 'bce_weight': 1.0}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.4795
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.7097
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.0576
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.0899
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.2630
+[I 2025-12-11 10:36:27,809] Trial 22 finished with value: 1.319936155477367 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.008751422243041701, 'bce_weight': 0.1}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.6163
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.5501
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.0926
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.0810
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.7020
+[I 2025-12-11 10:39:35,247] Trial 23 finished with value: 1.4083997296155395 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.006798770175325428, 'bce_weight': 0.5}. Best is trial 2 with value: 0.971788361970218.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 0.8998
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 0.7549
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.6782
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 0.9860
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.0637
+[I 2025-12-11 10:42:10,295] Trial 24 finished with value: 0.8765340940370686 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.0026302410299074504, 'bce_weight': 0.1}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.8693
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.9418
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.6459
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.7284
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.7733
+[I 2025-12-11 10:44:22,324] Trial 25 finished with value: 1.791747643701419 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.00020346689979533803, 'bce_weight': 0.1}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.4136
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 0.7527
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.7192
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.3004
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.3486
+[I 2025-12-11 10:46:43,388] Trial 26 finished with value: 1.106906524345708 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.004779769868642746, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.1737
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.1553
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.8886
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.5860
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.1364
+[I 2025-12-11 10:49:07,746] Trial 27 finished with value: 1.1879981742513694 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.005365653044773575, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.5726
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.5223
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.2745
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.4673
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.2931
+[I 2025-12-11 10:51:08,469] Trial 28 finished with value: 1.4259647388878203 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.007502548002976968, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.5899
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 2.2515
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 2.0818
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.4082
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.9849
+[I 2025-12-11 10:54:28,270] Trial 29 finished with value: 1.8632644681616468 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.009105813294808217, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 2.1648
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.8035
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.3729
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.8752
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.6179
+[I 2025-12-11 10:56:34,774] Trial 30 finished with value: 1.7668447220624386 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.007969635475512849, 'bce_weight': 1.0}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.6882
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.4512
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.2072
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.4892
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.9740
+[I 2025-12-11 10:58:43,410] Trial 31 finished with value: 1.5619586138301644 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.008321891149593221, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.1865
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 0.7644
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.5971
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.0753
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.1968
+[I 2025-12-11 11:00:51,134] Trial 32 finished with value: 0.9640104250273149 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.00431302522016737, 'bce_weight': 0.1}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.3160
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.1153
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.8483
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 0.8181
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.0917
+[I 2025-12-11 11:02:37,320] Trial 33 finished with value: 1.0378917198807285 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.0058077865943206, 'bce_weight': 0.1}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.5820
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.3883
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.9987
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.3609
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.2447
+[I 2025-12-11 11:04:46,383] Trial 34 finished with value: 1.3149251514942175 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.005351636912350615, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.7613
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.1320
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.1661
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.4163
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.4343
+[I 2025-12-11 11:07:06,155] Trial 35 finished with value: 1.3819882018546747 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.004602224791863087, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.1986
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.1014
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 0.8749
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.0125
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.4759
+[I 2025-12-11 11:09:26,015] Trial 36 finished with value: 1.1326582885719176 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.003329021093635001, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.7242
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.0864
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.0498
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.3369
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.6086
+[I 2025-12-11 11:11:08,882] Trial 37 finished with value: 1.3611533328777543 and parameters: {'GCN_HIDDEN_DIM': 32, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.3, 'CLASS_HIDDEN_DIM': 32, 'learning_rate': 0.0020971672388881376, 'bce_weight': 1.0}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.4290
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 0.7891
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.0265
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 0.9628
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.1342
+[I 2025-12-11 11:13:19,336] Trial 38 finished with value: 1.068315748892061 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.2, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.002872050030606495, 'bce_weight': 0.5}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Fold 1/5
+> val sequences: [1, 7, 15, 17, 25, 30, 35, 37, 46, 50, 52, 57, 63, 70, 79, 84, 88, 103, 106]
+> Creating GestureDataset with 6557 samples.
+> Creating GestureDataset with 1687 samples.
+> loss: 1.8441
+Fold 2/5
+> val sequences: [8, 14, 16, 21, 22, 39, 40, 43, 55, 59, 61, 81, 82, 85, 86, 87, 94, 95]
+> Creating GestureDataset with 6774 samples.
+> Creating GestureDataset with 1470 samples.
+> loss: 1.6831
+Fold 3/5
+> val sequences: [5, 10, 11, 12, 19, 24, 26, 33, 34, 36, 44, 47, 49, 68, 90, 93, 97, 105]
+> Creating GestureDataset with 6429 samples.
+> Creating GestureDataset with 1815 samples.
+> loss: 1.1022
+Fold 4/5
+> val sequences: [41, 53, 56, 60, 62, 65, 69, 71, 73, 75, 78, 91, 98, 99, 101, 104, 107, 108]
+> Creating GestureDataset with 6806 samples.
+> Creating GestureDataset with 1438 samples.
+> loss: 1.8987
+Fold 5/5
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 48, 66, 67, 76, 77, 80, 89, 92, 96, 100, 102]
+> Creating GestureDataset with 6410 samples.
+> Creating GestureDataset with 1834 samples.
+> loss: 1.3199
+[I 2025-12-11 11:15:45,572] Trial 39 finished with value: 1.5695855566876307 and parameters: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 128, 'TCN_KERNEL_SIZE': 5, 'TCN_DILATIONS': [1, 2, 4, 8], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 64, 'learning_rate': 0.008828919106282975, 'bce_weight': 0.1}. Best is trial 24 with value: 0.8765340940370686.
+==================================================
+Optimization completed in 5760.96 seconds.
+Best Trial: 24
+Best Score: 0.8765340940370686
+Best Params: {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.0026302410299074504, 'bce_weight': 0.1}
+Training model with parameters {'GCN_HIDDEN_DIM': 16, 'GCN_DROPOUT': 0.3, 'TCN_HIDDEN_DIM': 64, 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4, 8, 16], 'TCN_DROPOUT': 0.2, 'CLASS_HIDDEN_DIM': 128, 'learning_rate': 0.0026302410299074504, 'bce_weight': 0.1}
+> Creating GestureDataset with 8244 samples.
+Epoch [1/200], Loss: 1.6788
+Epoch [2/200], Loss: 1.6238
+Epoch [3/200], Loss: 1.5602
+Epoch [4/200], Loss: 1.4537
+Epoch [5/200], Loss: 1.2003
+Epoch [6/200], Loss: 1.0082
+Epoch [7/200], Loss: 0.8042
+Epoch [8/200], Loss: 0.6925
+Epoch [9/200], Loss: 0.5895
+Epoch [10/200], Loss: 0.5633
+Epoch [11/200], Loss: 0.5320
+Epoch [12/200], Loss: 0.4926
+Epoch [13/200], Loss: 0.4720
+Epoch [14/200], Loss: 0.4364
+Epoch [15/200], Loss: 0.4382
+Epoch [16/200], Loss: 0.4162
+Epoch [17/200], Loss: 0.3709
+Epoch [18/200], Loss: 0.3796
+Epoch [19/200], Loss: 0.3398
+Epoch [20/200], Loss: 0.3383
+Epoch [21/200], Loss: 0.3118
+Epoch [22/200], Loss: 0.3081
+Epoch [23/200], Loss: 0.3104
+Epoch [24/200], Loss: 0.3034
+Epoch [25/200], Loss: 0.2726
+Epoch [26/200], Loss: 0.2670
+Epoch [27/200], Loss: 0.2778
+Epoch [28/200], Loss: 0.2695
+Epoch [29/200], Loss: 0.2730
+Epoch [30/200], Loss: 0.2391
+Epoch [31/200], Loss: 0.2382
+Epoch [32/200], Loss: 0.2226
+Epoch [33/200], Loss: 0.2435
+Epoch [34/200], Loss: 0.2376
+Epoch [35/200], Loss: 0.2283
+Epoch [36/200], Loss: 0.2306
+Epoch [37/200], Loss: 0.2194
+Epoch [38/200], Loss: 0.1892
+Epoch [39/200], Loss: 0.2030
+Epoch [40/200], Loss: 0.2181
+Epoch [41/200], Loss: 0.1965
+Epoch [42/200], Loss: 0.1944
+Epoch [43/200], Loss: 0.1834
+Epoch [44/200], Loss: 0.2287
+Epoch [45/200], Loss: 0.1839
+Epoch [46/200], Loss: 0.2062
+Epoch [47/200], Loss: 0.1716
+Epoch [48/200], Loss: 0.2102
+Epoch [49/200], Loss: 0.1627
+Epoch [50/200], Loss: 0.1800
+Epoch [51/200], Loss: 0.1800
+Epoch [52/200], Loss: 0.1718
+Epoch [53/200], Loss: 0.1680
+Epoch [54/200], Loss: 0.1619
+Epoch [55/200], Loss: 0.1706
+Epoch [56/200], Loss: 0.1597
+Epoch [57/200], Loss: 0.1524
+Epoch [58/200], Loss: 0.1590
+Epoch [59/200], Loss: 0.1572
+Epoch [60/200], Loss: 0.1462
+Epoch [61/200], Loss: 0.1866
+Epoch [62/200], Loss: 0.1539
+Epoch [63/200], Loss: 0.1477
+Epoch [64/200], Loss: 0.1381
+Epoch [65/200], Loss: 0.1459
+Epoch [66/200], Loss: 0.1420
+Epoch [67/200], Loss: 0.1556
+Epoch [68/200], Loss: 0.1849
+Epoch [69/200], Loss: 0.1314
+Epoch [70/200], Loss: 0.1289
+Epoch [71/200], Loss: 0.1610
+Epoch [72/200], Loss: 0.1403
+Epoch [73/200], Loss: 0.1276
+Epoch [74/200], Loss: 0.1439
+Epoch [75/200], Loss: 0.1317
+Epoch [76/200], Loss: 0.1402
+Epoch [77/200], Loss: 0.1221
+Epoch [78/200], Loss: 0.1190
+Epoch [79/200], Loss: 0.1600
+Epoch [80/200], Loss: 0.1208
+Epoch [81/200], Loss: 0.1260
+Epoch [82/200], Loss: 0.1127
+Epoch [83/200], Loss: 0.1200
+Epoch [84/200], Loss: 0.1238
+Epoch [85/200], Loss: 0.1544
+Epoch [86/200], Loss: 0.1348
+Epoch [87/200], Loss: 0.1250
+Epoch [88/200], Loss: 0.1091
+Epoch [89/200], Loss: 0.1225
+Epoch [90/200], Loss: 0.1100
+Epoch [91/200], Loss: 0.1346
+Epoch [92/200], Loss: 0.1207
+Epoch [93/200], Loss: 0.1178
+Epoch [94/200], Loss: 0.1133
+Epoch [95/200], Loss: 0.1218
+Epoch [96/200], Loss: 0.1145
+Epoch [97/200], Loss: 0.1336
+Epoch [98/200], Loss: 0.1230
+Early stopping triggered.
+
+Training completed in 326.18 seconds.
+Model Hyperparameters: GTCNModelParams(id='best_model', GCN_HIDDEN_DIM=16, GCN_DROPOUT=0.3, TCN_HIDDEN_DIM=64, TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8, 16], TCN_DROPOUT=0.2, CLASS_HIDDEN_DIM=128)
+> Creating GestureDataset with 317 samples.
+> Creating GestureDataset with 77 samples.
+> Creating GestureDataset with 80 samples.
+> Creating GestureDataset with 77 samples.
+> Creating GestureDataset with 46 samples.
+> Creating GestureDataset with 186 samples.
+> Creating GestureDataset with 74 samples.
+> Creating GestureDataset with 41 samples.
+> Creating GestureDataset with 75 samples.
+> Creating GestureDataset with 126 samples.
+> Creating GestureDataset with 72 samples.
+> Creating GestureDataset with 210 samples.
+> Creating GestureDataset with 61 samples.
+> Creating GestureDataset with 427 samples.
+> Creating GestureDataset with 76 samples.
+> Creating GestureDataset with 169 samples.
+> Creating GestureDataset with 254 samples.
+> Creating GestureDataset with 104 samples.
+> Creating GestureDataset with 91 samples.
+> Creating GestureDataset with 67 samples.
+> Creating GestureDataset with 65 samples.
+> Creating GestureDataset with 152 samples.
+> Creating GestureDataset with 107 samples.
+> Creating GestureDataset with 293 samples.
+> Creating GestureDataset with 71 samples.
+> Creating GestureDataset with 92 samples.
+> Creating GestureDataset with 56 samples.
+> Creating GestureDataset with 95 samples.
+> Creating GestureDataset with 78 samples.
+> Creating GestureDataset with 256 samples.
+> Creating GestureDataset with 98 samples.
+> Creating GestureDataset with 47 samples.
+> Creating GestureDataset with 116 samples.
+> Creating GestureDataset with 130 samples.
+> Creating GestureDataset with 50 samples.
+> Creating GestureDataset with 38 samples.
+> Creating GestureDataset with 97 samples.
+> Creating GestureDataset with 35 samples.
+> Creating GestureDataset with 244 samples.
+> Creating GestureDataset with 37 samples.
+> Creating GestureDataset with 130 samples.
+> Creating GestureDataset with 38 samples.
+> Creating GestureDataset with 55 samples.
+> Creating GestureDataset with 204 samples.
+> Creating GestureDataset with 109 samples.
+> Creating GestureDataset with 135 samples.
+> Creating GestureDataset with 48 samples.
+> Creating GestureDataset with 47 samples.
+> Creating GestureDataset with 66 samples.
+> Creating GestureDataset with 50 samples.
+> Creating GestureDataset with 81 samples.
+> Creating GestureDataset with 120 samples.
+> Creating GestureDataset with 35 samples.
+> Creating GestureDataset with 70 samples.
+> Creating GestureDataset with 81 samples.
+> Creating GestureDataset with 90 samples.
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.5579    0.6276    0.5907      1850
+           1     0.3086    0.2208    0.2574       453
+           2     0.7739    0.7599    0.7668       608
+           3     0.7086    0.5083    0.5920       421
+           4     0.7738    0.9832    0.8660      1249
+           5     0.7634    0.7059    0.7335      1207
+           6     0.8201    0.3184    0.4588       358
+
+    accuracy                         0.6721      6146
+   macro avg     0.6723    0.5891    0.6093      6146
+weighted avg     0.6707    0.6721    0.6600      6146
+
+
+Classification Report with Majority Vote Smoothing:
+              precision    recall  f1-score   support
+
+           0     0.5571    0.6465    0.5984      1850
+           1     0.3200    0.2119    0.2550       453
+           2     0.8014    0.7763    0.7886       608
+           3     0.7273    0.5131    0.6017       421
+           4     0.7744    0.9704    0.8614      1249
+           5     0.7669    0.7142    0.7396      1207
+           6     0.8952    0.3101    0.4606       358
+
+    accuracy                         0.6777      6146
+   macro avg     0.6917    0.5918    0.6150      6146
+weighted avg     0.6805    0.6777    0.6653      6146
+
+
+Test completed in 0.87 seconds.
+
+script completed.
