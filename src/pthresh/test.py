@@ -172,6 +172,6 @@ if __name__ == "__main__":
     results = test_model(
         model_path="./src/pthresh/models/best_model.pth",
         test_set_path=DEFAULT_TESTSET_PATH,
-        threshold=0.6,
+        threshold=0.66,
         batch_size=32,
     )

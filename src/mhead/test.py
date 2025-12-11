@@ -3,7 +3,7 @@ import pickle
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, confusion_matrix
 from src import DEVICE
 from src.gtcn import DEFAULT_TESTSET_PATH, DEFAULT_MODEL_PATH
 from src.gtcn.dataset import GTCNDataset
@@ -93,7 +93,6 @@ def test_model(test_set_path, model_path, batch_size=32):
     # we need to evaluate each sequence separately to avoid data leakage
     truths = []
     predictions = []
-    smoothed_predictions = []
     for seq_id in np.unique(seq_ids):
         idx = np.where(seq_ids == seq_id)[0]
         X_seq = X[idx]
@@ -103,17 +102,23 @@ def test_model(test_set_path, model_path, batch_size=32):
             GTCNDataset(X_seq, y_seq), batch_size=batch_size, shuffle=False
         )
         seq_truths, seq_predictions = test_one_dataset(model, test_loader)
-        seq_smoothed = _majority_vote_smoothing(seq_predictions)
 
         truths.extend(seq_truths)
         predictions.extend(seq_predictions)
-        smoothed_predictions.extend(seq_smoothed.tolist())
+
+    print("\nConfusion Matrix:")
+    print(confusion_matrix(truths, predictions))
 
     print("\nClassification Report:")
-    print(classification_report(truths, predictions, digits=4))
-
-    print("\nClassification Report with Majority Vote Smoothing:")
-    print(classification_report(truths, smoothed_predictions, digits=4))
+    print(
+        classification_report(
+            truths,
+            predictions,
+            digits=4,
+            target_names=[g.name for g in GTCNMHead.GESTURES],
+            zero_division=0,
+        )
+    )
 
     print(f"\nTest completed in {time.time() - start_time:.2f} seconds.")
 

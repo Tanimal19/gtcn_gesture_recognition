@@ -9521,8 +9521,9 @@ Epoch [68/200], Loss: 0.0781
 Early stopping triggered.
 
 Training completed in 196.77 seconds.
+
 Loading model from: ./src/pthresh/models/best_model.pth
-Using threshold: 0.50
+Using threshold: 0.66
 > Creating GestureDataset with 6146 samples.
 Model Hyperparameters: GTCNModelParams(id='pthresh_model', GCN_HIDDEN_DIM=32, GCN_DROPOUT=0.2, TCN_HIDDEN_DIM=256, TCN_KERNEL_SIZE=5, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, CLASS_HIDDEN_DIM=64)
 
@@ -9531,33 +9532,33 @@ Evaluating...
 ==================================================
 EVALUATION RESULTS
 ==================================================
-Accuracy: 0.5566
-F1 Macro: 0.5268
-F1 Weighted: 0.4937
+Accuracy: 0.5729
+F1 Macro: 0.5518
+F1 Weighted: 0.5401
 
 Confusion Matrix:
-[[  88  471  209  138  270  344  330]
- [  12  186    0    2   58  142   53]
- [  20   31  498   19    0   39    1]
- [   6   33    7  295   80    0    0]
- [   0    1    2   14 1232    0    0]
- [  22  122   20    1    3  897  142]
- [   1   91    7    0    0   34  225]]
+[[ 278  424  201  104  242  302  299]
+ [  44  176    0    1   54  133   45]
+ [  51   24  487   16    0   29    1]
+ [  40   33    2  278   68    0    0]
+ [  15    1    2    8 1223    0    0]
+ [  98  104   16    0    1  862  126]
+ [  34   74    5    0    0   28  217]]
 
 Classification Report:
               precision    recall  f1-score   support
 
-        NONE       0.59      0.05      0.09      1850
-        GRAB       0.20      0.41      0.27       453
-       PINCH       0.67      0.82      0.74       608
-         TAP       0.63      0.70      0.66       421
-        DENY       0.75      0.99      0.85      1249
-        KNOB       0.62      0.74      0.67      1207
-      EXPAND       0.30      0.63      0.41       358
+        NONE       0.50      0.15      0.23      1850
+        GRAB       0.21      0.39      0.27       453
+       PINCH       0.68      0.80      0.74       608
+         TAP       0.68      0.66      0.67       421
+        DENY       0.77      0.98      0.86      1249
+        KNOB       0.64      0.71      0.67      1207
+      EXPAND       0.32      0.61      0.41       358
 
-    accuracy                           0.56      6146
-   macro avg       0.54      0.62      0.53      6146
-weighted avg       0.59      0.56      0.49      6146
+    accuracy                           0.57      6146
+   macro avg       0.54      0.61      0.55      6146
+weighted avg       0.58      0.57      0.54      6146
 
 
 Probability Distribution:
@@ -9566,12 +9567,10 @@ Probability Distribution:
   Std max probability: 0.1434
 
 Predictions by True Label:
-  NONE      : Acc=88/1850 (4.76%), Mean Prob=0.8759
-  GRAB      : Acc=186/453 (41.06%), Mean Prob=0.9130
-  PINCH     : Acc=498/608 (81.91%), Mean Prob=0.9355
-  TAP       : Acc=295/421 (70.07%), Mean Prob=0.9232
-  DENY      : Acc=1232/1249 (98.64%), Mean Prob=0.9895
-  KNOB      : Acc=897/1207 (74.32%), Mean Prob=0.9296
-  EXPAND    : Acc=225/358 (62.85%), Mean Prob=0.9198
-
-script completed.
+  NONE      : Acc=278/1850 (15.03%), Mean Prob=0.8759
+  GRAB      : Acc=176/453 (38.85%), Mean Prob=0.9131
+  PINCH     : Acc=487/608 (80.10%), Mean Prob=0.9355
+  TAP       : Acc=278/421 (66.03%), Mean Prob=0.9232
+  DENY      : Acc=1223/1249 (97.92%), Mean Prob=0.9895
+  KNOB      : Acc=862/1207 (71.42%), Mean Prob=0.9296
+  EXPAND    : Acc=217/358 (60.61%), Mean Prob=0.9198

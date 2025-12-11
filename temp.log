@@ -1,0 +1,40 @@
+Parsing result.md file...
+Found 3 models: GTCN, Double-Head, P-Threshold
+
+Generating visualizations...
+Saved: training_losses.png
+Saved: confusion_matrices.png
+Saved: metrics_comparison.png
+Saved: training_efficiency.png
+
+================================================================================
+MODEL PERFORMANCE SUMMARY
+================================================================================
+Model                Accuracy     Macro F1     Training Time (s)  Final Loss  
+--------------------------------------------------------------------------------
+GTCN                 0.6749       0.6139       401.75             0.3734      
+Double-Head          0.6721       0.6093       326.18             0.1230      
+P-Threshold          0.5700       0.5500       196.77             0.0781      
+================================================================================
+
+PER-CLASS F1-SCORE COMPARISON
+================================================================================
+Class       GTCN                Double-Head         P-Threshold         
+--------------------------------------------------------------------------------
+NONE        0.5767              0.5907              0.2300              
+GRAB        0.2797              0.2574              0.2700              
+PINCH       0.7254              0.7668              0.7400              
+TAP         0.6087              0.5920              0.6700              
+DENY        0.8800              0.8660              0.8600              
+KNOB        0.7822              0.7335              0.6700              
+EXPAND      0.4449              0.4588              0.4100              
+================================================================================
+
+
+✓ All visualizations generated successfully!
+
+Generated files:
+  - training_losses.png
+  - confusion_matrices.png
+  - metrics_comparison.png
+  - training_efficiency.png
