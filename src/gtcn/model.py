@@ -9,6 +9,7 @@ from src.gtcn.classifier import (
 )
 from dataclasses import dataclass, field
 from typing import Type
+import copy
 
 
 @dataclass
@@ -45,23 +46,23 @@ class GTCNModel(nn.Module):
     def __init__(self, hyperparams: GTCNParams):
         super().__init__()
 
-        self.hyperparams = hyperparams
+        self.hyperparams = copy.deepcopy(hyperparams)
 
-        self.gcn_layer = hyperparams.GCN_CLASS(
-            hyperparams.GCN_DIMS, hyperparams.GCN_DROPOUT
+        self.gcn_layer = self.hyperparams.GCN_CLASS(
+            self.hyperparams.GCN_DIMS, self.hyperparams.GCN_DROPOUT
         )
 
         gcn_feature_dim = self.gcn_layer.get_outdim()
-        self.tcn_layer = hyperparams.TCN_CLASS(
-            [gcn_feature_dim] + hyperparams.TCN_CHANNELS,
-            hyperparams.TCN_KERNEL_SIZE,
-            hyperparams.TCN_DILATIONS,
-            hyperparams.TCN_DROPOUT,
+        self.tcn_layer = self.hyperparams.TCN_CLASS(
+            [gcn_feature_dim] + self.hyperparams.TCN_CHANNELS,
+            self.hyperparams.TCN_KERNEL_SIZE,
+            self.hyperparams.TCN_DILATIONS,
+            self.hyperparams.TCN_DROPOUT,
         )
 
         gtcn_features = self.tcn_layer.get_outdim()
-        self.classifier = hyperparams.CLASSIFIER_CLASS(
-            gtcn_features, hyperparams.CLASSIFIER_DIM
+        self.classifier = self.hyperparams.CLASSIFIER_CLASS(
+            gtcn_features, self.hyperparams.CLASSIFIER_DIM
         )
 
     def forward(self, x):

@@ -20,14 +20,16 @@ DEFAULT_MODEL_FOLDER = "./src/models/"
 @dataclass
 class GTCNTrainParams:
     model_params: GTCNParams
-    weight_mode: str = ""
+    training_dataset_path: str
+    model_path: str
+    weight_mode: str | None = None  # 'simple', 'balanced', or None
     batch_size: int = 32
     learning_rate: float = 2e-3
     epochs: int = 50
 
 
-def compute_weights(y, mode: str = "") -> torch.Tensor:
-    """mode: 'simple', 'balanced', empty"""
+def compute_weights(y, mode: str | None = None) -> torch.Tensor:
+    """mode: 'simple', 'balanced', None"""
 
     weights = np.zeros(len(OUTPUT_GESTURES), dtype=np.float32)
 
@@ -78,13 +80,13 @@ def train_one_epoch(
     return avg_loss
 
 
-def train_model(params: GTCNTrainParams, training_dataset_path, model_path):
+def train_model(params: GTCNTrainParams):
     start_time = time.time()
 
     print(f"+ Start training model with parameters {params}")
 
     # Load full dataset
-    with open(training_dataset_path, "rb") as f:
+    with open(params.training_dataset_path, "rb") as f:
         data = pickle.load(f)
     X = data["X"]
     y = data["y"]
@@ -128,7 +130,7 @@ def train_model(params: GTCNTrainParams, training_dataset_path, model_path):
                     "loss": best_loss,
                     "hyperparams": params.model_params.__dict__,
                 },
-                model_path,
+                params.model_path,
             )
             early_stop_counter = 0
         else:
@@ -140,21 +142,3 @@ def train_model(params: GTCNTrainParams, training_dataset_path, model_path):
     print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
 
     return loss_history
-
-
-if __name__ == "__main__":
-    print(f"> Using device: {DEVICE}")
-    example_params = GTCNTrainParams(
-        model_params=GTCNParams(
-            id="example_gtcn",
-            GCN_CLASS=GCNLayerFingerPool,
-            TCN_CLASS=TCNLayerLastStep,
-            CLASSIFIER_CLASS=RegularClassifier,
-        )
-    )
-
-    train_model(
-        example_params,
-        training_dataset_path=DEFAULT_DATASET_FOLDER + "training_example.pkl",
-        model_path=DEFAULT_MODEL_FOLDER + "gtcn_example_model.pth",
-    )
