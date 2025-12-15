@@ -4,29 +4,44 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from collections import Counter
-from src import DEVICE
-from src.gtcn import DEFAULT_TRAINSET_PATH, DEFAULT_MODEL_PATH
-from src.gtcn.model import GTCNModel, GTCNModelParams
-from src.dataset import GTCNDataset
-from src.utils import GestureLabel
+from src.utils import DEVICE, GestureLabel
+from src.gtcn import OUTPUT_GESTURES, GTCNDataset
+from src.gtcn.model import GTCNModel, GTCNParams
+from src.gtcn.gcn import GCNLayerFingerPool
+from src.gtcn.tcn import TCNLayerLastStep
+from src.gtcn.classifier import RegularClassifier
+from src.dataset_builder import GTCNDataset, DEFAULT_DATASET_FOLDER
+from dataclasses import dataclass
+
+
+DEFAULT_MODEL_FOLDER = "./src/models/"
+
+
+@dataclass
+class GTCNTrainParams:
+    model_params: GTCNParams
+    weight_mode: str = ""
+    batch_size: int = 32
+    learning_rate: float = 2e-3
+    epochs: int = 50
 
 
 def compute_weights(y, mode: str = "") -> torch.Tensor:
     """mode: 'simple', 'balanced', empty"""
 
-    weights = np.zeros(len(GTCNModel.GESTURES), dtype=np.float32)
+    weights = np.zeros(len(OUTPUT_GESTURES), dtype=np.float32)
 
     if mode == "simple":
-        for gesture in GTCNModel.GESTURES:
-            idx = GTCNModel.GESTURES.index(gesture)
+        for gesture in OUTPUT_GESTURES:
+            idx = OUTPUT_GESTURES.index(gesture)
             weights[idx] = 0.1 if gesture == GestureLabel.NONE else 1.0
 
     elif mode == "balanced":
         counts = Counter(y)
         total = len(y)
-        for gesture in GTCNModel.GESTURES:
-            idx = GTCNModel.GESTURES.index(gesture)
-            weights[idx] = total / (len(GTCNModel.GESTURES) * counts.get(idx, 1))
+        for gesture in OUTPUT_GESTURES:
+            idx = OUTPUT_GESTURES.index(gesture)
+            weights[idx] = total / (len(OUTPUT_GESTURES) * counts.get(idx, 1))
 
     else:
         # no weighting
@@ -37,7 +52,12 @@ def compute_weights(y, mode: str = "") -> torch.Tensor:
     return torch.tensor(weights, dtype=torch.float32)
 
 
-def train_one_epoch(model, train_loader, criterion, optimizer):
+def train_one_epoch(
+    model: GTCNModel,
+    train_loader: DataLoader,
+    criterions: list[torch.nn.Module],
+    optimizer: torch.optim.Optimizer,
+):
     model.train()
     epoch_loss = 0.0
 
@@ -45,8 +65,8 @@ def train_one_epoch(model, train_loader, criterion, optimizer):
         x, y_batch = batch
         x, y_batch = x.to(DEVICE), y_batch.to(DEVICE)
 
-        logits = model(x)
-        loss = criterion(logits, y_batch)
+        output = model(x)
+        loss = model.compute_loss(output, y_batch, criterions)
 
         optimizer.zero_grad()
         loss.backward()
@@ -58,49 +78,44 @@ def train_one_epoch(model, train_loader, criterion, optimizer):
     return avg_loss
 
 
-def train_model(params, epochs, training_set_path, model_path, batch_size=32):
+def train_model(params: GTCNTrainParams, training_dataset_path, model_path):
     start_time = time.time()
 
-    print(f"Training model with parameters {params}")
+    print(f"+ Start training model with parameters {params}")
 
     # Load full dataset
-    with open(training_set_path, "rb") as f:
+    with open(training_dataset_path, "rb") as f:
         data = pickle.load(f)
     X = data["X"]
     y = data["y"]
 
-    # Create full training dataset
-    train_loader = DataLoader(GTCNDataset(X, y), batch_size=batch_size, shuffle=True)
+    train_loader = DataLoader(
+        GTCNDataset(X, y, params.model_params.WINDOW_LENGTH),
+        batch_size=params.batch_size,
+        shuffle=True,
+    )
 
     # Extract model and training params
-    model_params = GTCNModelParams(
-        id="best_model",
-        GCN_HIDDEN_DIM=params["GCN_HIDDEN_DIM"],
-        GCN_DROPOUT=params["GCN_DROPOUT"],
-        TCN_HIDDEN_DIM=params["TCN_HIDDEN_DIM"],
-        TCN_KERNEL_SIZE=params["TCN_KERNEL_SIZE"],
-        TCN_DILATIONS=params["TCN_DILATIONS"],
-        TCN_DROPOUT=params["TCN_DROPOUT"],
-        CLASS_HIDDEN_DIM=params["CLASS_HIDDEN_DIM"],
-    )
-    model = GTCNModel(model_params).to(DEVICE)
+    model = GTCNModel(params.model_params).to(DEVICE)
 
     # Setup training
-    weights = compute_weights(y, "balanced").to(DEVICE)
-    criterion = torch.nn.CrossEntropyLoss(weight=weights)
+    weights = compute_weights(y, params.weight_mode).to(DEVICE)
+    criterions = model.classifier.init_criterions(weights)
     optimizer = torch.optim.Adam(
         model.parameters(),
-        lr=params["learning_rate"],
+        lr=params.learning_rate,
     )
 
     # Training loop
+    loss_history: list[float] = []
     best_loss = float("inf")
     early_stop_counter = 0
     early_stop_patience = 10
 
-    for epoch in range(epochs):
-        epoch_loss = train_one_epoch(model, train_loader, criterion, optimizer)
-        print(f"Epoch [{epoch+1}/{epochs}], Loss: {epoch_loss:.4f}")
+    for epoch in range(params.epochs):
+        epoch_loss = train_one_epoch(model, train_loader, criterions, optimizer)
+        print(f"Epoch [{epoch+1}/{params.epochs}], Loss: {epoch_loss:.4f}")
+        loss_history.append(epoch_loss)
 
         # Save best model
         if epoch_loss < best_loss:
@@ -111,7 +126,7 @@ def train_model(params, epochs, training_set_path, model_path, batch_size=32):
                     "model_state_dict": model.state_dict(),
                     "optimizer_state_dict": optimizer.state_dict(),
                     "loss": best_loss,
-                    "hyperparams": model_params.__dict__,
+                    "hyperparams": params.model_params.__dict__,
                 },
                 model_path,
             )
@@ -124,24 +139,22 @@ def train_model(params, epochs, training_set_path, model_path, batch_size=32):
 
     print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
 
-    return model
+    return loss_history
 
 
 if __name__ == "__main__":
     print(f"> Using device: {DEVICE}")
-    example_params = {
-        "GCN_HIDDEN_DIM": 16,
-        "GCN_DROPOUT": 0.3,
-        "TCN_HIDDEN_DIM": 64,
-        "TCN_KERNEL_SIZE": 5,
-        "TCN_DILATIONS": (1, 2, 4, 8, 16),
-        "TCN_DROPOUT": 0.3,
-        "CLASS_HIDDEN_DIM": 32,
-        "learning_rate": 1e-3,
-    }
+    example_params = GTCNTrainParams(
+        model_params=GTCNParams(
+            id="example_gtcn",
+            GCN_CLASS=GCNLayerFingerPool,
+            TCN_CLASS=TCNLayerLastStep,
+            CLASSIFIER_CLASS=RegularClassifier,
+        )
+    )
+
     train_model(
         example_params,
-        training_set_path=DEFAULT_TRAINSET_PATH,
-        model_path=DEFAULT_MODEL_PATH,
-        epochs=10,
+        training_dataset_path=DEFAULT_DATASET_FOLDER + "training_example.pkl",
+        model_path=DEFAULT_MODEL_FOLDER + "gtcn_example_model.pth",
     )

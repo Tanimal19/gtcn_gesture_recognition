@@ -1,14 +1,13 @@
-import torch
 import torch.nn as nn
-from src.gtcn.gcn import BaseGCNLayer, GCNLayerFingerPool, GCNLayerNoPool
+from src.gtcn.gcn import BaseGCNLayer
 from src.gtcn.tcn import BaseTCNLayer
-from gtcn.classifier import (
+from src.gtcn.classifier import (
     AbstractClassifier,
     RegularClassifier,
     DoubleHeadClassifier,
     ProbThresholdClassifier,
 )
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Type
 
 
@@ -21,12 +20,12 @@ class GTCNParams:
 
     WINDOW_LENGTH: int = 15
 
-    GCN_DIMS: list[int] = [16]
+    GCN_DIMS: list[int] = field(default_factory=lambda: [16])
     GCN_DROPOUT: float = 0.2
 
-    TCN_CHANNELS: list[int] = [64, 64, 64]
+    TCN_CHANNELS: list[int] = field(default_factory=lambda: [64, 64, 64])
     TCN_KERNEL_SIZE: int = 3
-    TCN_DILATIONS: list[int] = [1, 2, 4]
+    TCN_DILATIONS: list[int] = field(default_factory=lambda: [1, 2, 4])
     TCN_DROPOUT: float = 0.2
 
     CLASSIFIER_DIM = 32
@@ -46,6 +45,8 @@ class GTCNModel(nn.Module):
     def __init__(self, hyperparams: GTCNParams):
         super().__init__()
 
+        self.hyperparams = hyperparams
+
         self.gcn_layer = hyperparams.GCN_CLASS(
             hyperparams.GCN_DIMS, hyperparams.GCN_DROPOUT
         )
@@ -59,23 +60,9 @@ class GTCNModel(nn.Module):
         )
 
         gtcn_features = self.tcn_layer.get_outdim()
-        if hyperparams.CLASSIFIER_CLASS == DoubleHeadClassifier:
-            self.classifier = DoubleHeadClassifier(
-                gtcn_features,
-                hyperparams.CLASSIFIER_DIM,
-                hyperparams.DOUBLE_HEAD_BCE_WEIGHT,
-            )
-        elif hyperparams.CLASSIFIER_CLASS == ProbThresholdClassifier:
-            self.classifier = ProbThresholdClassifier(
-                gtcn_features,
-                hyperparams.CLASSIFIER_DIM,
-                hyperparams.PROB_THRESHOLD,
-            )
-        else:  # RegularClassifier
-            self.classifier = RegularClassifier(
-                gtcn_features,
-                hyperparams.CLASSIFIER_DIM,
-            )
+        self.classifier = hyperparams.CLASSIFIER_CLASS(
+            gtcn_features, hyperparams.CLASSIFIER_DIM
+        )
 
     def forward(self, x):
         B, T, N, C = x.shape
@@ -89,5 +76,24 @@ class GTCNModel(nn.Module):
         g = g.transpose(1, 2)  # (B, gcn_features, T)
         feat = self.tcn_layer(g)  # (B, gtcn_features)
 
-        # Classifier: predict gesture
+        # Classifier
         return self.classifier(feat)
+
+    def compute_loss(self, forward_output, y, criterions: list[nn.Module]):
+        if isinstance(self.classifier, DoubleHeadClassifier):
+            return self.classifier.backpropagate(
+                forward_output,
+                y,
+                criterions,
+                self.hyperparams.DOUBLE_HEAD_BCE_WEIGHT,
+            )
+        else:
+            return self.classifier.backpropagate(forward_output, y, criterions)
+
+    def inference_gesture(self, forward_output):
+        if isinstance(self.classifier, ProbThresholdClassifier):
+            return self.classifier.inference(
+                forward_output, self.hyperparams.PROB_THRESHOLD
+            )
+        else:
+            return self.classifier.inference(forward_output)

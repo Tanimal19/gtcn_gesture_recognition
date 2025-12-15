@@ -7,7 +7,7 @@ from torch.utils.data import DataLoader
 from src import DEVICE
 from src.gtcn import DEFAULT_TRAINSET_PATH
 from src.gtcn.model import GTCNModel, GTCNModelParams
-from src.dataset import GTCNDataset
+from src.dataset_builder import GTCNDataset
 from src.train import compute_weights, train_one_epoch
 
 

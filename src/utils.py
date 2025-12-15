@@ -2,8 +2,9 @@ from enum import Enum, auto
 from dataclasses import dataclass
 from typing import List, Dict
 import os
+import torch
 
-
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 SHREC_TRAINING_DATASET_FOLDER = "./shrec_2021/training_set/"
 SHREC_TEST_DATASET_FOLDER = "./shrec_2021/test_set/"
 
