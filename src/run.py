@@ -108,7 +108,7 @@ def train_models():
             + f"training_{dataset_suffix}.pkl",
             model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
             weight_mode=weight_mode,
-            epochs=10,
+            epochs=150,
         )
         print(f"\n=== Training model '{model_name}' on dataset '{dataset_suffix}' ===")
         history[model_name] = train_model(params)
@@ -117,17 +117,17 @@ def train_models():
     start_train("base_simple", BASE_ARCHITECTURE, "base", "simple")
     start_train("base_balanced", BASE_ARCHITECTURE, "base", "balanced")
     start_train("base_peek5", BASE_ARCHITECTURE, "peek5", None)
-    # start_train("win10", WIN10_ARCHITECTURE, "win10", None)
-    # start_train("win30", WIN30_ARCHITECTURE, "win30", None)
-    # start_train("gcn_nopool", GCN_NOPOOL_ARCHITECTURE, "base", None)
-    # start_train("tcn_meanpool", TCN_MEANPOOL_ARCHITECTURE, "base", None)
-    # start_train("tcn_weightpool", TCN_WEIGHTPOOL_ARCHITECTURE, "base", None)
-    # start_train(
-    #     "doublehead_classifier", DOUBLEHEAD_CLASSIFIER_ARCHITECTURE, "base", None
-    # )
-    # start_train(
-    #     "probthreshold_classifier", PROBTHRESHOLD_CLASSIFIER_ARCHITECTURE, "base", None
-    # )
+    start_train("win10", WIN10_ARCHITECTURE, "win10", None)
+    start_train("win30", WIN30_ARCHITECTURE, "win30", None)
+    start_train("gcn_nopool", GCN_NOPOOL_ARCHITECTURE, "base", None)
+    start_train("tcn_meanpool", TCN_MEANPOOL_ARCHITECTURE, "base", None)
+    start_train("tcn_weightpool", TCN_WEIGHTPOOL_ARCHITECTURE, "base", None)
+    start_train(
+        "doublehead_classifier", DOUBLEHEAD_CLASSIFIER_ARCHITECTURE, "base", None
+    )
+    start_train(
+        "probthreshold_classifier", PROBTHRESHOLD_CLASSIFIER_ARCHITECTURE, "base", None
+    )
 
     # save training history
     with open("training_history.txt", "w") as f:
@@ -137,17 +137,17 @@ def train_models():
 
 def test_models():
     tests = [  # (model_name, dataset_suffix)
-        # ("base", "base"),
-        # ("base_simple", "base"),
-        # ("base_balanced", "base"),
-        # ("base_peek5", "peek5"),
-        # ("win10", "win10"),
-        # ("win30", "win30"),
+        ("base", "base"),
+        ("base_simple", "base"),
+        ("base_balanced", "base"),
+        ("base_peek5", "peek5"),
+        ("win10", "win10"),
+        ("win30", "win30"),
         ("gcn_nopool", "base"),
-        # ("tcn_meanpool", "base"),
-        # ("tcn_weightpool", "base"),
-        # ("doublehead_classifier", "base"),
-        # ("probthreshold_classifier", "base"),
+        ("tcn_meanpool", "base"),
+        ("tcn_weightpool", "base"),
+        ("doublehead_classifier", "base"),
+        ("probthreshold_classifier", "base"),
     ]
 
     results = {}
