@@ -1,0 +1,822 @@
+=== Creating dataset with window length 15 and peek 0 ===
+[training set]
++ Processing sequence: 1
++ Processing sequence: 2
+- Skipping sequence: 3 (no available gestures)
++ Processing sequence: 4
++ Processing sequence: 5
+- Skipping sequence: 6 (no available gestures)
++ Processing sequence: 7
++ Processing sequence: 8
+- Skipping sequence: 9 (no available gestures)
++ Processing sequence: 10
++ Processing sequence: 11
++ Processing sequence: 12
+- Skipping sequence: 13 (no available gestures)
++ Processing sequence: 14
++ Processing sequence: 15
++ Processing sequence: 16
++ Processing sequence: 17
+- Skipping sequence: 18 (no available gestures)
++ Processing sequence: 19
++ Processing sequence: 20
++ Processing sequence: 21
++ Processing sequence: 22
+- Skipping sequence: 23 (no available gestures)
++ Processing sequence: 24
++ Processing sequence: 25
++ Processing sequence: 26
+- Skipping sequence: 27 (no available gestures)
++ Processing sequence: 28
++ Processing sequence: 29
++ Processing sequence: 30
++ Processing sequence: 31
+- Skipping sequence: 32 (no available gestures)
++ Processing sequence: 33
++ Processing sequence: 34
++ Processing sequence: 35
++ Processing sequence: 36
++ Processing sequence: 37
++ Processing sequence: 38
++ Processing sequence: 39
++ Processing sequence: 40
++ Processing sequence: 41
+- Skipping sequence: 42 (no available gestures)
++ Processing sequence: 43
++ Processing sequence: 44
+- Skipping sequence: 45 (no available gestures)
++ Processing sequence: 46
++ Processing sequence: 47
++ Processing sequence: 48
++ Processing sequence: 49
++ Processing sequence: 50
+- Skipping sequence: 51 (no available gestures)
++ Processing sequence: 52
++ Processing sequence: 53
+- Skipping sequence: 54 (no available gestures)
++ Processing sequence: 55
++ Processing sequence: 56
++ Processing sequence: 57
+- Skipping sequence: 58 (no available gestures)
++ Processing sequence: 59
++ Processing sequence: 60
++ Processing sequence: 61
++ Processing sequence: 62
++ Processing sequence: 63
++ Processing sequence: 64
++ Processing sequence: 65
++ Processing sequence: 66
++ Processing sequence: 67
++ Processing sequence: 68
++ Processing sequence: 69
++ Processing sequence: 70
++ Processing sequence: 71
+- Skipping sequence: 72 (no available gestures)
++ Processing sequence: 73
+- Skipping sequence: 74 (no available gestures)
++ Processing sequence: 75
++ Processing sequence: 76
++ Processing sequence: 77
++ Processing sequence: 78
++ Processing sequence: 79
++ Processing sequence: 80
++ Processing sequence: 81
++ Processing sequence: 82
+- Skipping sequence: 83 (no available gestures)
++ Processing sequence: 84
++ Processing sequence: 85
++ Processing sequence: 86
++ Processing sequence: 87
++ Processing sequence: 88
++ Processing sequence: 89
++ Processing sequence: 90
++ Processing sequence: 91
++ Processing sequence: 92
++ Processing sequence: 93
++ Processing sequence: 94
++ Processing sequence: 95
++ Processing sequence: 96
++ Processing sequence: 97
++ Processing sequence: 98
++ Processing sequence: 99
++ Processing sequence: 100
++ Processing sequence: 101
++ Processing sequence: 102
++ Processing sequence: 103
++ Processing sequence: 104
++ Processing sequence: 105
++ Processing sequence: 106
++ Processing sequence: 107
++ Processing sequence: 108
+X.shape: (9674, 15, 11, 3), y.shape: (9674,)
+> Label distribution:
+  NONE:4290;
+  GRAB:674;
+  PINCH:589;
+  TAP:468;
+  DENY:1978;
+  KNOB:1313;
+  EXPAND:362;
+Saved to ./src/datasets/training_base.pkl (18.38 MB)
+
+[test set]
++ Processing sequence: 109
++ Processing sequence: 110
++ Processing sequence: 111
+- Skipping sequence: 112 (no available gestures)
++ Processing sequence: 113
++ Processing sequence: 114
++ Processing sequence: 115
+- Skipping sequence: 116 (no available gestures)
++ Processing sequence: 117
+- Skipping sequence: 118 (no available gestures)
+- Skipping sequence: 119 (no available gestures)
++ Processing sequence: 120
+- Skipping sequence: 121 (no available gestures)
++ Processing sequence: 122
++ Processing sequence: 123
+- Skipping sequence: 124 (no available gestures)
++ Processing sequence: 125
++ Processing sequence: 126
+- Skipping sequence: 127 (no available gestures)
++ Processing sequence: 128
+- Skipping sequence: 129 (no available gestures)
++ Processing sequence: 130
++ Processing sequence: 131
++ Processing sequence: 132
+- Skipping sequence: 133 (no available gestures)
++ Processing sequence: 134
++ Processing sequence: 135
++ Processing sequence: 136
++ Processing sequence: 137
++ Processing sequence: 138
++ Processing sequence: 139
++ Processing sequence: 140
++ Processing sequence: 141
++ Processing sequence: 142
++ Processing sequence: 143
++ Processing sequence: 144
++ Processing sequence: 145
+- Skipping sequence: 146 (no available gestures)
+- Skipping sequence: 147 (no available gestures)
++ Processing sequence: 148
++ Processing sequence: 149
++ Processing sequence: 150
++ Processing sequence: 151
++ Processing sequence: 152
++ Processing sequence: 153
++ Processing sequence: 154
++ Processing sequence: 155
++ Processing sequence: 156
++ Processing sequence: 157
++ Processing sequence: 158
++ Processing sequence: 159
++ Processing sequence: 160
++ Processing sequence: 161
+- Skipping sequence: 162 (no available gestures)
++ Processing sequence: 163
++ Processing sequence: 164
++ Processing sequence: 165
++ Processing sequence: 166
+- Skipping sequence: 167 (no available gestures)
++ Processing sequence: 168
++ Processing sequence: 169
++ Processing sequence: 170
+- Skipping sequence: 171 (no available gestures)
++ Processing sequence: 172
+- Skipping sequence: 173 (no available gestures)
++ Processing sequence: 174
++ Processing sequence: 175
++ Processing sequence: 176
++ Processing sequence: 177
++ Processing sequence: 178
+- Skipping sequence: 179 (no available gestures)
++ Processing sequence: 180
+X.shape: (7071, 15, 11, 3), y.shape: (7071,)
+> Label distribution:
+  NONE:2775;
+  GRAB:453;
+  PINCH:608;
+  TAP:421;
+  DENY:1249;
+  KNOB:1207;
+  EXPAND:358;
+Saved to ./src/datasets/test_base.pkl (13.43 MB)
+
+=== Creating dataset with window length 10 and peek 0 ===
+[training set]
++ Processing sequence: 1
++ Processing sequence: 2
+- Skipping sequence: 3 (no available gestures)
++ Processing sequence: 4
++ Processing sequence: 5
+- Skipping sequence: 6 (no available gestures)
++ Processing sequence: 7
++ Processing sequence: 8
+- Skipping sequence: 9 (no available gestures)
++ Processing sequence: 10
++ Processing sequence: 11
++ Processing sequence: 12
+- Skipping sequence: 13 (no available gestures)
++ Processing sequence: 14
++ Processing sequence: 15
++ Processing sequence: 16
++ Processing sequence: 17
+- Skipping sequence: 18 (no available gestures)
++ Processing sequence: 19
++ Processing sequence: 20
++ Processing sequence: 21
++ Processing sequence: 22
+- Skipping sequence: 23 (no available gestures)
++ Processing sequence: 24
++ Processing sequence: 25
++ Processing sequence: 26
+- Skipping sequence: 27 (no available gestures)
++ Processing sequence: 28
++ Processing sequence: 29
++ Processing sequence: 30
++ Processing sequence: 31
+- Skipping sequence: 32 (no available gestures)
++ Processing sequence: 33
++ Processing sequence: 34
++ Processing sequence: 35
++ Processing sequence: 36
++ Processing sequence: 37
++ Processing sequence: 38
++ Processing sequence: 39
++ Processing sequence: 40
++ Processing sequence: 41
+- Skipping sequence: 42 (no available gestures)
++ Processing sequence: 43
++ Processing sequence: 44
+- Skipping sequence: 45 (no available gestures)
++ Processing sequence: 46
++ Processing sequence: 47
++ Processing sequence: 48
++ Processing sequence: 49
++ Processing sequence: 50
+- Skipping sequence: 51 (no available gestures)
++ Processing sequence: 52
++ Processing sequence: 53
+- Skipping sequence: 54 (no available gestures)
++ Processing sequence: 55
++ Processing sequence: 56
++ Processing sequence: 57
+- Skipping sequence: 58 (no available gestures)
++ Processing sequence: 59
++ Processing sequence: 60
++ Processing sequence: 61
++ Processing sequence: 62
++ Processing sequence: 63
++ Processing sequence: 64
++ Processing sequence: 65
++ Processing sequence: 66
++ Processing sequence: 67
++ Processing sequence: 68
++ Processing sequence: 69
++ Processing sequence: 70
++ Processing sequence: 71
+- Skipping sequence: 72 (no available gestures)
++ Processing sequence: 73
+- Skipping sequence: 74 (no available gestures)
++ Processing sequence: 75
++ Processing sequence: 76
++ Processing sequence: 77
++ Processing sequence: 78
++ Processing sequence: 79
++ Processing sequence: 80
++ Processing sequence: 81
++ Processing sequence: 82
+- Skipping sequence: 83 (no available gestures)
++ Processing sequence: 84
++ Processing sequence: 85
++ Processing sequence: 86
++ Processing sequence: 87
++ Processing sequence: 88
++ Processing sequence: 89
++ Processing sequence: 90
++ Processing sequence: 91
++ Processing sequence: 92
++ Processing sequence: 93
++ Processing sequence: 94
++ Processing sequence: 95
++ Processing sequence: 96
++ Processing sequence: 97
++ Processing sequence: 98
++ Processing sequence: 99
++ Processing sequence: 100
++ Processing sequence: 101
++ Processing sequence: 102
++ Processing sequence: 103
++ Processing sequence: 104
++ Processing sequence: 105
++ Processing sequence: 106
++ Processing sequence: 107
++ Processing sequence: 108
+X.shape: (8244, 10, 11, 3), y.shape: (8244,)
+> Label distribution:
+  NONE:2860;
+  GRAB:674;
+  PINCH:589;
+  TAP:468;
+  DENY:1978;
+  KNOB:1313;
+  EXPAND:362;
+Saved to ./src/datasets/training_win10.pkl (10.47 MB)
+
+[test set]
++ Processing sequence: 109
++ Processing sequence: 110
++ Processing sequence: 111
+- Skipping sequence: 112 (no available gestures)
++ Processing sequence: 113
++ Processing sequence: 114
++ Processing sequence: 115
+- Skipping sequence: 116 (no available gestures)
++ Processing sequence: 117
+- Skipping sequence: 118 (no available gestures)
+- Skipping sequence: 119 (no available gestures)
++ Processing sequence: 120
+- Skipping sequence: 121 (no available gestures)
++ Processing sequence: 122
++ Processing sequence: 123
+- Skipping sequence: 124 (no available gestures)
++ Processing sequence: 125
++ Processing sequence: 126
+- Skipping sequence: 127 (no available gestures)
++ Processing sequence: 128
+- Skipping sequence: 129 (no available gestures)
++ Processing sequence: 130
++ Processing sequence: 131
++ Processing sequence: 132
+- Skipping sequence: 133 (no available gestures)
++ Processing sequence: 134
++ Processing sequence: 135
++ Processing sequence: 136
++ Processing sequence: 137
++ Processing sequence: 138
++ Processing sequence: 139
++ Processing sequence: 140
++ Processing sequence: 141
++ Processing sequence: 142
++ Processing sequence: 143
++ Processing sequence: 144
++ Processing sequence: 145
+- Skipping sequence: 146 (no available gestures)
+- Skipping sequence: 147 (no available gestures)
++ Processing sequence: 148
++ Processing sequence: 149
++ Processing sequence: 150
++ Processing sequence: 151
++ Processing sequence: 152
++ Processing sequence: 153
++ Processing sequence: 154
++ Processing sequence: 155
++ Processing sequence: 156
++ Processing sequence: 157
++ Processing sequence: 158
++ Processing sequence: 159
++ Processing sequence: 160
++ Processing sequence: 161
+- Skipping sequence: 162 (no available gestures)
++ Processing sequence: 163
++ Processing sequence: 164
++ Processing sequence: 165
++ Processing sequence: 166
+- Skipping sequence: 167 (no available gestures)
++ Processing sequence: 168
++ Processing sequence: 169
++ Processing sequence: 170
+- Skipping sequence: 171 (no available gestures)
++ Processing sequence: 172
+- Skipping sequence: 173 (no available gestures)
++ Processing sequence: 174
++ Processing sequence: 175
++ Processing sequence: 176
++ Processing sequence: 177
++ Processing sequence: 178
+- Skipping sequence: 179 (no available gestures)
++ Processing sequence: 180
+X.shape: (6146, 10, 11, 3), y.shape: (6146,)
+> Label distribution:
+  NONE:1850;
+  GRAB:453;
+  PINCH:608;
+  TAP:421;
+  DENY:1249;
+  KNOB:1207;
+  EXPAND:358;
+Saved to ./src/datasets/test_win10.pkl (7.81 MB)
+
+=== Creating dataset with window length 30 and peek 0 ===
+[training set]
++ Processing sequence: 1
++ Processing sequence: 2
+- Skipping sequence: 3 (no available gestures)
++ Processing sequence: 4
++ Processing sequence: 5
+- Skipping sequence: 6 (no available gestures)
++ Processing sequence: 7
++ Processing sequence: 8
+- Skipping sequence: 9 (no available gestures)
++ Processing sequence: 10
++ Processing sequence: 11
++ Processing sequence: 12
+- Skipping sequence: 13 (no available gestures)
++ Processing sequence: 14
++ Processing sequence: 15
++ Processing sequence: 16
++ Processing sequence: 17
+- Skipping sequence: 18 (no available gestures)
++ Processing sequence: 19
++ Processing sequence: 20
++ Processing sequence: 21
++ Processing sequence: 22
+- Skipping sequence: 23 (no available gestures)
++ Processing sequence: 24
++ Processing sequence: 25
++ Processing sequence: 26
+- Skipping sequence: 27 (no available gestures)
++ Processing sequence: 28
++ Processing sequence: 29
++ Processing sequence: 30
++ Processing sequence: 31
+- Skipping sequence: 32 (no available gestures)
++ Processing sequence: 33
++ Processing sequence: 34
++ Processing sequence: 35
++ Processing sequence: 36
++ Processing sequence: 37
++ Processing sequence: 38
++ Processing sequence: 39
++ Processing sequence: 40
++ Processing sequence: 41
+- Skipping sequence: 42 (no available gestures)
++ Processing sequence: 43
++ Processing sequence: 44
+- Skipping sequence: 45 (no available gestures)
++ Processing sequence: 46
++ Processing sequence: 47
++ Processing sequence: 48
++ Processing sequence: 49
++ Processing sequence: 50
+- Skipping sequence: 51 (no available gestures)
++ Processing sequence: 52
++ Processing sequence: 53
+- Skipping sequence: 54 (no available gestures)
++ Processing sequence: 55
++ Processing sequence: 56
++ Processing sequence: 57
+- Skipping sequence: 58 (no available gestures)
++ Processing sequence: 59
++ Processing sequence: 60
++ Processing sequence: 61
++ Processing sequence: 62
++ Processing sequence: 63
++ Processing sequence: 64
++ Processing sequence: 65
++ Processing sequence: 66
++ Processing sequence: 67
++ Processing sequence: 68
++ Processing sequence: 69
++ Processing sequence: 70
++ Processing sequence: 71
+- Skipping sequence: 72 (no available gestures)
++ Processing sequence: 73
+- Skipping sequence: 74 (no available gestures)
++ Processing sequence: 75
++ Processing sequence: 76
++ Processing sequence: 77
++ Processing sequence: 78
++ Processing sequence: 79
++ Processing sequence: 80
++ Processing sequence: 81
++ Processing sequence: 82
+- Skipping sequence: 83 (no available gestures)
++ Processing sequence: 84
++ Processing sequence: 85
++ Processing sequence: 86
++ Processing sequence: 87
++ Processing sequence: 88
++ Processing sequence: 89
++ Processing sequence: 90
++ Processing sequence: 91
++ Processing sequence: 92
++ Processing sequence: 93
++ Processing sequence: 94
++ Processing sequence: 95
++ Processing sequence: 96
++ Processing sequence: 97
++ Processing sequence: 98
++ Processing sequence: 99
++ Processing sequence: 100
++ Processing sequence: 101
++ Processing sequence: 102
++ Processing sequence: 103
++ Processing sequence: 104
++ Processing sequence: 105
++ Processing sequence: 106
++ Processing sequence: 107
++ Processing sequence: 108
+X.shape: (13954, 30, 11, 3), y.shape: (13954,)
+> Label distribution:
+  NONE:8570;
+  GRAB:674;
+  PINCH:589;
+  TAP:468;
+  DENY:1978;
+  KNOB:1313;
+  EXPAND:362;
+Saved to ./src/datasets/training_win30.pkl (52.86 MB)
+
+[test set]
++ Processing sequence: 109
++ Processing sequence: 110
++ Processing sequence: 111
+- Skipping sequence: 112 (no available gestures)
++ Processing sequence: 113
++ Processing sequence: 114
++ Processing sequence: 115
+- Skipping sequence: 116 (no available gestures)
++ Processing sequence: 117
+- Skipping sequence: 118 (no available gestures)
+- Skipping sequence: 119 (no available gestures)
++ Processing sequence: 120
+- Skipping sequence: 121 (no available gestures)
++ Processing sequence: 122
++ Processing sequence: 123
+- Skipping sequence: 124 (no available gestures)
++ Processing sequence: 125
++ Processing sequence: 126
+- Skipping sequence: 127 (no available gestures)
++ Processing sequence: 128
+- Skipping sequence: 129 (no available gestures)
++ Processing sequence: 130
++ Processing sequence: 131
++ Processing sequence: 132
+- Skipping sequence: 133 (no available gestures)
++ Processing sequence: 134
++ Processing sequence: 135
++ Processing sequence: 136
++ Processing sequence: 137
++ Processing sequence: 138
++ Processing sequence: 139
++ Processing sequence: 140
++ Processing sequence: 141
++ Processing sequence: 142
++ Processing sequence: 143
++ Processing sequence: 144
++ Processing sequence: 145
+- Skipping sequence: 146 (no available gestures)
+- Skipping sequence: 147 (no available gestures)
++ Processing sequence: 148
++ Processing sequence: 149
++ Processing sequence: 150
++ Processing sequence: 151
++ Processing sequence: 152
++ Processing sequence: 153
++ Processing sequence: 154
++ Processing sequence: 155
++ Processing sequence: 156
++ Processing sequence: 157
++ Processing sequence: 158
++ Processing sequence: 159
++ Processing sequence: 160
++ Processing sequence: 161
+- Skipping sequence: 162 (no available gestures)
++ Processing sequence: 163
++ Processing sequence: 164
++ Processing sequence: 165
++ Processing sequence: 166
+- Skipping sequence: 167 (no available gestures)
++ Processing sequence: 168
++ Processing sequence: 169
++ Processing sequence: 170
+- Skipping sequence: 171 (no available gestures)
++ Processing sequence: 172
+- Skipping sequence: 173 (no available gestures)
++ Processing sequence: 174
++ Processing sequence: 175
++ Processing sequence: 176
++ Processing sequence: 177
++ Processing sequence: 178
+- Skipping sequence: 179 (no available gestures)
++ Processing sequence: 180
+X.shape: (9836, 30, 11, 3), y.shape: (9836,)
+> Label distribution:
+  NONE:5540;
+  GRAB:453;
+  PINCH:608;
+  TAP:421;
+  DENY:1249;
+  KNOB:1207;
+  EXPAND:358;
+Saved to ./src/datasets/test_win30.pkl (37.26 MB)
+
+=== Creating dataset with window length 15 and peek 5 ===
+[training set]
++ Processing sequence: 1
++ Processing sequence: 2
+- Skipping sequence: 3 (no available gestures)
++ Processing sequence: 4
++ Processing sequence: 5
+- Skipping sequence: 6 (no available gestures)
++ Processing sequence: 7
++ Processing sequence: 8
+- Skipping sequence: 9 (no available gestures)
++ Processing sequence: 10
++ Processing sequence: 11
++ Processing sequence: 12
+- Skipping sequence: 13 (no available gestures)
++ Processing sequence: 14
++ Processing sequence: 15
++ Processing sequence: 16
++ Processing sequence: 17
+- Skipping sequence: 18 (no available gestures)
++ Processing sequence: 19
++ Processing sequence: 20
++ Processing sequence: 21
++ Processing sequence: 22
+- Skipping sequence: 23 (no available gestures)
++ Processing sequence: 24
++ Processing sequence: 25
++ Processing sequence: 26
+- Skipping sequence: 27 (no available gestures)
++ Processing sequence: 28
++ Processing sequence: 29
++ Processing sequence: 30
++ Processing sequence: 31
+- Skipping sequence: 32 (no available gestures)
++ Processing sequence: 33
++ Processing sequence: 34
++ Processing sequence: 35
++ Processing sequence: 36
++ Processing sequence: 37
++ Processing sequence: 38
++ Processing sequence: 39
++ Processing sequence: 40
++ Processing sequence: 41
+- Skipping sequence: 42 (no available gestures)
++ Processing sequence: 43
++ Processing sequence: 44
+- Skipping sequence: 45 (no available gestures)
++ Processing sequence: 46
++ Processing sequence: 47
++ Processing sequence: 48
++ Processing sequence: 49
++ Processing sequence: 50
+- Skipping sequence: 51 (no available gestures)
++ Processing sequence: 52
++ Processing sequence: 53
+- Skipping sequence: 54 (no available gestures)
++ Processing sequence: 55
++ Processing sequence: 56
++ Processing sequence: 57
+- Skipping sequence: 58 (no available gestures)
++ Processing sequence: 59
++ Processing sequence: 60
++ Processing sequence: 61
++ Processing sequence: 62
++ Processing sequence: 63
++ Processing sequence: 64
++ Processing sequence: 65
++ Processing sequence: 66
++ Processing sequence: 67
++ Processing sequence: 68
++ Processing sequence: 69
++ Processing sequence: 70
++ Processing sequence: 71
+- Skipping sequence: 72 (no available gestures)
++ Processing sequence: 73
+- Skipping sequence: 74 (no available gestures)
++ Processing sequence: 75
++ Processing sequence: 76
++ Processing sequence: 77
++ Processing sequence: 78
++ Processing sequence: 79
++ Processing sequence: 80
++ Processing sequence: 81
++ Processing sequence: 82
+- Skipping sequence: 83 (no available gestures)
++ Processing sequence: 84
++ Processing sequence: 85
++ Processing sequence: 86
++ Processing sequence: 87
++ Processing sequence: 88
++ Processing sequence: 89
++ Processing sequence: 90
++ Processing sequence: 91
++ Processing sequence: 92
++ Processing sequence: 93
++ Processing sequence: 94
++ Processing sequence: 95
++ Processing sequence: 96
++ Processing sequence: 97
++ Processing sequence: 98
++ Processing sequence: 99
++ Processing sequence: 100
++ Processing sequence: 101
++ Processing sequence: 102
++ Processing sequence: 103
++ Processing sequence: 104
++ Processing sequence: 105
++ Processing sequence: 106
++ Processing sequence: 107
++ Processing sequence: 108
+X.shape: (9674, 15, 11, 3), y.shape: (9674,)
+> Label distribution:
+  NONE:4290;
+  GRAB:674;
+  PINCH:589;
+  TAP:468;
+  DENY:1978;
+  KNOB:1313;
+  EXPAND:362;
+Saved to ./src/datasets/training_peek5.pkl (18.38 MB)
+
+[test set]
++ Processing sequence: 109
++ Processing sequence: 110
++ Processing sequence: 111
+- Skipping sequence: 112 (no available gestures)
++ Processing sequence: 113
++ Processing sequence: 114
++ Processing sequence: 115
+- Skipping sequence: 116 (no available gestures)
++ Processing sequence: 117
+- Skipping sequence: 118 (no available gestures)
+- Skipping sequence: 119 (no available gestures)
++ Processing sequence: 120
+- Skipping sequence: 121 (no available gestures)
++ Processing sequence: 122
++ Processing sequence: 123
+- Skipping sequence: 124 (no available gestures)
++ Processing sequence: 125
++ Processing sequence: 126
+- Skipping sequence: 127 (no available gestures)
++ Processing sequence: 128
+- Skipping sequence: 129 (no available gestures)
++ Processing sequence: 130
++ Processing sequence: 131
++ Processing sequence: 132
+- Skipping sequence: 133 (no available gestures)
++ Processing sequence: 134
++ Processing sequence: 135
++ Processing sequence: 136
++ Processing sequence: 137
++ Processing sequence: 138
++ Processing sequence: 139
++ Processing sequence: 140
++ Processing sequence: 141
++ Processing sequence: 142
++ Processing sequence: 143
++ Processing sequence: 144
++ Processing sequence: 145
+- Skipping sequence: 146 (no available gestures)
+- Skipping sequence: 147 (no available gestures)
++ Processing sequence: 148
++ Processing sequence: 149
++ Processing sequence: 150
++ Processing sequence: 151
++ Processing sequence: 152
++ Processing sequence: 153
++ Processing sequence: 154
++ Processing sequence: 155
++ Processing sequence: 156
++ Processing sequence: 157
++ Processing sequence: 158
++ Processing sequence: 159
++ Processing sequence: 160
++ Processing sequence: 161
+- Skipping sequence: 162 (no available gestures)
++ Processing sequence: 163
++ Processing sequence: 164
++ Processing sequence: 165
++ Processing sequence: 166
+- Skipping sequence: 167 (no available gestures)
++ Processing sequence: 168
++ Processing sequence: 169
++ Processing sequence: 170
+- Skipping sequence: 171 (no available gestures)
++ Processing sequence: 172
+- Skipping sequence: 173 (no available gestures)
++ Processing sequence: 174
++ Processing sequence: 175
++ Processing sequence: 176
++ Processing sequence: 177
++ Processing sequence: 178
+- Skipping sequence: 179 (no available gestures)
++ Processing sequence: 180
+X.shape: (7071, 15, 11, 3), y.shape: (7071,)
+> Label distribution:
+  NONE:2775;
+  GRAB:453;
+  PINCH:608;
+  TAP:421;
+  DENY:1249;
+  KNOB:1207;
+  EXPAND:358;
+Saved to ./src/datasets/test_peek5.pkl (13.43 MB)
+
+
+

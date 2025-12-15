@@ -82,38 +82,56 @@ datasets = {
     "win30": (30, 0),
     "peek5": (15, 5),
 }
-for suffix, (window_length, peek) in datasets.items():
-    print(
-        f"=== Creating dataset with window length {window_length} and peek {peek} ==="
-    )
-    builder = GTCNDatasetBuilder(window_length=window_length, peek=peek)
-    create_datasets(builder, suffix)
+# for suffix, (window_length, peek) in datasets.items():
+#     print(
+#         f"\n=== Creating dataset with window length {window_length} and peek {peek} ==="
+#     )
+#     builder = GTCNDatasetBuilder(window_length=window_length, peek=peek)
+#     create_datasets(builder, suffix)
 
+
+history: dict[str, list[float]] = {}
+
+# train base models with different weight modes
+weight_modes = ["simple", "balanced"]
+for weight_mode in weight_modes:
+    print(f"\n=== Training base model with weight mode '{weight_mode}' ===")
+    train_params = GTCNTrainParams(
+        model_params=BASE_ARCHITECTURE,
+        weight_mode=weight_mode,
+        epochs=150,
+    )
+    model_filename = f"base_weight_{weight_mode}.pth"
+    history[model_filename] = train_model(
+        train_params,
+        training_dataset_path=DEFAULT_DATASET_FOLDER + "training_base.pkl",
+        model_path=DEFAULT_MODEL_FOLDER + model_filename,
+    )
 
 # train models with different architectures
 model_settings = [
     (BASE_ARCHITECTURE, "base", "base.pth"),
     (WIN10_ARCHITECTURE, "win10", "win10.pth"),
     (WIN30_ARCHITECTURE, "win30", "win30.pth"),
-    (BASE_ARCHITECTURE, "peek5", "peek5.pth"),
+    (BASE_ARCHITECTURE, "peek5", "base_peek5.pth"),
     (GCN_NOPOOL_ARCHITECTURE, "base", "gcn_nopool.pth"),
     (TCN_MEANPOOL_ARCHITECTURE, "base", "tcn_meanpool.pth"),
     (TCN_WEIGHTPOOL_ARCHITECTURE, "base", "tcn_weightpool.pth"),
     (DOUBLEHEAD_CLASSIFIER_ARCHITECTURE, "base", "doublehead_classifier.pth"),
     (PROBTHRESHOLD_CLASSIFIER_ARCHITECTURE, "base", "probthreshold_classifier.pth"),
 ]
-history: dict[str, list[float]] = {}
 for architecture, dataset_suffix, model_filename in model_settings:
-    print(f"=== Training model '{architecture.id}' on dataset '{dataset_suffix}' ===")
+    print(f"\n=== Training model '{architecture.id}' on dataset '{dataset_suffix}' ===")
     train_params = GTCNTrainParams(
         model_params=architecture,
-        epochs=10,
+        epochs=150,
     )
     history[model_filename] = train_model(
         train_params,
         training_dataset_path=DEFAULT_DATASET_FOLDER + f"training_{dataset_suffix}.pkl",
         model_path=DEFAULT_MODEL_FOLDER + model_filename,
     )
+
 
 # save training history
 with open("training_history.txt", "w") as f:

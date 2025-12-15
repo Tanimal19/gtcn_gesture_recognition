@@ -104,7 +104,7 @@ class DoubleHeadClassifier(AbstractClassifier):
         assert isinstance(bce_loss_fn, nn.BCEWithLogitsLoss)
 
         gesture_labels = y.clone()
-        real_gesture_mask = y != -1
+        real_gesture_mask = y != 0
         if real_gesture_mask.any():
             gesture_loss = entropy_loss_fn(
                 gesture_logits[real_gesture_mask],
@@ -161,7 +161,7 @@ class ProbThresholdClassifier(AbstractClassifier):
         assert isinstance(entropy_loss_fn, nn.CrossEntropyLoss)
 
         logits = forward_output
-        real_gesture_mask = y != -1
+        real_gesture_mask = y != 0
         if real_gesture_mask.any():
             return entropy_loss_fn(
                 logits[real_gesture_mask],
