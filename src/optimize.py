@@ -7,8 +7,8 @@ from torch.utils.data import DataLoader
 from src import DEVICE
 from src.gtcn import DEFAULT_TRAINSET_PATH
 from src.gtcn.model import GTCNModel, GTCNModelParams
-from src.gtcn.dataset import GTCNDataset
-from src.gtcn.train import compute_weights, train_one_epoch
+from src.dataset import GTCNDataset
+from src.train import compute_weights, train_one_epoch
 
 
 RANDOM_SEED = 42

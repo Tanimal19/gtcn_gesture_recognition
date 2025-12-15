@@ -7,7 +7,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 from src import DEVICE
 from src.gtcn import DEFAULT_TESTSET_PATH, DEFAULT_MODEL_PATH
 from src.gtcn.model import GTCNModel, GTCNModelParams
-from src.gtcn.dataset import GTCNDataset
+from src.dataset import GTCNDataset
 
 
 def load_model(model_path: str) -> GTCNModel:

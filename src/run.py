@@ -1,7 +1,7 @@
 # nohup python -u -m src.run &
 
 from src import DEVICE
-from src.gtcn.test import test_model as test_gtcn_model
+from src.test import test_model as test_gtcn_model
 from src.mhead.test import test_model as test_mhead_model
 from src.pthresh.test import test_model as test_pthresh_model
 

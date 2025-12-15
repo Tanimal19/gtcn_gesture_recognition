@@ -12,8 +12,8 @@ from src.dataset_utils import (
     SHREC_TRAINING_DATASET_FOLDER,
     SHREC_TEST_DATASET_FOLDER,
 )
-from src.gtcn import DEFAULT_TRAINSET_PATH, DEFAULT_TESTSET_PATH
-from src.gtcn.model import GTCNModel
+from src.gtcn import GTCNModel
+from src.gtcn.gcn import GCNLayer
 
 
 class GTCNDataset(Dataset):
@@ -33,33 +33,37 @@ class GTCNDataset(Dataset):
     @staticmethod
     def check_shape(X: np.ndarray, y: np.ndarray):
         assert X.shape[0] == y.shape[0], "X and y length mismatch!"
-        assert X.shape[1] == GTCNModel.WINDOW_LENGTH, "X window length mismatch!"
-        assert X.shape[2] == len(GTCNModel.LANDMARKS), "X landmark count mismatch!"
-        assert X.shape[3] == 3, "X coordinate dimension mismatch!"
+        assert X.shape[2] == len(GCNLayer.INPUT_LANDMARKS), "X landmark count mismatch!"
+        assert (
+            X.shape[3] == GCNLayer.INPUT_DIMENSIONS
+        ), "X coordinate dimension mismatch!"
 
         y_unique = np.unique(y)
         for label in y_unique:
-            assert 0 <= label < len(GTCNModel.GESTURES), "y label value out of range!"
+            assert (
+                0 <= label < len(GTCNModel.OUTPUT_GESTURES)
+            ), "y label value out of range!"
 
     @staticmethod
     def print_label_distribution(y: np.ndarray):
         counts = Counter(y)
         print("> Label distribution:")
-        for gesture in GTCNModel.GESTURES:
-            idx = GTCNModel.GESTURES.index(gesture)
+        for gesture in GTCNModel.OUTPUT_GESTURES:
+            idx = GTCNModel.OUTPUT_GESTURES.index(gesture)
             print(f"  {gesture.name}:{counts[idx]};")
 
 
 class GTCNDatasetBuilder:
-    def __init__(self, shift: int = 0):
-        self.shift = shift
-        self.none_window_length = GTCNModel.WINDOW_LENGTH
+    def __init__(self, window_length, peek: int = 0):
+        self.window_length = window_length
+        self.none_window_length = window_length // 2
+        self.peek = peek  # number of future frames to peek
 
     def convert_sequence_to_X(self, sequence: DSequence) -> np.ndarray:
         X = []
         for sample_frame in range(len(sequence.frames)):
-            start_frame = sample_frame - GTCNModel.WINDOW_LENGTH + 1 + self.shift
-            end_frame = start_frame + GTCNModel.WINDOW_LENGTH - 1
+            start_frame = sample_frame - self.window_length + 1 + self.peek
+            end_frame = start_frame + self.window_length - 1
 
             if start_frame >= 0 and end_frame < len(sequence.frames):
                 window = sequence.frames[start_frame : end_frame + 1]
@@ -75,13 +79,13 @@ class GTCNDatasetBuilder:
                 else:
                     raise ValueError("Unexpected frame indices!")
 
-            assert len(window) == GTCNModel.WINDOW_LENGTH
+            assert len(window) == self.window_length
 
-            num_landmarks = len(GTCNModel.LANDMARKS)
-            x = np.zeros((GTCNModel.WINDOW_LENGTH, num_landmarks, 3), dtype=np.float32)
+            num_landmarks = len(GCNLayer.INPUT_LANDMARKS)
+            x = np.zeros((self.window_length, num_landmarks, 3), dtype=np.float32)
 
             for t, frame in enumerate(window):
-                for i, lm in enumerate(GTCNModel.LANDMARKS):
+                for i, lm in enumerate(GCNLayer.INPUT_LANDMARKS):
                     coord = frame.landmarks[lm]
                     x[t, i, :] = np.array(coord, dtype=np.float32)
 
@@ -100,7 +104,7 @@ class GTCNDatasetBuilder:
             pre_start = max(0, start_frame - self.none_window_length)
             post_end = min(num_frames, end_frame + self.none_window_length)
             y[pre_start:post_end] = 0  # none gesture
-            y[start_frame:end_frame] = GTCNModel.GESTURES.index(label)
+            y[start_frame:end_frame] = GTCNModel.OUTPUT_GESTURES.index(label)
 
         # output shape: (total_frames,)
         return y
@@ -113,12 +117,12 @@ class GTCNDatasetBuilder:
         max_sequence_id=None,
     ):
         total_X = np.array([], dtype=np.float32).reshape(
-            0, GTCNModel.WINDOW_LENGTH, len(GTCNModel.LANDMARKS), 3
+            0, self.window_length, len(GCNLayer.INPUT_LANDMARKS), 3
         )
         total_y = np.array([], dtype=np.long)
         total_seq_ids = np.array([], dtype=np.int32)  # track sequence IDs
 
-        annotations = parse_shrec_annotations_file(ann_file, GTCNModel.GESTURES)
+        annotations = parse_shrec_annotations_file(ann_file, GTCNModel.OUTPUT_GESTURES)
         for ann in annotations:
             if max_sequence_id is not None and ann.sequence_id > max_sequence_id:
                 continue
@@ -159,14 +163,20 @@ class GTCNDatasetBuilder:
 
 
 if __name__ == "__main__":
-    builder = GTCNDatasetBuilder(shift=0)
+    builder = GTCNDatasetBuilder(window_length=15, peek=0)
+
+    print("=== Creating training set ===")
     builder.create_set(
         sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
-        ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-        out_file=DEFAULT_TRAINSET_PATH,
+        ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotation_revised_training.txt",
+        out_file="gtcn_shrec_training_dataset.pkl",
+        max_sequence_id=10,
     )
+
+    print("\n=== Creating test set ===")
     builder.create_set(
         sequences_folder=SHREC_TEST_DATASET_FOLDER + "sequences/",
-        ann_file=SHREC_TEST_DATASET_FOLDER + "annotations_revised.txt",
-        out_file=DEFAULT_TESTSET_PATH,
+        ann_file=SHREC_TEST_DATASET_FOLDER + "annotation_revised.txt",
+        out_file="gtcn_shrec_test_dataset.pkl",
+        max_sequence_id=10,
     )
