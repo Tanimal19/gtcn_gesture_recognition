@@ -4,7 +4,7 @@ import torch
 import numpy as np
 from collections import Counter
 from torch.utils.data import Dataset
-from src.dataset_utils import (
+from src.utils import (
     parse_shrec_sequence_file,
     parse_shrec_annotations_file,
     DAnnotation,

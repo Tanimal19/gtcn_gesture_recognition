@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.metrics import ConfusionMatrixDisplay
 from matplotlib import pyplot as plt
-from src.dataset_utils import (
+from src.utils import (
     SHREC_TEST_DATASET_FOLDER,
     GestureLabel,
     parse_shrec_annotations_file,

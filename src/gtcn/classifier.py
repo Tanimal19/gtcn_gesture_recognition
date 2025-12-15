@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 from abc import ABC, abstractmethod
+from src.gtcn import OUTPUT_GESTURES
 
 
 class AbstractClassifier(ABC, nn.Module):
@@ -28,12 +29,12 @@ class RegularClassifier(AbstractClassifier):
     Output: (B, num_gestures)
     """
 
-    def __init__(self, gtcn_features, num_gestures, hidden_dim):
+    def __init__(self, gtcn_features, hidden_dim):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(gtcn_features, hidden_dim),
             nn.ReLU(),
-            nn.Linear(hidden_dim, num_gestures),
+            nn.Linear(hidden_dim, len(OUTPUT_GESTURES)),
         )
 
     def forward(self, x):
@@ -55,16 +56,15 @@ class DoubleHeadClassifier(nn.Module):
     - none_logit: (B, 1)
     """
 
-    def __init__(self, gtcn_features, num_real_gestures, hidden_dim, bce_weight=0.1):
+    def __init__(self, gtcn_features, hidden_dim, bce_weight):
         super().__init__()
-        self.num_real_gestures = num_real_gestures
         self.bce_weight = bce_weight
 
         self.shared = nn.Sequential(
             nn.Linear(gtcn_features, hidden_dim),
             nn.ReLU(),
         )
-        self.gesture_head = nn.Linear(hidden_dim, num_real_gestures)
+        self.gesture_head = nn.Linear(hidden_dim, len(OUTPUT_GESTURES) - 1)
         self.none_head = nn.Linear(hidden_dim, 1)
 
     def forward(self, x):
@@ -109,16 +109,14 @@ class ProbThresholdClassifier(nn.Module):
     Outputs: (B, num_real_gestures)
     """
 
-    def __init__(
-        self, gtcn_features, num_real_gestures, hidden_dim, none_threshold=0.6
-    ):
+    def __init__(self, gtcn_features, hidden_dim, none_threshold):
         super().__init__()
         self.none_threshold = none_threshold
 
         self.net = nn.Sequential(
             nn.Linear(gtcn_features, hidden_dim),
             nn.ReLU(),
-            nn.Linear(hidden_dim, num_real_gestures),
+            nn.Linear(hidden_dim, len(OUTPUT_GESTURES) - 1),
         )
 
     def forward(self, x):

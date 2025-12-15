@@ -8,7 +8,7 @@ from src import DEVICE
 from src.gtcn import DEFAULT_TRAINSET_PATH, DEFAULT_MODEL_PATH
 from src.gtcn.model import GTCNModel, GTCNModelParams
 from src.dataset import GTCNDataset
-from src.dataset_utils import GestureLabel
+from src.utils import GestureLabel
 
 
 def compute_weights(y, mode: str = "") -> torch.Tensor:

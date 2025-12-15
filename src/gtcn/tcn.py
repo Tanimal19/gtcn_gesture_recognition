@@ -3,15 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-# receptive field calculation helper
-def calculate_receptive_field(kernel_size, dilations):
-    receptive_field = 1
-    for d in dilations:
-        receptive_field += (kernel_size - 1) * d
-    return receptive_field
-
-
-class TCNLayer(nn.Module):
+class BaseTCNLayer(nn.Module):
     """
     Stacked TCN Blocks.\n
     Input: (B, gcn_features, window_length)\n
@@ -36,8 +28,13 @@ class TCNLayer(nn.Module):
             )
         self.net = nn.Sequential(*tcn_blocks)
 
+        self.outdim = channels[-1]
 
-class TCNLayerLastStep(TCNLayer):
+    def get_outdim(self) -> int:
+        return self.outdim
+
+
+class TCNLayerLastStep(BaseTCNLayer):
     """
     Stacked TCN Blocks and take last time step.
     """
@@ -48,7 +45,7 @@ class TCNLayerLastStep(TCNLayer):
         return out
 
 
-class TCNLayerMeanPool(TCNLayer):
+class TCNLayerMeanPool(BaseTCNLayer):
     """
     Stacked TCN Blocks and mean pool over time.
     """
@@ -59,7 +56,7 @@ class TCNLayerMeanPool(TCNLayer):
         return out
 
 
-class TCNLayerWeightPool(TCNLayer):
+class TCNLayerWeightPool(BaseTCNLayer):
     """
     Stacked TCN Blocks and linear weight pool over time.
     """

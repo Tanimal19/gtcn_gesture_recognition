@@ -4,7 +4,7 @@ import os
 from src.gtcn.model import GTCNModel, GTCNHyperParams
 from src.train import DEFAULT_MODEL_PATH
 from src.dataset import convert_sequence_to_X
-from src.dataset_utils import (
+from src.utils import (
     DSequence,
     DAnnotation,
     GestureLabel,

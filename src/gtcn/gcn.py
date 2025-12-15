@@ -2,30 +2,16 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
-from src.dataset_utils import HandLandmark
+from src.utils import HandLandmark
+from src.gtcn import INPUT_LANDMARKS, INPUT_DIMENSIONS
 
 
-class GCNLayer(nn.Module):
+class BaseGCNLayer(nn.Module):
     """
-    Stacked GCN Blocks with finger pooling at the end\n
+    Stacked GCN Blocks.\n
     Input: (num_landmarks=11, num_dimensions=3)\n
-    Output: (gcn_features*num_finger_groups)
+    Output: (gcn_features)
     """
-
-    INPUT_LANDMARKS = [
-        HandLandmark.thumbA,
-        HandLandmark.thumbB,
-        HandLandmark.thumbEnd,
-        HandLandmark.indexA,
-        HandLandmark.indexB,
-        HandLandmark.indexC,
-        HandLandmark.indexEnd,
-        HandLandmark.middleA,
-        HandLandmark.middleB,
-        HandLandmark.middleC,
-        HandLandmark.middleEnd,
-    ]
-    INPUT_DIMENSIONS = 3  # x, y, z
 
     INTRA_FINGER_CONNECTIONS = [
         (HandLandmark.thumbA, HandLandmark.thumbB),
@@ -43,19 +29,13 @@ class GCNLayer(nn.Module):
         (HandLandmark.indexEnd, HandLandmark.middleEnd),
     ]
 
-    FINGER_GROUPS = [
-        [0, 1, 2],  # thumb
-        [3, 4, 5, 6],  # index finger
-        [7, 8, 9, 10],  # middle finger
-    ]
-
     def __init__(self, hidden_dims: list[int], dropout):
         super().__init__()
 
         A1 = self._normalize_adjacency(
             torch.tensor(
                 self._generate_adjacent_matrix(
-                    self.INPUT_LANDMARKS, self.INTRA_FINGER_CONNECTIONS
+                    INPUT_LANDMARKS, self.INTRA_FINGER_CONNECTIONS
                 ),
                 dtype=torch.float32,
             )
@@ -63,7 +43,7 @@ class GCNLayer(nn.Module):
         A2 = self._normalize_adjacency(
             torch.tensor(
                 self._generate_adjacent_matrix(
-                    self.INPUT_LANDMARKS, self.INTER_FINGER_CONNECTIONS
+                    INPUT_LANDMARKS, self.INTER_FINGER_CONNECTIONS
                 ),
                 dtype=torch.float32,
             )
@@ -71,7 +51,7 @@ class GCNLayer(nn.Module):
         self.register_buffer("A1", A1)
         self.register_buffer("A2", A2)
 
-        hidden_dims.insert(0, self.INPUT_DIMENSIONS)
+        hidden_dims.insert(0, INPUT_DIMENSIONS)
         gcn_blocks = []
         for i in range(len(hidden_dims) - 1):
             gcn_blocks.append(
@@ -85,16 +65,10 @@ class GCNLayer(nn.Module):
             )
         self.net = nn.Sequential(*gcn_blocks)
 
-    def forward(self, X):
-        out = self.net(X)
+        self.outdim = hidden_dims[-1]
 
-        pooled = []
-        for idxs in self.FINGER_GROUPS:
-            pooled.append(out[:, idxs].mean(dim=1))
-        out = torch.stack(pooled, dim=1)
-
-        out = out.reshape(out.size(0), -1)
-        return out
+    def get_outdim(self) -> int:
+        return self.outdim
 
     @staticmethod
     def _generate_adjacent_matrix(
@@ -122,17 +96,44 @@ class GCNLayer(nn.Module):
         return A_norm
 
 
-class GCNLayerNoPool(GCNLayer):
+class GCNLayerFingerPool(BaseGCNLayer):
     """
-    Stacked GCN Blocks without finger pooling at the end\n
-    Input: (num_landmarks=11, num_dimensions=3)\n
-    Output: (gcn_features*num_landmarks)
+    Stacked GCN Blocks with finger pooling at the end
+    """
+
+    FINGER_GROUPS = [
+        [0, 1, 2],  # thumb
+        [3, 4, 5, 6],  # index finger
+        [7, 8, 9, 10],  # middle finger
+    ]
+
+    def forward(self, X):
+        out = self.net(X)
+
+        pooled = []
+        for idxs in self.FINGER_GROUPS:
+            pooled.append(out[:, idxs].mean(dim=1))
+        out = torch.stack(pooled, dim=1)
+
+        out = out.reshape(out.size(0), -1)  # flatten
+        return out
+
+    def get_outdim(self) -> int:
+        return super().get_outdim() * len(self.FINGER_GROUPS)
+
+
+class GCNLayerNoPool(BaseGCNLayer):
+    """
+    Stacked GCN Blocks without finger pooling at the end
     """
 
     def forward(self, X):
         out = self.net(X)
         out = out.reshape(out.size(0), -1)
         return out
+
+    def get_outdim(self) -> int:
+        return super().get_outdim() * len(INPUT_LANDMARKS)
 
 
 class GCNBlock(nn.Module):

@@ -1,5 +1,5 @@
 import numpy as np
-from src.dataset_utils import (
+from src.utils import (
     GestureLabel,
     SHREC_TRAINING_DATASET_FOLDER,
     parse_shrec_annotations_file,
