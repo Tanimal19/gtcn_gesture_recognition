@@ -29,7 +29,7 @@ class GTCNParams:
     TCN_DILATIONS: list[int] = field(default_factory=lambda: [1, 2, 4])
     TCN_DROPOUT: float = 0.2
 
-    CLASSIFIER_DIM = 32
+    CLASSIFIER_DIM: int = 32
     DOUBLE_HEAD_BCE_WEIGHT: float = 0.1
     PROB_THRESHOLD: float = 0.6
 

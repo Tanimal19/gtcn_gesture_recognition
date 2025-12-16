@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 from abc import ABC, abstractmethod
 from src.gtcn import OUTPUT_GESTURES
-from typing import Type
 
 
 class AbstractClassifier(ABC, nn.Module):
@@ -122,10 +121,10 @@ class DoubleHeadClassifier(AbstractClassifier):
     @staticmethod
     def inference(forward_output):
         gesture_logits, none_logit = forward_output
-        none_prob = torch.sigmoid(none_logit)
+        none_prob = torch.sigmoid(none_logit).squeeze(-1)
         pred_y = torch.where(
             none_prob > 0.5,
-            torch.zeros_like(none_logit, dtype=torch.long),  # NONE
+            torch.zeros(none_prob.shape, dtype=torch.long),  # NONE
             torch.argmax(gesture_logits, dim=1) + 1,  # shift by 1 to account for NONE
         )
         return pred_y

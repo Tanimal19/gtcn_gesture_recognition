@@ -1,0 +1,320 @@
+
+=== Testing model 'base' on dataset 'base' ===
++ Start testing model from ./src/models/base.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='base_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[1853   99   72  214  258  255   24]
+ [ 316  106    0    0    3   23    5]
+ [ 251    0  303    3   18   33    0]
+ [ 155    0    0  106  141   19    0]
+ [  25    0    0   47 1177    0    0]
+ [ 301   27    0    0    0  879    0]
+ [ 247    0    0    2    0    4  105]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.5886    0.6677    0.6257      2775
+        GRAB     0.4569    0.2340    0.3095       453
+       PINCH     0.8080    0.4984    0.6165       608
+         TAP     0.2849    0.2518    0.2673       421
+        DENY     0.7370    0.9424    0.8271      1249
+        KNOB     0.7246    0.7283    0.7264      1207
+      EXPAND     0.7836    0.2933    0.4268       358
+
+    accuracy                         0.6405      7071
+   macro avg     0.6262    0.5165    0.5428      7071
+weighted avg     0.6403    0.6405    0.6260      7071
+
+
+Test completed in 1.16 seconds.
+
+=== Testing model 'base_simple' on dataset 'base' ===
++ Start testing model from ./src/models/base_simple.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='base_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[1566   75  432  133  298  116  155]
+ [ 233  148   41    2   21    0    8]
+ [  22    0  583    3    0    0    0]
+ [ 106    0   48  212   55    0    0]
+ [  17    0   22   24 1186    0    0]
+ [ 175   48   67    6    1  900   10]
+ [ 161   18    0    0    0    6  173]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6868    0.5643    0.6196      2775
+        GRAB     0.5121    0.3267    0.3989       453
+       PINCH     0.4887    0.9589    0.6474       608
+         TAP     0.5579    0.5036    0.5293       421
+        DENY     0.7598    0.9496    0.8441      1249
+        KNOB     0.8806    0.7457    0.8075      1207
+      EXPAND     0.5000    0.4832    0.4915       358
+
+    accuracy                         0.6743      7071
+   macro avg     0.6266    0.6474    0.6198      7071
+weighted avg     0.6874    0.6743    0.6677      7071
+
+
+Test completed in 1.13 seconds.
+
+=== Testing model 'base_balanced' on dataset 'base' ===
++ Start testing model from ./src/models/base_balanced.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='base_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[1768  163  372  200   78   81  113]
+ [ 235  197    7    2    0    5    7]
+ [  81    6  516    0    0    5    0]
+ [ 106    0   58  228   21    7    1]
+ [  18    0   22  154 1054    0    1]
+ [ 186   95    2    3    0  906   15]
+ [ 191   26    2    0    0    4  135]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6839    0.6371    0.6597      2775
+        GRAB     0.4045    0.4349    0.4191       453
+       PINCH     0.5271    0.8487    0.6503       608
+         TAP     0.3884    0.5416    0.4524       421
+        DENY     0.9141    0.8439    0.8776      1249
+        KNOB     0.8988    0.7506    0.8181      1207
+      EXPAND     0.4963    0.3771    0.4286       358
+
+    accuracy                         0.6794      7071
+   macro avg     0.6162    0.6334    0.6151      7071
+weighted avg     0.7028    0.6794    0.6850      7071
+
+
+Test completed in 1.14 seconds.
+
+=== Testing model 'base_peek5' on dataset 'peek5' ===
++ Start testing model from ./src/models/base_peek5.pth on dataset ./src/datasets/test_peek5.pkl
+model hyperparameters: GTCNParams(id='base_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[2239   74  128   32  128  106   68]
+ [ 208  222    2    0    0   16    5]
+ [ 256    0  348    4    0    0    0]
+ [ 198    8   15  177   23    0    0]
+ [  55    0    8   15 1171    0    0]
+ [ 278   13   11    0    4  900    1]
+ [ 171   17    0    0    0   11  159]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6576    0.8068    0.7246      2775
+        GRAB     0.6647    0.4901    0.5642       453
+       PINCH     0.6797    0.5724    0.6214       608
+         TAP     0.7763    0.4204    0.5455       421
+        DENY     0.8831    0.9376    0.9095      1249
+        KNOB     0.8712    0.7457    0.8036      1207
+      EXPAND     0.6824    0.4441    0.5381       358
+
+    accuracy                         0.7377      7071
+   macro avg     0.7450    0.6310    0.6724      7071
+weighted avg     0.7446    0.7377    0.7315      7071
+
+
+Test completed in 1.15 seconds.
+
+=== Testing model 'win10' on dataset 'win10' ===
++ Start testing model from ./src/models/win10.pth on dataset ./src/datasets/test_win10.pkl
+model hyperparameters: GTCNParams(id='win10_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=10, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[1212  175   80  152  152   47   32]
+ [ 175  214    0    0    0   57    7]
+ [ 224    6  365    3    2    0    8]
+ [ 147    3    0  236   34    0    1]
+ [   6    0    0  103 1140    0    0]
+ [ 623  130    9    0    0  445    0]
+ [ 217   25    0    0    0    2  114]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.4654    0.6551    0.5442      1850
+        GRAB     0.3870    0.4724    0.4254       453
+       PINCH     0.8040    0.6003    0.6874       608
+         TAP     0.4777    0.5606    0.5158       421
+        DENY     0.8584    0.9127    0.8847      1249
+        KNOB     0.8076    0.3687    0.5063      1207
+      EXPAND     0.7037    0.3184    0.4385       358
+
+    accuracy                         0.6062      6146
+   macro avg     0.6434    0.5555    0.5718      6146
+weighted avg     0.6549    0.6062    0.6033      6146
+
+
+Test completed in 0.92 seconds.
+
+=== Testing model 'win30' on dataset 'win30' ===
++ Start testing model from ./src/models/win30.pth on dataset ./src/datasets/test_win30.pkl
+model hyperparameters: GTCNParams(id='win30_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=30, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[5118  262   10   23   98   29    0]
+ [ 340  113    0    0    0    0    0]
+ [ 482   13  112    0    1    0    0]
+ [ 279    0    0  142    0    0    0]
+ [ 222    0   16   17  994    0    0]
+ [1083   40    0    0    0   84    0]
+ [ 300   19    0   23    0    1   15]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6541    0.9238    0.7659      5540
+        GRAB     0.2528    0.2494    0.2511       453
+       PINCH     0.8116    0.1842    0.3003       608
+         TAP     0.6927    0.3373    0.4537       421
+        DENY     0.9094    0.7958    0.8488      1249
+        KNOB     0.7368    0.0696    0.1272      1207
+      EXPAND     1.0000    0.0419    0.0804       358
+
+    accuracy                         0.6688      9836
+   macro avg     0.7225    0.3717    0.4039      9836
+weighted avg     0.7022    0.6688    0.6073      9836
+
+
+Test completed in 2.50 seconds.
+
+=== Testing model 'gcn_nopool' on dataset 'base' ===
++ Start testing model from ./src/models/gcn_nopool.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='gcn_nopool_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerNoPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[2332   42   83   35  148  131    4]
+ [ 276  105    0    0    2   70    0]
+ [ 256    0  330    0   12   10    0]
+ [ 230    0    0  163   28    0    0]
+ [  68    0    3   29 1149    0    0]
+ [ 330   29    2    0    1  842    3]
+ [ 258    4    0    0    0    0   96]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6219    0.8404    0.7148      2775
+        GRAB     0.5833    0.2318    0.3318       453
+       PINCH     0.7895    0.5428    0.6433       608
+         TAP     0.7181    0.3872    0.5031       421
+        DENY     0.8575    0.9199    0.8876      1249
+        KNOB     0.7996    0.6976    0.7451      1207
+      EXPAND     0.9320    0.2682    0.4165       358
+
+    accuracy                         0.7095      7071
+   macro avg     0.7574    0.5554    0.6060      7071
+weighted avg     0.7272    0.7095    0.6921      7071
+
+
+Test completed in 1.53 seconds.
+
+=== Testing model 'tcn_meanpool' on dataset 'base' ===
++ Start testing model from ./src/models/tcn_meanpool.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='tcn_meanpool_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[2299   91   63  158  102   56    6]
+ [ 325  128    0    0    0    0    0]
+ [ 236    0  354   18    0    0    0]
+ [ 237   10    0  153   13    8    0]
+ [  66    0    0  109 1074    0    0]
+ [ 314  162    2    6    0  723    0]
+ [ 254   22    0    0    0    0   82]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6162    0.8285    0.7067      2775
+        GRAB     0.3099    0.2826    0.2956       453
+       PINCH     0.8449    0.5822    0.6894       608
+         TAP     0.3446    0.3634    0.3538       421
+        DENY     0.9033    0.8599    0.8811      1249
+        KNOB     0.9187    0.5990    0.7252      1207
+      EXPAND     0.9318    0.2291    0.3677       358
+
+    accuracy                         0.6807      7071
+   macro avg     0.6956    0.5349    0.5742      7071
+weighted avg     0.7184    0.6807    0.6747      7071
+
+
+Test completed in 1.14 seconds.
+
+=== Testing model 'tcn_weightpool' on dataset 'base' ===
++ Start testing model from ./src/models/tcn_weightpool.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='tcn_weightpool_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerWeightPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[2484   56   16   17   20  115   67]
+ [ 303  135    8    0    0    1    6]
+ [ 320    4  247   31    0    0    6]
+ [ 384    0    0   35    0    0    2]
+ [ 686    0    7    1  551    0    4]
+ [ 783   27    9    0    0  374   14]
+ [ 223   15    0    0    0    2  118]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.4793    0.8951    0.6243      2775
+        GRAB     0.5696    0.2980    0.3913       453
+       PINCH     0.8606    0.4062    0.5520       608
+         TAP     0.4167    0.0831    0.1386       421
+        DENY     0.9650    0.4412    0.6055      1249
+        KNOB     0.7602    0.3099    0.4403      1207
+      EXPAND     0.5438    0.3296    0.4104       358
+
+    accuracy                         0.5578      7071
+   macro avg     0.6564    0.3947    0.4518      7071
+weighted avg     0.6511    0.5578    0.5287      7071
+
+
+Test completed in 1.15 seconds.
+
+=== Testing model 'doublehead_classifier' on dataset 'base' ===
++ Start testing model from ./src/models/doublehead_classifier.pth on dataset ./src/datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='doublehead_classifier_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.DoubleHeadClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[1908  463  113   84  133   64   10]
+ [ 174  274    0    0    0    0    5]
+ [ 134    0  472    2    0    0    0]
+ [ 163    0    9  224   23    2    0]
+ [  86    3    7   35 1118    0    0]
+ [ 345  139    0    0    0  713   10]
+ [ 220   19    0    0    0    0  119]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.6297    0.6876    0.6574      2775
+        GRAB     0.3051    0.6049    0.4056       453
+       PINCH     0.7854    0.7763    0.7808       608
+         TAP     0.6493    0.5321    0.5849       421
+        DENY     0.8776    0.8951    0.8862      1249
+        KNOB     0.9153    0.5907    0.7180      1207
+      EXPAND     0.8264    0.3324    0.4741       358
+
+    accuracy                         0.6828      7071
+   macro avg     0.7127    0.6313    0.6439      7071
+weighted avg     0.7259    0.6828    0.6890      7071
+
+
+Test completed in 1.14 seconds.
+
+=== Testing model 'probthreshold_classifier' on dataset 'base' ===
++ Start testing model from ./src/models/probthreshold_classifier.pth on dataset ./src/datasets/test_base.pkl
+{'id': 'probthreshold_classifier_model', 'GCN_CLASS': <class 'src.gtcn.gcn.GCNLayerFingerPool'>, 'TCN_CLASS': <class 'src.gtcn.tcn.TCNLayerLastStep'>, 'CLASSIFIER_CLASS': <class 'src.gtcn.classifier.ProbThresholdClassifier'>, 'WINDOW_LENGTH': 15, 'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_CHANNELS': [64, 64, 64], 'TCN_KERNEL_SIZE': 3, 'TCN_DILATIONS': [1, 2, 4], 'TCN_DROPOUT': 0.2, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'PROB_THRESHOLD': 0.6}
+model hyperparameters: GTCNParams(id='probthreshold_classifier_model', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4], TCN_DROPOUT=0.2, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+Confusion Matrix:
+[[202 741  44 546  87 158 997]
+ [ 53 326   0   6   0  11  57]
+ [ 51  62 316 155   0   0  24]
+ [ 11   5   0 345  17   1  42]
+ [ 42   0   0 460 690   0  57]
+ [ 54  99  14  11   3 981  45]
+ [ 22  65   0  13   0   0 258]]
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE     0.4644    0.0728    0.1259      2775
+        GRAB     0.2512    0.7196    0.3724       453
+       PINCH     0.8449    0.5197    0.6436       608
+         TAP     0.2246    0.8195    0.3526       421
+        DENY     0.8657    0.5524    0.6745      1249
+        KNOB     0.8523    0.8128    0.8321      1207
+      EXPAND     0.1743    0.7207    0.2807       358
+
+    accuracy                         0.4410      7071
+   macro avg     0.5253    0.6025    0.4688      7071
+weighted avg     0.5916    0.4410    0.4250      7071
+
+
+Test completed in 1.14 seconds.

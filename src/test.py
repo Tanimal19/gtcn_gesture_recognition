@@ -15,7 +15,6 @@ def load_model(model_path: str) -> GTCNModel:
 
     # Reconstruct hyperparameters
     hyperparams_dict = checkpoint["hyperparams"]
-    print(hyperparams_dict)
     hyperparams = GTCNParams(
         id=hyperparams_dict["id"],
         GCN_CLASS=hyperparams_dict["GCN_CLASS"],
@@ -76,8 +75,7 @@ def test_model(test_dataset_path, model_path, batch_size=32):
     seq_ids = data["seq_ids"]
 
     # we need to evaluate each sequence separately to avoid data leakage
-    truths = []
-    predictions = []
+    results = []
     for seq_id in np.unique(seq_ids):
         idx = np.where(seq_ids == seq_id)[0]
         X_seq = X[idx]
@@ -90,17 +88,28 @@ def test_model(test_dataset_path, model_path, batch_size=32):
         )
         seq_truths, seq_predictions = test_one_sequence(model, seq_loader)
 
-        truths.extend(seq_truths)
-        predictions.extend(seq_predictions)
+        assert len(seq_truths) == len(idx)
+        assert len(seq_predictions) == len(idx)
+
+        results.append(
+            {
+                "seq_id": seq_id,
+                "truths": seq_truths,
+                "predictions": seq_predictions,
+            }
+        )
+
+    flat_truths = [item for res in results for item in res["truths"]]
+    flat_predictions = [item for res in results for item in res["predictions"]]
 
     print("Confusion Matrix:")
-    print(confusion_matrix(truths, predictions))
+    print(confusion_matrix(flat_truths, flat_predictions))
 
     print("Classification Report:")
     print(
         classification_report(
-            truths,
-            predictions,
+            flat_truths,
+            flat_predictions,
             digits=4,
             target_names=[g.name for g in OUTPUT_GESTURES],
             zero_division=0,
@@ -109,7 +118,4 @@ def test_model(test_dataset_path, model_path, batch_size=32):
 
     print(f"\nTest completed in {time.time() - start_time:.2f} seconds.")
 
-    return {
-        "truths": truths,
-        "predictions": predictions,
-    }
+    return results

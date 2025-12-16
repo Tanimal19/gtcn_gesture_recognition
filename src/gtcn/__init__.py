@@ -33,7 +33,7 @@ OUTPUT_GESTURES = [
 class GTCNDataset(Dataset):
     def __init__(self, X: np.ndarray, y: np.ndarray, window_length: int):
         self.check_shape(X, y, window_length)
-        print(f"> Creating GestureDataset with {y.shape[0]} samples.")
+        # print(f"> Creating GestureDataset with {y.shape[0]} samples.")
 
         self.X = torch.tensor(X, dtype=torch.float32)
         self.y = torch.tensor(y, dtype=torch.long)

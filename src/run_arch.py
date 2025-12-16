@@ -1,3 +1,4 @@
+# run script for prelimanary experiments: compare different model architectures
 # nohup python -u -m src.run &
 
 from src.dataset_builder import (
@@ -105,13 +106,13 @@ def train_models():
         params = GTCNTrainParams(
             model_params=architecture,
             training_dataset_path=DEFAULT_DATASET_FOLDER
-            + f"training_{dataset_suffix}.pkl",
+            + f"train_{dataset_suffix}.pkl",
             model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
             weight_mode=weight_mode,
             epochs=150,
         )
         print(f"\n=== Training model '{model_name}' on dataset '{dataset_suffix}' ===")
-        history[model_name] = train_model(params)
+        _, history[model_name] = train_model(params)
 
     start_train("base", BASE_ARCHITECTURE, "base", None)
     start_train("base_simple", BASE_ARCHITECTURE, "base", "simple")
@@ -154,14 +155,29 @@ def test_models():
     for model_name, dataset_suffix in tests:
         print(f"\n=== Testing model '{model_name}' on dataset '{dataset_suffix}' ===")
         results[model_name] = test_model(
-            test_dataset_path=DEFAULT_DATASET_FOLDER + f"testing_{dataset_suffix}.pkl",
+            test_dataset_path=DEFAULT_DATASET_FOLDER + f"test_{dataset_suffix}.pkl",
             model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
         )
 
     # save testing results
-    with open("testing_results.txt", "w") as f:
-        for model_name, result in results.items():
-            f.write(f"{model_name}: {result}\n")
+    import pandas as pd
+
+    df_rows = []
+    for model_name, model_results in results.items():
+        for seq_result in model_results:
+            seq_id = seq_result["seq_id"]
+            truths = seq_result["truths"]
+            predictions = seq_result["predictions"]
+            df_rows.append(
+                {
+                    "model": model_name,
+                    "seq_id": seq_id,
+                    "truths": truths,
+                    "predictions": predictions,
+                }
+            )
+    df = pd.DataFrame(df_rows)
+    df.to_csv("testing_results.csv", index=False)
 
 
 if __name__ == "__main__":

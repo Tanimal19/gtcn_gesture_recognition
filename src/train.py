@@ -21,7 +21,7 @@ DEFAULT_MODEL_FOLDER = "./src/models/"
 class GTCNTrainParams:
     model_params: GTCNParams
     training_dataset_path: str
-    model_path: str
+    model_path: str | None = None
     weight_mode: str | None = None  # 'simple', 'balanced', or None
     batch_size: int = 32
     learning_rate: float = 2e-3
@@ -122,16 +122,17 @@ def train_model(params: GTCNTrainParams):
         # Save best model
         if epoch_loss < best_loss:
             best_loss = epoch_loss
-            torch.save(
-                {
-                    "epoch": epoch,
-                    "model_state_dict": model.state_dict(),
-                    "optimizer_state_dict": optimizer.state_dict(),
-                    "loss": best_loss,
-                    "hyperparams": params.model_params.__dict__,
-                },
-                params.model_path,
-            )
+            if params.model_path is not None:
+                torch.save(
+                    {
+                        "epoch": epoch,
+                        "model_state_dict": model.state_dict(),
+                        "optimizer_state_dict": optimizer.state_dict(),
+                        "loss": best_loss,
+                        "hyperparams": params.model_params.__dict__,
+                    },
+                    params.model_path,
+                )
             early_stop_counter = 0
         else:
             early_stop_counter += 1
@@ -141,4 +142,4 @@ def train_model(params: GTCNTrainParams):
 
     print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
 
-    return loss_history
+    return model, loss_history

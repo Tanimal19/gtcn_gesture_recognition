@@ -21,7 +21,7 @@ class GTCNDatasetBuilder:
     :param peek: number of future frames to peek when constructing the window (default: 0)
     """
 
-    def __init__(self, window_length, peek: int = 0):
+    def __init__(self, window_length: int, peek: int = 0):
         self.window_length = window_length
         self.none_window_length = window_length
         self.peek = peek
@@ -126,7 +126,7 @@ def create_datasets(builder: GTCNDatasetBuilder, suffix: str = ""):
     builder.create_set(
         sequences_folder=SHREC_TRAINING_DATASET_FOLDER + "sequences/",
         ann_file=SHREC_TRAINING_DATASET_FOLDER + "annotations_revised_training.txt",
-        out_file=DEFAULT_DATASET_FOLDER + f"training_{suffix}.pkl",
+        out_file=DEFAULT_DATASET_FOLDER + f"train_{suffix}.pkl",
     )
 
     print("\n[test set]")
