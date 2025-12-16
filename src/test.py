@@ -27,7 +27,7 @@ def load_model(model_path: str) -> GTCNModel:
         TCN_DROPOUT=hyperparams_dict["TCN_DROPOUT"],
         CLASSIFIER_DIM=hyperparams_dict["CLASSIFIER_DIM"],
         DOUBLE_HEAD_BCE_WEIGHT=hyperparams_dict["DOUBLE_HEAD_BCE_WEIGHT"],
-        PROB_THRESHOLD=hyperparams_dict["PROB_THRESHOLD"],
+        PROB_THRESHOLD=0.9,
     )
 
     # Load model

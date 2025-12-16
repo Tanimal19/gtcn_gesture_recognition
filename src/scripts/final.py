@@ -14,9 +14,9 @@ FINAL_ARCHITECTURE = GTCNParams(
     TCN_KERNEL_SIZE=3,
     TCN_DILATIONS=[1, 2, 4, 8],
     TCN_DROPOUT=0.3,
-    CLASSIFIER_CLASS=DoubleHeadClassifier,
+    CLASSIFIER_CLASS=ProbThresholdClassifier,
     DOUBLE_HEAD_BCE_WEIGHT = 0.1,
-    PROB_THRESHOLD = 0.6,
+    PROB_THRESHOLD = 0.5,
     WINDOW_LENGTH=15,
 )
 
@@ -29,20 +29,20 @@ training_settings = [
     ("final", "base"),
 ]
 
-loss_history = {}
-for model_name, dataset_suffix in training_settings:
-    training_params = GTCNTrainParams(
-        model_params=FINAL_ARCHITECTURE,
-        training_dataset_path=DEFAULT_DATASET_FOLDER + f"train_{dataset_suffix}.pkl",
-        model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
-        weight_mode="simple",
-        learning_rate=1e-3,
-        epochs=200,
-    )
-    loss_history[model_name] = train_model(training_params)
+# loss_history = {}
+# for model_name, dataset_suffix in training_settings:
+#     training_params = GTCNTrainParams(
+#         model_params=FINAL_ARCHITECTURE,
+#         training_dataset_path=DEFAULT_DATASET_FOLDER + f"train_{dataset_suffix}.pkl",
+#         model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
+#         weight_mode="simple",
+#         learning_rate=1e-3,
+#         epochs=200,
+#     )
+#     loss_history[model_name] = train_model(training_params)
 
 
-# # test final model
+# test final model
 from src.test import test_model
 import pandas as pd
 

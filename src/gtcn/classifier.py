@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from abc import ABC, abstractmethod
 from src.gtcn import OUTPUT_GESTURES
-
+from src.utils import DEVICE
 
 class AbstractClassifier(ABC, nn.Module):
     """
@@ -124,7 +124,7 @@ class DoubleHeadClassifier(AbstractClassifier):
         none_prob = torch.sigmoid(none_logit).squeeze(-1)
         pred_y = torch.where(
             none_prob > 0.5,
-            torch.zeros(none_prob.shape, dtype=torch.long),  # NONE
+            torch.zeros(none_prob.shape, dtype=torch.long, device=DEVICE),  # NONE
             torch.argmax(gesture_logits, dim=1) + 1,  # shift by 1 to account for NONE
         )
         return pred_y
@@ -167,7 +167,7 @@ class ProbThresholdClassifier(AbstractClassifier):
                 y[real_gesture_mask] - 1,  # shift real gesture labels to start from 0
             )
         else:
-            return torch.tensor(0.0, device=logits.device)
+            return logits.sum() * 0.0
 
     @staticmethod
     def inference(forward_output, none_threshold):
@@ -177,7 +177,7 @@ class ProbThresholdClassifier(AbstractClassifier):
 
         pred_y = torch.where(
             max_probs < none_threshold,
-            torch.zeros_like(max_indices, dtype=torch.long),  # NONE
+            torch.zeros_like(max_indices, dtype=torch.long, device=DEVICE),  # NONE
             max_indices + 1,  # shift by 1 to account for NONE
         )
         return pred_y

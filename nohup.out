@@ -444,32 +444,996 @@ Epoch [98/200], Loss: 0.0596
 Early stopping triggered.
 
 Training completed in 589.61 seconds.
+
 + Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
 model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.DoubleHeadClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+
+Test completed in 3.53 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.3373, False Positive Rate: 0.1479, Jaccard Index: 0.2590
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.50      0.86      0.63      2775
+        GRAB       0.28      0.20      0.23       453
+       PINCH       0.94      0.62      0.75       608
+         TAP       0.41      0.39      0.40       421
+        DENY       0.98      0.52      0.68      1249
+        KNOB       0.89      0.21      0.34      1207
+      EXPAND       0.48      0.24      0.32       358
+
+    accuracy                           0.57      7071
+   macro avg       0.64      0.43      0.48      7071
+weighted avg       0.67      0.57      0.54      7071
+
+Confusion Matrix:
+[[2395  157   22   85   14   25   77]
+ [ 350   90    0    0    0    4    9]
+ [ 211   18  375    0    0    0    4]
+ [ 252    0    0  165    0    3    1]
+ [ 451    0    1  150  647    0    0]
+ [ 903   46    0    0    0  255    3]
+ [ 260   12    0    0    0    0   86]]
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=10, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6), training_dataset_path='./datasets/train_win10.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 1.2527
+Epoch [2/200], Loss: 0.6999
+Epoch [3/200], Loss: 0.5600
+Epoch [4/200], Loss: 0.5046
+Epoch [5/200], Loss: 0.4538
+Epoch [6/200], Loss: 0.4232
+Epoch [7/200], Loss: 0.4171
+Epoch [8/200], Loss: 0.3827
+Epoch [9/200], Loss: 0.3480
+Epoch [10/200], Loss: 0.3442
+Epoch [11/200], Loss: 0.3382
+Epoch [12/200], Loss: 0.3219
+Epoch [13/200], Loss: 0.3186
+Epoch [14/200], Loss: 0.3073
+Epoch [15/200], Loss: 0.3159
+Epoch [16/200], Loss: 0.2930
+Epoch [17/200], Loss: 0.2823
+Epoch [18/200], Loss: 0.2774
+Epoch [19/200], Loss: 0.2619
+Epoch [20/200], Loss: 0.2860
+Epoch [21/200], Loss: 0.2567
+Epoch [22/200], Loss: 0.2684
+Epoch [23/200], Loss: 0.2508
+Epoch [24/200], Loss: 0.2635
+Epoch [25/200], Loss: 0.2554
+Epoch [26/200], Loss: 0.2408
+Epoch [27/200], Loss: 0.2417
+Epoch [28/200], Loss: 0.2363
+Epoch [29/200], Loss: 0.2433
+Epoch [30/200], Loss: 0.2347
+Epoch [31/200], Loss: 0.2296
+Epoch [32/200], Loss: 0.2330
+Epoch [33/200], Loss: 0.2351
+Epoch [34/200], Loss: 0.2185
+Epoch [35/200], Loss: 0.2267
+Epoch [36/200], Loss: 0.2167
+Epoch [37/200], Loss: 0.2143
+Epoch [38/200], Loss: 0.2169
+Epoch [39/200], Loss: 0.2162
+Epoch [40/200], Loss: 0.2069
+Epoch [41/200], Loss: 0.2108
+Epoch [42/200], Loss: 0.2110
+Epoch [43/200], Loss: 0.2142
+Epoch [44/200], Loss: 0.2055
+Epoch [45/200], Loss: 0.2013
+Epoch [46/200], Loss: 0.2094
+Epoch [47/200], Loss: 0.1953
+Epoch [48/200], Loss: 0.2019
+Epoch [49/200], Loss: 0.1978
+Epoch [50/200], Loss: 0.2071
+Epoch [51/200], Loss: 0.1916
+Epoch [52/200], Loss: 0.2021
+Epoch [53/200], Loss: 0.1891
+Epoch [54/200], Loss: 0.1871
+Epoch [55/200], Loss: 0.1867
+Epoch [56/200], Loss: 0.1917
+Epoch [57/200], Loss: 0.1993
+Epoch [58/200], Loss: 0.1955
+Epoch [59/200], Loss: 0.1973
+Epoch [60/200], Loss: 0.1763
+Epoch [61/200], Loss: 0.1823
+Epoch [62/200], Loss: 0.1806
+Epoch [63/200], Loss: 0.1819
+Epoch [64/200], Loss: 0.1785
+Epoch [65/200], Loss: 0.1893
+Epoch [66/200], Loss: 0.1731
+Epoch [67/200], Loss: 0.1828
+Epoch [68/200], Loss: 0.1735
+Epoch [69/200], Loss: 0.1773
+Epoch [70/200], Loss: 0.1871
+Epoch [71/200], Loss: 0.1747
+Epoch [72/200], Loss: 0.1695
+Epoch [73/200], Loss: 0.1769
+Epoch [74/200], Loss: 0.1687
+Epoch [75/200], Loss: 0.1725
+Epoch [76/200], Loss: 0.1684
+Epoch [77/200], Loss: 0.1707
+Epoch [78/200], Loss: 0.1665
+Epoch [79/200], Loss: 0.1647
+Epoch [80/200], Loss: 0.1657
+Epoch [81/200], Loss: 0.1765
+Epoch [82/200], Loss: 0.1672
+Epoch [83/200], Loss: 0.1558
+Epoch [84/200], Loss: 0.1806
+Epoch [85/200], Loss: 0.1740
+Epoch [86/200], Loss: 0.1641
+Epoch [87/200], Loss: 0.1659
+Epoch [88/200], Loss: 0.1702
+Epoch [89/200], Loss: 0.1677
+Epoch [90/200], Loss: 0.1616
+Epoch [91/200], Loss: 0.1598
+Epoch [92/200], Loss: 0.1662
+Epoch [93/200], Loss: 0.1708
+Early stopping triggered.
+
+Training completed in 453.32 seconds.
++ Start testing model from ./models/final.pth on dataset ./datasets/test_win10.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=10, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+
+Test completed in 1.96 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6337, False Positive Rate: 0.6692, Jaccard Index: 0.2945
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.61      0.32      0.42      1850
+        GRAB       0.42      0.50      0.45       453
+       PINCH       0.71      0.88      0.78       608
+         TAP       0.34      0.80      0.47       421
+        DENY       0.89      0.80      0.84      1249
+        KNOB       0.70      0.88      0.78      1207
+      EXPAND       0.48      0.37      0.42       358
+
+    accuracy                           0.63      6146
+   macro avg       0.59      0.65      0.60      6146
+weighted avg       0.65      0.63      0.62      6146
+
+Confusion Matrix:
+[[ 584  177  191  386  113  279  120]
+ [  92  225    6   16    0  104   10]
+ [  45    8  532    4    0   12    7]
+ [  55    7    4  337   13    0    5]
+ [   0    0    0  253  996    0    0]
+ [  67   71    7    4    0 1058    0]
+ [ 109   51    9    2    3   51  133]]
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6), training_dataset_path='./datasets/train_peek1.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 1.1327
+Epoch [2/200], Loss: 0.6835
+Epoch [3/200], Loss: 0.5466
+Epoch [4/200], Loss: 0.5020
+Epoch [5/200], Loss: 0.4513
+Epoch [6/200], Loss: 0.4155
+Epoch [7/200], Loss: 0.3956
+Epoch [8/200], Loss: 0.3629
+Epoch [9/200], Loss: 0.3520
+Epoch [10/200], Loss: 0.3317
+Epoch [11/200], Loss: 0.3143
+Epoch [12/200], Loss: 0.3120
+Epoch [13/200], Loss: 0.3003
+Epoch [14/200], Loss: 0.2892
+Epoch [15/200], Loss: 0.2647
+Epoch [16/200], Loss: 0.2884
+Epoch [17/200], Loss: 0.2943
+Epoch [18/200], Loss: 0.2759
+Epoch [19/200], Loss: 0.2591
+Epoch [20/200], Loss: 0.2600
+Epoch [21/200], Loss: 0.2445
+Epoch [22/200], Loss: 0.2541
+Epoch [23/200], Loss: 0.2376
+Epoch [24/200], Loss: 0.2418
+Epoch [25/200], Loss: 0.2304
+Epoch [26/200], Loss: 0.2449
+Epoch [27/200], Loss: 0.2321
+Epoch [28/200], Loss: 0.2206
+Epoch [29/200], Loss: 0.2189
+Epoch [30/200], Loss: 0.2159
+Epoch [31/200], Loss: 0.2057
+Epoch [32/200], Loss: 0.2076
+Epoch [33/200], Loss: 0.2023
+Epoch [34/200], Loss: 0.2067
+Epoch [35/200], Loss: 0.2296
+Epoch [36/200], Loss: 0.2476
+Epoch [37/200], Loss: 0.2191
+Epoch [38/200], Loss: 0.1972
+Epoch [39/200], Loss: 0.1877
+Epoch [40/200], Loss: 0.1898
+Epoch [41/200], Loss: 0.1934
+Epoch [42/200], Loss: 0.1892
+Epoch [43/200], Loss: 0.1880
+Epoch [44/200], Loss: 0.2032
+Epoch [45/200], Loss: 0.1819
+Epoch [46/200], Loss: 0.1826
+Epoch [47/200], Loss: 0.1932
+Epoch [48/200], Loss: 0.1836
+Epoch [49/200], Loss: 0.1947
+Epoch [50/200], Loss: 0.1782
+Epoch [51/200], Loss: 0.1675
+Epoch [52/200], Loss: 0.1767
+Epoch [53/200], Loss: 0.1903
+Epoch [54/200], Loss: 0.1880
+Epoch [55/200], Loss: 0.1803
+Epoch [56/200], Loss: 0.1772
+Epoch [57/200], Loss: 0.1734
+Epoch [58/200], Loss: 0.1815
+Epoch [59/200], Loss: 0.1875
+Epoch [60/200], Loss: 0.1731
+Epoch [61/200], Loss: 0.1695
+Early stopping triggered.
+
+Training completed in 357.03 seconds.
++ Start testing model from ./models/final.pth on dataset ./datasets/test_peek1.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+
+Test completed in 4.01 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6574, False Positive Rate: 0.5795, Jaccard Index: 0.2977
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.66      0.44      0.53      2775
+        GRAB       0.29      0.75      0.41       453
+       PINCH       0.74      0.82      0.78       608
+         TAP       0.36      0.72      0.48       421
+        DENY       0.89      0.80      0.85      1249
+        KNOB       0.82      0.72      0.77      1207
+      EXPAND       0.36      0.32      0.34       358
+
+    accuracy                           0.62      7071
+   macro avg       0.59      0.65      0.59      7071
+weighted avg       0.68      0.62      0.63      7071
+
+Confusion Matrix:
+[[1223  513  170  405  113  184  167]
+ [  91  341    0    2    0    7   12]
+ [  58   43  497    2    0    4    4]
+ [ 101    6    0  303    9    0    2]
+ [ 102    2    4  136 1005    0    0]
+ [  97  221    0    0    0  874   15]
+ [ 174   69    0    1    0    0  114]]
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 16, 16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.2, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6), training_dataset_path='./datasets/train_base.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 1.1797
+Epoch [2/200], Loss: 0.7266
+Epoch [3/200], Loss: 0.5908
+Epoch [4/200], Loss: 0.4985
+Epoch [5/200], Loss: 0.4687
+Epoch [6/200], Loss: 0.4220
+Epoch [7/200], Loss: 0.3956
+Epoch [8/200], Loss: 0.3667
+Epoch [9/200], Loss: 0.3521
+Epoch [10/200], Loss: 0.3440
+Epoch [11/200], Loss: 0.3259
+Epoch [12/200], Loss: 0.3092
+Epoch [13/200], Loss: 0.3056
+Epoch [14/200], Loss: 0.3097
+Epoch [15/200], Loss: 0.2804
+Epoch [16/200], Loss: 0.2800
+Epoch [17/200], Loss: 0.2888
+Epoch [18/200], Loss: 0.2554
+Epoch [19/200], Loss: 0.2571
+Epoch [20/200], Loss: 0.2475
+Epoch [21/200], Loss: 0.2468
+Epoch [22/200], Loss: 0.2477
+Epoch [23/200], Loss: 0.2311
+Epoch [24/200], Loss: 0.2393
+Epoch [25/200], Loss: 0.2243
+Epoch [26/200], Loss: 0.2244
+Epoch [27/200], Loss: 0.2227
+Epoch [28/200], Loss: 0.2278
+Epoch [29/200], Loss: 0.2339
+Epoch [30/200], Loss: 0.2105
+Epoch [31/200], Loss: 0.2255
+Epoch [32/200], Loss: 0.2176
+Epoch [33/200], Loss: 0.2039
+Epoch [34/200], Loss: 0.2023
+Epoch [35/200], Loss: 0.2046
+Epoch [36/200], Loss: 0.1951
+Epoch [37/200], Loss: 0.2067
+Epoch [38/200], Loss: 0.2000
+Epoch [39/200], Loss: 0.2074
+Epoch [40/200], Loss: 0.1926
+Epoch [41/200], Loss: 0.1910
+Epoch [42/200], Loss: 0.2082
+Epoch [43/200], Loss: 0.1867
+Epoch [44/200], Loss: 0.1836
+Epoch [45/200], Loss: 0.1914
+Epoch [46/200], Loss: 0.1880
+Epoch [47/200], Loss: 0.1791
+Epoch [48/200], Loss: 0.1778
+Epoch [49/200], Loss: 0.1902
+Epoch [50/200], Loss: 0.1740
+Epoch [51/200], Loss: 0.1844
+Epoch [52/200], Loss: 0.1806
+Epoch [53/200], Loss: 0.1742
+Epoch [54/200], Loss: 0.1777
+Epoch [55/200], Loss: 0.1805
+Epoch [56/200], Loss: 0.1677
+Epoch [57/200], Loss: 0.1843
+Epoch [58/200], Loss: 0.1642
+Epoch [59/200], Loss: 0.1746
+Epoch [60/200], Loss: 0.1719
+Epoch [61/200], Loss: 0.1700
+Epoch [62/200], Loss: 0.1608
+Epoch [63/200], Loss: 0.1681
+Epoch [64/200], Loss: 0.1692
+Epoch [65/200], Loss: 0.1664
+Epoch [66/200], Loss: 0.1733
+Epoch [67/200], Loss: 0.1703
+Epoch [68/200], Loss: 0.1635
+Epoch [69/200], Loss: 0.1581
+Epoch [70/200], Loss: 0.1594
+Epoch [71/200], Loss: 0.1598
+Epoch [72/200], Loss: 0.1634
+Epoch [73/200], Loss: 0.1616
+Epoch [74/200], Loss: 0.1765
+Epoch [75/200], Loss: 0.1573
+Epoch [76/200], Loss: 0.1569
+Epoch [77/200], Loss: 0.1608
+Epoch [78/200], Loss: 0.1613
+Epoch [79/200], Loss: 0.1574
+Epoch [80/200], Loss: 0.1478
+Epoch [81/200], Loss: 0.1518
+Epoch [82/200], Loss: 0.1539
+Epoch [83/200], Loss: 0.1495
+Epoch [84/200], Loss: 0.1494
+Epoch [85/200], Loss: 0.1476
+Epoch [86/200], Loss: 0.1528
+Epoch [87/200], Loss: 0.1463
+Epoch [88/200], Loss: 0.1453
+Epoch [89/200], Loss: 0.1456
+Epoch [90/200], Loss: 0.1501
+Epoch [91/200], Loss: 0.1565
+Epoch [92/200], Loss: 0.1468
+Epoch [93/200], Loss: 0.1431
+Epoch [94/200], Loss: 0.1513
+Epoch [95/200], Loss: 0.1469
+Epoch [96/200], Loss: 0.1391
+Epoch [97/200], Loss: 0.1413
+Epoch [98/200], Loss: 0.1452
+Epoch [99/200], Loss: 0.1460
+Epoch [100/200], Loss: 0.1458
+Epoch [101/200], Loss: 0.1399
+Epoch [102/200], Loss: 0.1527
+Epoch [103/200], Loss: 0.1348
+Epoch [104/200], Loss: 0.1408
+Epoch [105/200], Loss: 0.1457
+Epoch [106/200], Loss: 0.1468
+Epoch [107/200], Loss: 0.1429
+Epoch [108/200], Loss: 0.1443
+Epoch [109/200], Loss: 0.1377
+Epoch [110/200], Loss: 0.1327
+Epoch [111/200], Loss: 0.1407
+Epoch [112/200], Loss: 0.1413
+Epoch [113/200], Loss: 0.1340
+Epoch [114/200], Loss: 0.1470
+Epoch [115/200], Loss: 0.1492
+Epoch [116/200], Loss: 0.1543
+Epoch [117/200], Loss: 0.1314
+Epoch [118/200], Loss: 0.1424
+Epoch [119/200], Loss: 0.1418
+Epoch [120/200], Loss: 0.1442
+Epoch [121/200], Loss: 0.1379
+Epoch [122/200], Loss: 0.1312
+Epoch [123/200], Loss: 0.1270
+Epoch [124/200], Loss: 0.1408
+Epoch [125/200], Loss: 0.1334
+Epoch [126/200], Loss: 0.1360
+Epoch [127/200], Loss: 0.1330
+Epoch [128/200], Loss: 0.1279
+Epoch [129/200], Loss: 0.1247
+Epoch [130/200], Loss: 0.1374
+Epoch [131/200], Loss: 0.1266
+Epoch [132/200], Loss: 0.1337
+Epoch [133/200], Loss: 0.1328
+Epoch [134/200], Loss: 0.1306
+Epoch [135/200], Loss: 0.1323
+Epoch [136/200], Loss: 0.1359
+Epoch [137/200], Loss: 0.1258
+Epoch [138/200], Loss: 0.1322
+Epoch [139/200], Loss: 0.1260
+Early stopping triggered.
+
+Training completed in 755.40 seconds.
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 16, 16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.2, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+
+Test completed in 1.56 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6037, False Positive Rate: 0.4702, Jaccard Index: 0.3102
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.67      0.54      0.60      2775
+        GRAB       0.36      0.50      0.42       453
+       PINCH       0.74      0.80      0.77       608
+         TAP       0.32      0.71      0.44       421
+        DENY       0.84      0.86      0.85      1249
+        KNOB       0.85      0.76      0.80      1207
+      EXPAND       0.57      0.44      0.50       358
+
+    accuracy                           0.66      7071
+   macro avg       0.62      0.66      0.63      7071
+weighted avg       0.69      0.66      0.67      7071
+
+Confusion Matrix:
+[[1491  268  138  466  184  120  108]
+ [ 185  228    0    4    0   36    0]
+ [ 108    2  485    4    0    9    0]
+ [  89    0   18  298   16    0    0]
+ [   0    0   10  159 1080    0    0]
+ [ 169  112    1    0    0  914   11]
+ [ 178   20    0    3    0    0  157]]
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 64], GCN_DROPOUT=0.3, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6), training_dataset_path='./datasets/train_base.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 1.2368
+Epoch [2/200], Loss: 0.6698
+Epoch [3/200], Loss: 0.4988
+Epoch [4/200], Loss: 0.4298
+Epoch [5/200], Loss: 0.3936
+Epoch [6/200], Loss: 0.3730
+Epoch [7/200], Loss: 0.3523
+Epoch [8/200], Loss: 0.3352
+Epoch [9/200], Loss: 0.3194
+Epoch [10/200], Loss: 0.2950
+Epoch [11/200], Loss: 0.3123
+Epoch [12/200], Loss: 0.2847
+Epoch [13/200], Loss: 0.2793
+Epoch [14/200], Loss: 0.2597
+Epoch [15/200], Loss: 0.2736
+Epoch [16/200], Loss: 0.2531
+Epoch [17/200], Loss: 0.2493
+Epoch [18/200], Loss: 0.2429
+Epoch [19/200], Loss: 0.2493
+Epoch [20/200], Loss: 0.2513
+Epoch [21/200], Loss: 0.2302
+Epoch [22/200], Loss: 0.2403
+Epoch [23/200], Loss: 0.2226
+Epoch [24/200], Loss: 0.2309
+Epoch [25/200], Loss: 0.2208
+Epoch [26/200], Loss: 0.2240
+Epoch [27/200], Loss: 0.2260
+Epoch [28/200], Loss: 0.2236
+Epoch [29/200], Loss: 0.2091
+Epoch [30/200], Loss: 0.2132
+Epoch [31/200], Loss: 0.2065
+Epoch [32/200], Loss: 0.2001
+Epoch [33/200], Loss: 0.2065
+Epoch [34/200], Loss: 0.2007
+Epoch [35/200], Loss: 0.1954
+Epoch [36/200], Loss: 0.2026
+Epoch [37/200], Loss: 0.2006
+Epoch [38/200], Loss: 0.1958
+Epoch [39/200], Loss: 0.1917
+Epoch [40/200], Loss: 0.2014
+Epoch [41/200], Loss: 0.1845
+Epoch [42/200], Loss: 0.1875
+Epoch [43/200], Loss: 0.1886
+Epoch [44/200], Loss: 0.1833
+Epoch [45/200], Loss: 0.1801
+Epoch [46/200], Loss: 0.1871
+Epoch [47/200], Loss: 0.1785
+Epoch [48/200], Loss: 0.1760
+Epoch [49/200], Loss: 0.1774
+Epoch [50/200], Loss: 0.1875
+Epoch [51/200], Loss: 0.1785
+Epoch [52/200], Loss: 0.1772
+Epoch [53/200], Loss: 0.1761
+Epoch [54/200], Loss: 0.1690
+Epoch [55/200], Loss: 0.1753
+Epoch [56/200], Loss: 0.1675
+Epoch [57/200], Loss: 0.1685
+Epoch [58/200], Loss: 0.1576
+Epoch [59/200], Loss: 0.1712
+Epoch [60/200], Loss: 0.1708
+Epoch [61/200], Loss: 0.1637
+Epoch [62/200], Loss: 0.1644
+Epoch [63/200], Loss: 0.1583
+Epoch [64/200], Loss: 0.1671
+Epoch [65/200], Loss: 0.1648
+Epoch [66/200], Loss: 0.1529
+Epoch [67/200], Loss: 0.1649
+Epoch [68/200], Loss: 0.1571
+Epoch [69/200], Loss: 0.1599
+Epoch [70/200], Loss: 0.1595
+Epoch [71/200], Loss: 0.1671
+Epoch [72/200], Loss: 0.1669
+Epoch [73/200], Loss: 0.1547
+Epoch [74/200], Loss: 0.1560
+Epoch [75/200], Loss: 0.1489
+Epoch [76/200], Loss: 0.1522
+Epoch [77/200], Loss: 0.1603
+Epoch [78/200], Loss: 0.1563
+Epoch [79/200], Loss: 0.1463
+Epoch [80/200], Loss: 0.1525
+Epoch [81/200], Loss: 0.1520
+Epoch [82/200], Loss: 0.1581
+Epoch [83/200], Loss: 0.1528
+Epoch [84/200], Loss: 0.1506
+Epoch [85/200], Loss: 0.1517
+Epoch [86/200], Loss: 0.1551
+Epoch [87/200], Loss: 0.1451
+Epoch [88/200], Loss: 0.1534
+Epoch [89/200], Loss: 0.1472
+Epoch [90/200], Loss: 0.1510
+Epoch [91/200], Loss: 0.1455
+Epoch [92/200], Loss: 0.1492
+Epoch [93/200], Loss: 0.1447
+Epoch [94/200], Loss: 0.1565
+Epoch [95/200], Loss: 0.1474
+Epoch [96/200], Loss: 0.1480
+Epoch [97/200], Loss: 0.1421
+Epoch [98/200], Loss: 0.1434
+Epoch [99/200], Loss: 0.1380
+Epoch [100/200], Loss: 0.1470
+Epoch [101/200], Loss: 0.1425
+Epoch [102/200], Loss: 0.1399
+Epoch [103/200], Loss: 0.1471
+Epoch [104/200], Loss: 0.1435
+Epoch [105/200], Loss: 0.1472
+Epoch [106/200], Loss: 0.1387
+Epoch [107/200], Loss: 0.1403
+Epoch [108/200], Loss: 0.1321
+Epoch [109/200], Loss: 0.1463
+Epoch [110/200], Loss: 0.1358
+Epoch [111/200], Loss: 0.1495
+Epoch [112/200], Loss: 0.1440
+Epoch [113/200], Loss: 0.1343
+Epoch [114/200], Loss: 0.1494
+Epoch [115/200], Loss: 0.1333
+Epoch [116/200], Loss: 0.1375
+Epoch [117/200], Loss: 0.1362
+Epoch [118/200], Loss: 0.1387
+Early stopping triggered.
+
+Training completed in 640.14 seconds.
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.RegularClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 64], GCN_DROPOUT=0.3, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+
+Test completed in 2.16 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.5457, False Positive Rate: 0.3155, Jaccard Index: 0.3386
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.64      0.70      0.67      2775
+        GRAB       0.34      0.35      0.35       453
+       PINCH       0.71      0.78      0.74       608
+         TAP       0.40      0.59      0.48       421
+        DENY       0.92      0.75      0.83      1249
+        KNOB       0.88      0.77      0.82      1207
+      EXPAND       0.61      0.35      0.45       358
+
+    accuracy                           0.68      7071
+   macro avg       0.64      0.62      0.62      7071
+weighted avg       0.70      0.68      0.69      7071
+
+Confusion Matrix:
+[[1941  198  155  214   76  122   69]
+ [ 289  160    0    0    0    4    0]
+ [ 125    6  477    0    0    0    0]
+ [ 151    0   19  248    3    0    0]
+ [ 131    0   24  155  939    0    0]
+ [ 196   66    0    0    0  934   11]
+ [ 190   40    0    0    0    1  127]]
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.3, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6), training_dataset_path='./datasets/train_base.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 1.0228
+Epoch [2/200], Loss: 0.5294
+Epoch [3/200], Loss: 0.3814
+Epoch [4/200], Loss: 0.3119
+Epoch [5/200], Loss: 0.2775
+Epoch [6/200], Loss: 0.2439
+Epoch [7/200], Loss: 0.2142
+Epoch [8/200], Loss: 0.1987
+Epoch [9/200], Loss: 0.1860
+Epoch [10/200], Loss: 0.1912
+Epoch [11/200], Loss: 0.1631
+Epoch [12/200], Loss: 0.1458
+Epoch [13/200], Loss: 0.1458
+Epoch [14/200], Loss: 0.1367
+Epoch [15/200], Loss: 0.1411
+Epoch [16/200], Loss: 0.1373
+Epoch [17/200], Loss: 0.1252
+Epoch [18/200], Loss: 0.1222
+Epoch [19/200], Loss: 0.1100
+Epoch [20/200], Loss: 0.1126
+Epoch [21/200], Loss: 0.1072
+Epoch [22/200], Loss: 0.0937
+Epoch [23/200], Loss: 0.1007
+Epoch [24/200], Loss: 0.0960
+Epoch [25/200], Loss: 0.0899
+Epoch [26/200], Loss: 0.1053
+Epoch [27/200], Loss: 0.0859
+Epoch [28/200], Loss: 0.0880
+Epoch [29/200], Loss: 0.0970
+Epoch [30/200], Loss: 0.0813
+Epoch [31/200], Loss: 0.0827
+Epoch [32/200], Loss: 0.0818
+Epoch [33/200], Loss: 0.0792
+Epoch [34/200], Loss: 0.0782
+Epoch [35/200], Loss: 0.0682
+Epoch [36/200], Loss: 0.0663
+Epoch [37/200], Loss: 0.0768
+Epoch [38/200], Loss: 0.0632
+Epoch [39/200], Loss: 0.0536
+Epoch [40/200], Loss: 0.0697
+Epoch [41/200], Loss: 0.0699
+Epoch [42/200], Loss: 0.0646
+Epoch [43/200], Loss: 0.0473
+Epoch [44/200], Loss: 0.0503
+Epoch [45/200], Loss: 0.0534
+Epoch [46/200], Loss: 0.0506
+Epoch [47/200], Loss: 0.0512
+Epoch [48/200], Loss: 0.0677
+Epoch [49/200], Loss: 0.0483
+Epoch [50/200], Loss: 0.0591
+Epoch [51/200], Loss: 0.0483
+Epoch [52/200], Loss: 0.0481
+Epoch [53/200], Loss: 0.0494
+Early stopping triggered.
+
+Training completed in 370.50 seconds.
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.3, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6)
+
+Test completed in 3.88 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6959, False Positive Rate: 0.9146, Jaccard Index: 0.2563
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.55      0.09      0.15      2775
+        GRAB       0.27      0.78      0.41       453
+       PINCH       0.71      0.86      0.78       608
+         TAP       0.25      0.83      0.39       421
+        DENY       0.80      0.83      0.82      1249
+        KNOB       0.87      0.80      0.84      1207
+      EXPAND       0.28      0.63      0.39       358
+
+    accuracy                           0.52      7071
+   macro avg       0.53      0.69      0.54      7071
+weighted avg       0.61      0.52      0.48      7071
+
+Confusion Matrix:
+[[ 244  696  196  756  218  123  542]
+ [  41  355    0   11    0   15   31]
+ [  21    6  521   50    2    0    8]
+ [  32    0    0  349   29    2    9]
+ [  21    0    0  185 1042    0    1]
+ [  41  177    3   11    4  968    3]
+ [  45   59   10   15    2    0  227]]
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.5), training_dataset_path='./datasets/train_base.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 0.9276
+Epoch [2/200], Loss: 0.3949
+Epoch [3/200], Loss: 0.2656
+Epoch [4/200], Loss: 0.2246
+Epoch [5/200], Loss: 0.1868
+Epoch [6/200], Loss: 0.1703
+Epoch [7/200], Loss: 0.1431
+Epoch [8/200], Loss: 0.1343
+Epoch [9/200], Loss: 0.1194
+Epoch [10/200], Loss: 0.1182
+Epoch [11/200], Loss: 0.1101
+Epoch [12/200], Loss: 0.0976
+Epoch [13/200], Loss: 0.0771
+Epoch [14/200], Loss: 0.0925
+Epoch [15/200], Loss: 0.0783
+Epoch [16/200], Loss: 0.0834
+Epoch [17/200], Loss: 0.0856
+Epoch [18/200], Loss: 0.0674
+Epoch [19/200], Loss: 0.0683
+Epoch [20/200], Loss: 0.0668
+Epoch [21/200], Loss: 0.0627
+Epoch [22/200], Loss: 0.0566
+Epoch [23/200], Loss: 0.0603
+Epoch [24/200], Loss: 0.0621
+Epoch [25/200], Loss: 0.0648
+Epoch [26/200], Loss: 0.0587
+Epoch [27/200], Loss: 0.0638
+Epoch [28/200], Loss: 0.0500
+Epoch [29/200], Loss: 0.0407
+Epoch [30/200], Loss: 0.0560
+Epoch [31/200], Loss: 0.0569
+Epoch [32/200], Loss: 0.0533
+Epoch [33/200], Loss: 0.0496
+Epoch [34/200], Loss: 0.0398
+Epoch [35/200], Loss: 0.0459
+Epoch [36/200], Loss: 0.0521
+Epoch [37/200], Loss: 0.0372
+Epoch [38/200], Loss: 0.0344
+Epoch [39/200], Loss: 0.0458
+Epoch [40/200], Loss: 0.0445
+Epoch [41/200], Loss: 0.0564
+Epoch [42/200], Loss: 0.0460
+Epoch [43/200], Loss: 0.0445
+Epoch [44/200], Loss: 0.0446
+Epoch [45/200], Loss: 0.0321
+Epoch [46/200], Loss: 0.0316
+Epoch [47/200], Loss: 0.0318
+Epoch [48/200], Loss: 0.0470
+Epoch [49/200], Loss: 0.0387
+Epoch [50/200], Loss: 0.0332
+Epoch [51/200], Loss: 0.0334
+Epoch [52/200], Loss: 0.0371
+Epoch [53/200], Loss: 0.0289
+Epoch [54/200], Loss: 0.0362
+Epoch [55/200], Loss: 0.0351
+Epoch [56/200], Loss: 0.0264
+Epoch [57/200], Loss: 0.0325
+Epoch [58/200], Loss: 0.0367
 Traceback (most recent call last):
   File "<frozen runpy>", line 198, in _run_module_as_main
   File "<frozen runpy>", line 88, in _run_code
-  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/scripts/final.py", line 51, in <module>
-    results[model_name] = test_model(
-                          ~~~~~~~~~~^
-        test_dataset_path=DEFAULT_DATASET_FOLDER + f"test_{dataset_suffix}.pkl",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/scripts/final.py", line 42, in <module>
+    loss_history[model_name] = train_model(training_params)
+                               ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/train.py", line 115, in train_model
+    epoch_loss = train_one_epoch(model, train_loader, criterions, optimizer)
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/train.py", line 71, in train_one_epoch
+    loss.backward()
+    ~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/site-packages/torch/_tensor.py", line 625, in backward
+    torch.autograd.backward(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        self, gradient, retain_graph, create_graph, inputs=inputs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     )
     ^
-  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/test.py", line 88, in test_model
-    seq_truths, seq_predictions = test_one_sequence(model, seq_loader)
-                                  ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
-  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/test.py", line 54, in test_one_sequence
-    pred_y = model.inference_gesture(output)
-  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/gtcn/model.py", line 100, in inference_gesture
-    return self.classifier.inference(forward_output)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/gtcn/classifier.py", line 125, in inference
-    pred_y = torch.where(
-        none_prob > 0.5,
-        torch.zeros(none_prob.shape, dtype=torch.long),  # NONE
-        torch.argmax(gesture_logits, dim=1) + 1,  # shift by 1 to account for NONE
+  File "/usr/lib/python3.13/site-packages/torch/autograd/__init__.py", line 354, in backward
+    _engine_run_backward(
+    ~~~~~~~~~~~~~~~~~~~~^
+        tensors,
+        ^^^^^^^^
+    ...<5 lines>...
+        accumulate_grad=True,
+        ^^^^^^^^^^^^^^^^^^^^^
     )
-RuntimeError: Expected all tensors to be on the same device, but found at least two devices, cuda:0 and cpu!
+    ^
+  File "/usr/lib/python3.13/site-packages/torch/autograd/graph.py", line 841, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        t_outputs, *args, **kwargs
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )  # Calls into the C++ engine to run the backward pass
+    ^
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.5), training_dataset_path='./datasets/train_base.pkl', model_path='./models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.001, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 0.9720
+Epoch [2/200], Loss: 0.4990
+Epoch [3/200], Loss: 0.3443
+Epoch [4/200], Loss: 0.2996
+Epoch [5/200], Loss: 0.2721
+Epoch [6/200], Loss: 0.2360
+Epoch [7/200], Loss: 0.2172
+Epoch [8/200], Loss: 0.1939
+Epoch [9/200], Loss: 0.1788
+Epoch [10/200], Loss: 0.1646
+Epoch [11/200], Loss: 0.1555
+Epoch [12/200], Loss: 0.1465
+Epoch [13/200], Loss: 0.1338
+Epoch [14/200], Loss: 0.1275
+Epoch [15/200], Loss: 0.1275
+Epoch [16/200], Loss: 0.1156
+Epoch [17/200], Loss: 0.1184
+Epoch [18/200], Loss: 0.1196
+Epoch [19/200], Loss: 0.1097
+Epoch [20/200], Loss: 0.0992
+Epoch [21/200], Loss: 0.0886
+Epoch [22/200], Loss: 0.0901
+Epoch [23/200], Loss: 0.1067
+Epoch [24/200], Loss: 0.0942
+Epoch [25/200], Loss: 0.0705
+Epoch [26/200], Loss: 0.0902
+Epoch [27/200], Loss: 0.0691
+Epoch [28/200], Loss: 0.0745
+Epoch [29/200], Loss: 0.0777
+Epoch [30/200], Loss: 0.0680
+Epoch [31/200], Loss: 0.0698
+Epoch [32/200], Loss: 0.0705
+Epoch [33/200], Loss: 0.0583
+Epoch [34/200], Loss: 0.0541
+Epoch [35/200], Loss: 0.0601
+Epoch [36/200], Loss: 0.0715
+Epoch [37/200], Loss: 0.0451
+Epoch [38/200], Loss: 0.0535
+Epoch [39/200], Loss: 0.0503
+Epoch [40/200], Loss: 0.0392
+Epoch [41/200], Loss: 0.0492
+Epoch [42/200], Loss: 0.0557
+Epoch [43/200], Loss: 0.0562
+Epoch [44/200], Loss: 0.0461
+Epoch [45/200], Loss: 0.0493
+Epoch [46/200], Loss: 0.0526
+Epoch [47/200], Loss: 0.0498
+Epoch [48/200], Loss: 0.0486
+Epoch [49/200], Loss: 0.0434
+Epoch [50/200], Loss: 0.0504
+Early stopping triggered.
+
+Training completed in 279.99 seconds.
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.5)
+
+Test completed in 1.86 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6906, False Positive Rate: 0.9533, Jaccard Index: 0.2377
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.70      0.04      0.08      2775
+        GRAB       0.30      0.75      0.43       453
+       PINCH       0.77      0.79      0.78       608
+         TAP       0.29      0.86      0.43       421
+        DENY       0.82      0.70      0.76      1249
+        KNOB       0.82      0.82      0.82      1207
+      EXPAND       0.19      0.87      0.31       358
+
+    accuracy                           0.49      7071
+   macro avg       0.56      0.69      0.52      7071
+weighted avg       0.67      0.49      0.44      7071
+
+Confusion Matrix:
+[[ 119  556  133  489  148  195 1135]
+ [  16  339    6   10   20   11   51]
+ [   5   15  478   72    0    0   38]
+ [   5    0    0  363   18    2   33]
+ [  11    3    0  329  872    0   34]
+ [  12  188    2    0    0  988   17]
+ [   3   39    0    0    0    5  311]]
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.4)
+
+Test completed in 2.44 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6946, False Positive Rate: 0.9888, Jaccard Index: 0.2292
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.85      0.01      0.02      2775
+        GRAB       0.29      0.76      0.42       453
+       PINCH       0.76      0.79      0.78       608
+         TAP       0.29      0.87      0.43       421
+        DENY       0.81      0.70      0.75      1249
+        KNOB       0.80      0.82      0.81      1207
+      EXPAND       0.19      0.87      0.31       358
+
+    accuracy                           0.48      7071
+   macro avg       0.57      0.69      0.50      7071
+weighted avg       0.73      0.48      0.41      7071
+
+Confusion Matrix:
+[[  29  576  136  492  168  221 1153]
+ [   2  345    7   10   22   13   54]
+ [   1   15  479   73    0    0   40]
+ [   0    0    0  365   18    4   34]
+ [   1    4    0  331  877    0   36]
+ [   0  194    5    0    0  991   17]
+ [   1   40    0    0    0    6  311]]
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.7)
+
+Test completed in 2.39 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6669, False Positive Rate: 0.8306, Jaccard Index: 0.2689
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.61      0.17      0.26      2775
+        GRAB       0.32      0.71      0.44       453
+       PINCH       0.80      0.77      0.79       608
+         TAP       0.31      0.85      0.45       421
+        DENY       0.86      0.66      0.75      1249
+        KNOB       0.87      0.81      0.84      1207
+      EXPAND       0.20      0.86      0.33       358
+
+    accuracy                           0.53      7071
+   macro avg       0.57      0.69      0.55      7071
+weighted avg       0.66      0.53      0.52      7071
+
+Confusion Matrix:
+[[ 461  483  118  418  106  131 1058]
+ [  65  321    0    6    9    7   45]
+ [  27   13  470   63    0    0   35]
+ [  25    0    0  356   15    0   25]
+ [  92    1    0  303  829    0   24]
+ [  70  155    0    0    0  972   10]
+ [  14   33    0    0    0    4  307]]
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.8)
+
+Test completed in 2.16 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6495, False Positive Rate: 0.7738, Jaccard Index: 0.2702
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.59      0.23      0.33      2775
+        GRAB       0.33      0.67      0.45       453
+       PINCH       0.80      0.75      0.78       608
+         TAP       0.33      0.83      0.47       421
+        DENY       0.88      0.64      0.74      1249
+        KNOB       0.89      0.80      0.84      1207
+      EXPAND       0.21      0.85      0.34       358
+
+    accuracy                           0.54      7071
+   macro avg       0.58      0.68      0.56      7071
+weighted avg       0.66      0.54      0.54      7071
+
+Confusion Matrix:
+[[ 633  427  112  380   97  112 1014]
+ [  93  304    0    6    4    6   40]
+ [  46   12  459   58    0    0   33]
+ [  34    0    0  349   14    0   24]
+ [ 145    0    0  280  805    0   19]
+ [ 102  139    0    0    0  960    6]
+ [  18   30    0    0    0    4  306]]
++ Start testing model from ./models/final.pth on dataset ./datasets/test_base.pkl
+model hyperparameters: GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerMeanPool'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.ProbThresholdClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16, 32], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 2, 4, 8], TCN_DROPOUT=0.3, CLASSIFIER_DIM=32, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.9)
+
+Test completed in 2.27 seconds.
+
+================================================================================
+EVALUATION REPORT OF FINAL
+================================================================================
+True Positive Rate: 0.6218, False Positive Rate: 0.6949, Jaccard Index: 0.2853
+Classification Report:
+              precision    recall  f1-score   support
+
+        NONE       0.57      0.31      0.40      2775
+        GRAB       0.36      0.62      0.46       453
+       PINCH       0.82      0.73      0.77       608
+         TAP       0.34      0.81      0.48       421
+        DENY       0.88      0.61      0.72      1249
+        KNOB       0.90      0.78      0.84      1207
+      EXPAND       0.22      0.84      0.35       358
+
+    accuracy                           0.56      7071
+   macro avg       0.59      0.67      0.57      7071
+weighted avg       0.66      0.56      0.57      7071
+
+Confusion Matrix:
+[[859 341  96 336  92 102 949]
+ [135 279   0   2   0   0  37]
+ [ 76  12 445  46   0   0  29]
+ [ 51   0   0 339  13   0  18]
+ [218   0   0 261 763   0   7]
+ [144 115   0   0   0 942   6]
+ [ 34  23   0   0   0   2 299]]
