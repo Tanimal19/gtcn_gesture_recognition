@@ -15,7 +15,7 @@ FINAL_ARCHITECTURE = GTCNParams(
     GCN_DROPOUT=0.2,
     TCN_CLASS=TCNLayerMeanPool,
     TCN_CHANNELS=[64, 64, 64, 64],
-    TCN_KERNEL_SIZE=5,
+    TCN_KERNEL_SIZE=3,
     TCN_DILATIONS=[1, 2, 4, 8],
     TCN_DROPOUT=0.3,
     CLASSIFIER_CLASS=RegularClassifier,
@@ -30,8 +30,8 @@ from src.train import train_model, DEFAULT_MODEL_FOLDER, GTCNTrainParams
 
 training_settings = [
     ("final", "base"),
-    # ("final_peek1", "peek1"),
-    # ("final_peek5", "peek5"),
+    ("final_peek1", "peek1"),
+    ("final_peek5", "peek5"),
 ]
 
 loss_history = {}
