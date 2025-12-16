@@ -1,7 +1,11 @@
 from src.gtcn.model import GTCNParams
 from src.gtcn.gcn import GCNLayerFingerPool
 from src.gtcn.tcn import TCNLayerMeanPool
-from src.gtcn.classifier import RegularClassifier, DoubleHeadClassifier, ProbThresholdClassifier
+from src.gtcn.classifier import (
+    RegularClassifier,
+    DoubleHeadClassifier,
+    ProbThresholdClassifier,
+)
 
 
 FINAL_ARCHITECTURE = GTCNParams(
@@ -11,12 +15,11 @@ FINAL_ARCHITECTURE = GTCNParams(
     GCN_DROPOUT=0.2,
     TCN_CLASS=TCNLayerMeanPool,
     TCN_CHANNELS=[64, 64, 64, 64],
-    TCN_KERNEL_SIZE=3,
+    TCN_KERNEL_SIZE=5,
     TCN_DILATIONS=[1, 2, 4, 8],
     TCN_DROPOUT=0.3,
-    CLASSIFIER_CLASS=ProbThresholdClassifier,
-    DOUBLE_HEAD_BCE_WEIGHT = 0.1,
-    PROB_THRESHOLD = 0.5,
+    CLASSIFIER_CLASS=RegularClassifier,
+    CLASSIFIER_DIM=32,
     WINDOW_LENGTH=15,
 )
 
@@ -27,20 +30,25 @@ from src.train import train_model, DEFAULT_MODEL_FOLDER, GTCNTrainParams
 
 training_settings = [
     ("final", "base"),
+    # ("final_peek1", "peek1"),
+    # ("final_peek5", "peek5"),
 ]
 
-# loss_history = {}
-# for model_name, dataset_suffix in training_settings:
-#     training_params = GTCNTrainParams(
-#         model_params=FINAL_ARCHITECTURE,
-#         training_dataset_path=DEFAULT_DATASET_FOLDER + f"train_{dataset_suffix}.pkl",
-#         model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
-#         weight_mode="simple",
-#         learning_rate=1e-3,
-#         epochs=200,
-#     )
-#     loss_history[model_name] = train_model(training_params)
+loss_history = {}
+for model_name, dataset_suffix in training_settings:
+    training_params = GTCNTrainParams(
+        model_params=FINAL_ARCHITECTURE,
+        training_dataset_path=DEFAULT_DATASET_FOLDER + f"train_{dataset_suffix}.pkl",
+        model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
+        weight_mode="simple",
+        learning_rate=1e-3,
+        epochs=200,
+    )
+    loss_history[model_name] = train_model(training_params)
 
+with open("final_training_loss_history.txt", "w") as f:
+    for model_name, loss in loss_history.items():
+        f.write(f"{model_name}: {loss}\n")
 
 # test final model
 from src.test import test_model
