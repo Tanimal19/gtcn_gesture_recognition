@@ -1,0 +1,1062 @@
+[training set]
++ Processing sequence: 1
++ Processing sequence: 2
+- Skipping sequence: 3 (no available gestures)
++ Processing sequence: 4
++ Processing sequence: 5
+- Skipping sequence: 6 (no available gestures)
++ Processing sequence: 7
++ Processing sequence: 8
+- Skipping sequence: 9 (no available gestures)
++ Processing sequence: 10
++ Processing sequence: 11
++ Processing sequence: 12
+- Skipping sequence: 13 (no available gestures)
++ Processing sequence: 14
++ Processing sequence: 15
++ Processing sequence: 16
++ Processing sequence: 17
+- Skipping sequence: 18 (no available gestures)
++ Processing sequence: 19
++ Processing sequence: 20
++ Processing sequence: 21
++ Processing sequence: 22
+- Skipping sequence: 23 (no available gestures)
++ Processing sequence: 24
++ Processing sequence: 25
++ Processing sequence: 26
+- Skipping sequence: 27 (no available gestures)
++ Processing sequence: 28
++ Processing sequence: 29
++ Processing sequence: 30
++ Processing sequence: 31
+- Skipping sequence: 32 (no available gestures)
++ Processing sequence: 33
++ Processing sequence: 34
++ Processing sequence: 35
++ Processing sequence: 36
++ Processing sequence: 37
++ Processing sequence: 38
++ Processing sequence: 39
++ Processing sequence: 40
++ Processing sequence: 41
+- Skipping sequence: 42 (no available gestures)
++ Processing sequence: 43
++ Processing sequence: 44
+- Skipping sequence: 45 (no available gestures)
++ Processing sequence: 46
++ Processing sequence: 47
++ Processing sequence: 48
++ Processing sequence: 49
++ Processing sequence: 50
+- Skipping sequence: 51 (no available gestures)
++ Processing sequence: 52
++ Processing sequence: 53
+- Skipping sequence: 54 (no available gestures)
++ Processing sequence: 55
++ Processing sequence: 56
++ Processing sequence: 57
+- Skipping sequence: 58 (no available gestures)
++ Processing sequence: 59
++ Processing sequence: 60
++ Processing sequence: 61
++ Processing sequence: 62
++ Processing sequence: 63
++ Processing sequence: 64
++ Processing sequence: 65
++ Processing sequence: 66
++ Processing sequence: 67
++ Processing sequence: 68
++ Processing sequence: 69
++ Processing sequence: 70
++ Processing sequence: 71
+- Skipping sequence: 72 (no available gestures)
++ Processing sequence: 73
+- Skipping sequence: 74 (no available gestures)
++ Processing sequence: 75
++ Processing sequence: 76
++ Processing sequence: 77
++ Processing sequence: 78
++ Processing sequence: 79
++ Processing sequence: 80
++ Processing sequence: 81
++ Processing sequence: 82
+- Skipping sequence: 83 (no available gestures)
++ Processing sequence: 84
++ Processing sequence: 85
++ Processing sequence: 86
++ Processing sequence: 87
++ Processing sequence: 88
++ Processing sequence: 89
++ Processing sequence: 90
++ Processing sequence: 91
++ Processing sequence: 92
++ Processing sequence: 93
++ Processing sequence: 94
++ Processing sequence: 95
++ Processing sequence: 96
++ Processing sequence: 97
++ Processing sequence: 98
++ Processing sequence: 99
++ Processing sequence: 100
++ Processing sequence: 101
++ Processing sequence: 102
++ Processing sequence: 103
++ Processing sequence: 104
++ Processing sequence: 105
++ Processing sequence: 106
++ Processing sequence: 107
++ Processing sequence: 108
+X.shape: (9674, 15, 11, 3), y.shape: (9674,)
+> Label distribution:
+  NONE:4290;
+  GRAB:674;
+  PINCH:589;
+  TAP:468;
+  DENY:1978;
+  KNOB:1313;
+  EXPAND:362;
+Saved to ./src/datasets/train_final.pkl (18.38 MB)
+
+[test set]
++ Processing sequence: 109
++ Processing sequence: 110
++ Processing sequence: 111
+- Skipping sequence: 112 (no available gestures)
++ Processing sequence: 113
++ Processing sequence: 114
++ Processing sequence: 115
+- Skipping sequence: 116 (no available gestures)
++ Processing sequence: 117
+- Skipping sequence: 118 (no available gestures)
+- Skipping sequence: 119 (no available gestures)
++ Processing sequence: 120
+- Skipping sequence: 121 (no available gestures)
++ Processing sequence: 122
++ Processing sequence: 123
+- Skipping sequence: 124 (no available gestures)
++ Processing sequence: 125
++ Processing sequence: 126
+- Skipping sequence: 127 (no available gestures)
++ Processing sequence: 128
+- Skipping sequence: 129 (no available gestures)
++ Processing sequence: 130
++ Processing sequence: 131
++ Processing sequence: 132
+- Skipping sequence: 133 (no available gestures)
++ Processing sequence: 134
++ Processing sequence: 135
++ Processing sequence: 136
++ Processing sequence: 137
++ Processing sequence: 138
++ Processing sequence: 139
++ Processing sequence: 140
++ Processing sequence: 141
++ Processing sequence: 142
++ Processing sequence: 143
++ Processing sequence: 144
++ Processing sequence: 145
+- Skipping sequence: 146 (no available gestures)
+- Skipping sequence: 147 (no available gestures)
++ Processing sequence: 148
++ Processing sequence: 149
++ Processing sequence: 150
++ Processing sequence: 151
++ Processing sequence: 152
++ Processing sequence: 153
++ Processing sequence: 154
++ Processing sequence: 155
++ Processing sequence: 156
++ Processing sequence: 157
++ Processing sequence: 158
++ Processing sequence: 159
++ Processing sequence: 160
++ Processing sequence: 161
+- Skipping sequence: 162 (no available gestures)
++ Processing sequence: 163
++ Processing sequence: 164
++ Processing sequence: 165
++ Processing sequence: 166
+- Skipping sequence: 167 (no available gestures)
++ Processing sequence: 168
++ Processing sequence: 169
++ Processing sequence: 170
+- Skipping sequence: 171 (no available gestures)
++ Processing sequence: 172
+- Skipping sequence: 173 (no available gestures)
++ Processing sequence: 174
++ Processing sequence: 175
++ Processing sequence: 176
++ Processing sequence: 177
++ Processing sequence: 178
+- Skipping sequence: 179 (no available gestures)
++ Processing sequence: 180
+X.shape: (7071, 15, 11, 3), y.shape: (7071,)
+> Label distribution:
+  NONE:2775;
+  GRAB:453;
+  PINCH:608;
+  TAP:421;
+  DENY:1249;
+  KNOB:1207;
+  EXPAND:358;
+Saved to ./src/datasets/test_final.pkl (13.43 MB)
+
+Starting study 'final_model_optimization' with 50 trials...
+[I 2025-12-16 09:08:09,822] A new study created in memory with name: no-name-1ac61e84-191d-4788-9657-89f747fa5cb6
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [16] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [16, 32] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [16, 32, 64] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([64, 64, 64], 3, [1, 2, 4]) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([128, 128], 5, [1, 2]) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([64, 128, 256], 3, [1, 2, 4]) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([64, 64, 64], 3, [1, 3, 9]) which is of type tuple.
+  warnings.warn(message)
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.6633
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7444
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7306
+[I 2025-12-16 09:09:43,230] Trial 0 finished with value: 0.7127601373894947 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [16] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [16, 32] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains [16, 32, 64] which is of type list.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([64, 64, 64], 3, [1, 2, 4]) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([128, 128], 5, [1, 2]) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([64, 128, 256], 3, [1, 2, 4]) which is of type tuple.
+  warnings.warn(message)
+/tmp2/b11902038/pip_packages/optuna/distributions.py:502: UserWarning: Choices for a categorical distribution should be a tuple of None, bool, int, float and str for persistent storage but contains ([64, 64, 64], 3, [1, 3, 9]) which is of type tuple.
+  warnings.warn(message)
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8623
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9056
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.8991
+[I 2025-12-16 09:11:10,663] Trial 1 finished with value: 1.2223365151271857 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.8253
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 5.7174
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4478
+[I 2025-12-16 09:12:22,506] Trial 2 finished with value: 3.3301684320479947 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9520
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8097
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7744
+[I 2025-12-16 09:13:44,365] Trial 3 finished with value: 0.8453433650694855 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.6178
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0067
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.8840
+[I 2025-12-16 09:15:16,252] Trial 4 finished with value: 1.502846455398532 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4978
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1454
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 5.2480
+[I 2025-12-16 09:16:34,749] Trial 5 finished with value: 2.6304111488211297 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 3.3566
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1699
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.4142
+[I 2025-12-16 09:18:24,495] Trial 6 finished with value: 2.313549394639976 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8784
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9614
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7984
+[I 2025-12-16 09:19:49,610] Trial 7 finished with value: 0.8793895877126334 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9685
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.6017
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9390
+[I 2025-12-16 09:21:16,674] Trial 8 finished with value: 0.8363749046063337 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.2959
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0567
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0051
+[I 2025-12-16 09:22:37,207] Trial 9 finished with value: 1.7859141684471014 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.6934
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.5744
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3657
+[I 2025-12-16 09:24:37,421] Trial 10 finished with value: 1.2111345453479012 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.6904
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3033
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1362
+[I 2025-12-16 09:26:26,123] Trial 11 finished with value: 1.3766205063926469 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2019
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8772
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1532
+[I 2025-12-16 09:28:03,090] Trial 12 finished with value: 1.0774249386824861 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9654
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.1243
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 3.3323
+[I 2025-12-16 09:29:42,466] Trial 13 finished with value: 2.1406601565400893 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3576
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3950
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.9826
+[I 2025-12-16 09:31:13,602] Trial 14 finished with value: 1.911754096321508 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0628
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2269
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.3456
+[I 2025-12-16 09:32:11,545] Trial 15 finished with value: 1.5450601524684118 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.7841
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3736
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0793
+[I 2025-12-16 09:34:02,209] Trial 16 finished with value: 1.745637124013693 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5490
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.8699
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0690
+[I 2025-12-16 09:34:56,832] Trial 17 finished with value: 1.8292695287347864 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4890
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1774
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.2568
+[I 2025-12-16 09:36:45,927] Trial 18 finished with value: 1.6410566616908433 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9503
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7670
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0104
+[I 2025-12-16 09:38:23,136] Trial 19 finished with value: 0.909231624143923 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3376
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8590
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1528
+[I 2025-12-16 09:40:00,170] Trial 20 finished with value: 1.1164713922107112 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8257
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.4630
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9880
+[I 2025-12-16 09:41:31,229] Trial 21 finished with value: 0.7588884545544196 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 7.6791
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.7575
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3109
+[I 2025-12-16 09:43:14,137] Trial 22 finished with value: 3.582479747242782 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2024
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8000
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5476
+[I 2025-12-16 09:44:46,267] Trial 23 finished with value: 1.1833686489630137 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.6992
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0185
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 4.7626
+[I 2025-12-16 09:46:08,745] Trial 24 finished with value: 2.493469169683571 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0268
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9433
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.3421
+[I 2025-12-16 09:47:34,222] Trial 25 finished with value: 1.4374044071488399 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.7956
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7477
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1922
+[I 2025-12-16 09:48:52,408] Trial 26 finished with value: 1.2451750833050517 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1478
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0132
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1326
+[I 2025-12-16 09:50:21,166] Trial 27 finished with value: 1.0978880771112032 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9344
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1430
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.4635
+[I 2025-12-16 09:51:54,171] Trial 28 finished with value: 0.8469794429795522 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1309
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8463
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.7574
+[I 2025-12-16 09:53:43,080] Trial 29 finished with value: 1.2448312686467564 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.7722
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 4.6221
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5189
+[I 2025-12-16 09:55:03,331] Trial 30 finished with value: 2.304416178148251 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0557
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0383
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4180
+[I 2025-12-16 09:56:25,297] Trial 31 finished with value: 1.170628408396386 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5598
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4158
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4137
+[I 2025-12-16 09:58:03,163] Trial 32 finished with value: 1.4631305789298577 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 3.8236
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8232
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9641
+[I 2025-12-16 09:59:33,164] Trial 33 finished with value: 1.8702999150559314 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8152
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.6750
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4220
+[I 2025-12-16 10:00:53,919] Trial 34 finished with value: 1.6373980682271514 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.6818
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.7565
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.1879
+[I 2025-12-16 10:01:57,450] Trial 35 finished with value: 1.5420763827436115 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.6030
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0366
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0071
+[I 2025-12-16 10:03:13,499] Trial 36 finished with value: 1.2155723321557252 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2225
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.4483
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.9556
+[I 2025-12-16 10:05:13,093] Trial 37 finished with value: 1.542127073007192 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.7429
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 4.4561
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2936
+[I 2025-12-16 10:06:33,470] Trial 38 finished with value: 2.4975250110595852 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.6945
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1146
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.7203
+[I 2025-12-16 10:07:14,318] Trial 39 finished with value: 1.8431489456327352 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0030
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.6617
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9932
+[I 2025-12-16 10:09:05,127] Trial 40 finished with value: 0.885981393973058 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2404
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 5.6066
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9411
+[I 2025-12-16 10:10:21,217] Trial 41 finished with value: 2.5960348966746345 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([128, 128], 5, [1, 2]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5746
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5566
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.9834
+[I 2025-12-16 10:12:20,503] Trial 42 finished with value: 1.7048918933024353 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 128, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8473
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.5046
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1752
+[I 2025-12-16 10:13:54,103] Trial 43 finished with value: 0.8423525971043978 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.1247
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.8859
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.0771
+[I 2025-12-16 10:15:48,446] Trial 44 finished with value: 1.0292223235272764 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.5093
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.6177
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.5582
+[I 2025-12-16 10:17:44,759] Trial 45 finished with value: 2.561716886089699 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.01}. Best is trial 0 with value: 0.7127601373894947.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.5380
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.4653
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 0.9131
+[I 2025-12-16 10:19:04,851] Trial 46 finished with value: 0.6387999997090933 and parameters: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}. Best is trial 46 with value: 0.6387999997090933.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.2931
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 5.3115
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 3.0342
+[I 2025-12-16 10:20:42,006] Trial 47 finished with value: 3.212927973112556 and parameters: {'GCN_DIMS': [16, 32], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.01}. Best is trial 46 with value: 0.6387999997090933.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.6431
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 5.7742
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 15.8814
+[I 2025-12-16 10:22:30,449] Trial 48 finished with value: 8.099554679573137 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 32, 'DOUBLE_HEAD_BCE_WEIGHT': 0.5, 'learning_rate': 0.01}. Best is trial 46 with value: 0.6387999997090933.
+==================================================
+Fold 1/3
+> val sequences: [1, 7, 14, 15, 16, 17, 21, 25, 30, 35, 37, 39, 40, 43, 46, 50, 52, 57, 63, 70, 79, 81, 82, 84, 85, 86, 88, 94, 95, 103, 106]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5192
+Fold 2/3
+> val sequences: [5, 8, 10, 11, 12, 19, 22, 24, 26, 33, 34, 36, 44, 47, 49, 55, 56, 59, 61, 65, 68, 69, 71, 87, 90, 93, 97, 99, 105, 108]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 1.5780
+Fold 3/3
+> val sequences: [2, 4, 20, 28, 29, 31, 38, 41, 48, 53, 60, 62, 66, 67, 73, 75, 76, 77, 78, 80, 89, 91, 92, 96, 98, 100, 101, 102, 104, 107]
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+> loss: 2.0428
+[I 2025-12-16 10:24:31,515] Trial 49 finished with value: 1.7133345136084859 and parameters: {'GCN_DIMS': [16, 32, 64], 'GCN_DROPOUT': 0.3, 'TCN_PARAMS': ([64, 128, 256], 3, [1, 2, 4]), 'TCN_DROPOUT': 0.2, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 1.0, 'learning_rate': 0.002}. Best is trial 46 with value: 0.6387999997090933.
+==================================================
+Optimization completed in 4581.69 seconds.
+Best Trial: 46
+Best Score: 0.6387999997090933
+Best Params: {'GCN_DIMS': [16], 'GCN_DROPOUT': 0.2, 'TCN_PARAMS': ([64, 64, 64], 3, [1, 3, 9]), 'TCN_DROPOUT': 0.3, 'CLASSIFIER_DIM': 64, 'DOUBLE_HEAD_BCE_WEIGHT': 0.1, 'learning_rate': 0.0005}
++ Start training model with parameters GTCNTrainParams(model_params=GTCNParams(id='final', GCN_CLASS=<class 'src.gtcn.gcn.GCNLayerFingerPool'>, TCN_CLASS=<class 'src.gtcn.tcn.TCNLayerLastStep'>, CLASSIFIER_CLASS=<class 'src.gtcn.classifier.DoubleHeadClassifier'>, WINDOW_LENGTH=15, GCN_DIMS=[16], GCN_DROPOUT=0.2, TCN_CHANNELS=[64, 64, 64], TCN_KERNEL_SIZE=3, TCN_DILATIONS=[1, 3, 9], TCN_DROPOUT=0.3, CLASSIFIER_DIM=64, DOUBLE_HEAD_BCE_WEIGHT=0.1, PROB_THRESHOLD=0.6), training_dataset_path='./src/datasets/train_final.pkl', model_path='./src/models/final.pth', weight_mode='simple', batch_size=32, learning_rate=0.0005, epochs=200)
+> Label weights: [0.1 1.  1.  1.  1.  1.  1. ]
+Epoch [1/200], Loss: 1.4765
+Epoch [2/200], Loss: 0.9282
+Epoch [3/200], Loss: 0.7593
+Epoch [4/200], Loss: 0.6396
+Epoch [5/200], Loss: 0.5823
+Epoch [6/200], Loss: 0.5299
+Epoch [7/200], Loss: 0.4901
+Epoch [8/200], Loss: 0.4553
+Epoch [9/200], Loss: 0.4557
+Epoch [10/200], Loss: 0.3959
+Epoch [11/200], Loss: 0.3781
+Epoch [12/200], Loss: 0.3663
+Epoch [13/200], Loss: 0.3574
+Epoch [14/200], Loss: 0.3416
+Epoch [15/200], Loss: 0.3185
+Epoch [16/200], Loss: 0.3201
+Epoch [17/200], Loss: 0.2980
+Epoch [18/200], Loss: 0.3022
+Epoch [19/200], Loss: 0.2885
+Epoch [20/200], Loss: 0.2735
+Epoch [21/200], Loss: 0.2629
+Epoch [22/200], Loss: 0.2708
+Epoch [23/200], Loss: 0.2461
+Epoch [24/200], Loss: 0.2406
+Epoch [25/200], Loss: 0.2433
+Epoch [26/200], Loss: 0.2349
+Epoch [27/200], Loss: 0.2243
+Epoch [28/200], Loss: 0.2116
+Epoch [29/200], Loss: 0.2237
+Epoch [30/200], Loss: 0.2326
+Epoch [31/200], Loss: 0.2169
+Epoch [32/200], Loss: 0.2125
+Epoch [33/200], Loss: 0.2005
+Epoch [34/200], Loss: 0.1936
+Epoch [35/200], Loss: 0.1926
+Epoch [36/200], Loss: 0.1942
+Epoch [37/200], Loss: 0.1727
+Epoch [38/200], Loss: 0.1826
+Epoch [39/200], Loss: 0.1847
+Epoch [40/200], Loss: 0.1767
+Epoch [41/200], Loss: 0.1631
+Epoch [42/200], Loss: 0.1660
+Epoch [43/200], Loss: 0.1659
+Epoch [44/200], Loss: 0.1665
+Epoch [45/200], Loss: 0.1599
+Epoch [46/200], Loss: 0.1449
+Epoch [47/200], Loss: 0.1511
+Epoch [48/200], Loss: 0.1578
+Epoch [49/200], Loss: 0.1459
+Epoch [50/200], Loss: 0.1426
+Epoch [51/200], Loss: 0.1386
+Epoch [52/200], Loss: 0.1448
+Epoch [53/200], Loss: 0.1313
+Epoch [54/200], Loss: 0.1396
+Epoch [55/200], Loss: 0.1389
+Epoch [56/200], Loss: 0.1278
+Epoch [57/200], Loss: 0.1381
+Epoch [58/200], Loss: 0.1362
+Epoch [59/200], Loss: 0.1279
+Epoch [60/200], Loss: 0.1146
+Epoch [61/200], Loss: 0.1313
+Epoch [62/200], Loss: 0.1210
+Epoch [63/200], Loss: 0.1171
+Epoch [64/200], Loss: 0.1096
+Epoch [65/200], Loss: 0.1218
+Epoch [66/200], Loss: 0.1106
+Epoch [67/200], Loss: 0.1070
+Epoch [68/200], Loss: 0.1146
+Epoch [69/200], Loss: 0.1059
+Epoch [70/200], Loss: 0.1219
+Epoch [71/200], Loss: 0.1154
+Epoch [72/200], Loss: 0.1023
+Epoch [73/200], Loss: 0.1124
+Epoch [74/200], Loss: 0.0972
+Epoch [75/200], Loss: 0.1017
+Epoch [76/200], Loss: 0.0984
+Epoch [77/200], Loss: 0.1069
+Epoch [78/200], Loss: 0.0989
+Epoch [79/200], Loss: 0.1007
+Epoch [80/200], Loss: 0.0958
+Epoch [81/200], Loss: 0.0951
+Epoch [82/200], Loss: 0.1048
+Epoch [83/200], Loss: 0.1026
+Epoch [84/200], Loss: 0.0948
+Epoch [85/200], Loss: 0.0856
+Epoch [86/200], Loss: 0.0858
+Epoch [87/200], Loss: 0.0872
+Epoch [88/200], Loss: 0.0899
+Epoch [89/200], Loss: 0.0961
+Epoch [90/200], Loss: 0.0888
+Epoch [91/200], Loss: 0.0873
+Epoch [92/200], Loss: 0.0922
+Epoch [93/200], Loss: 0.0939
+Epoch [94/200], Loss: 0.0876
+Epoch [95/200], Loss: 0.0903
+Early stopping triggered.
+
+Training completed in 356.42 seconds.
++ Start testing model from ./src/models/final.pth on dataset ./src/datasets/test_final.pkl
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/run_final.py", line 46, in <module>
+    results = test_model(
+        test_dataset_path=DEFAULT_DATASET_FOLDER + "test_final.pkl",
+        model_path=DEFAULT_MODEL_FOLDER + "final.pth",
+    )
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/test.py", line 68, in test_model
+    model = load_model(model_path)
+  File "/nfs/undergrad/11/b11902038/Desktop/dynamic_gesture_recognition/src/test.py", line 36, in load_model
+    model.load_state_dict(checkpoint["model_state_dict"])
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.13/site-packages/torch/nn/modules/module.py", line 2629, in load_state_dict
+    raise RuntimeError(
+    ...<3 lines>...
+    )
+RuntimeError: Error(s) in loading state_dict for GTCNModel:
+	size mismatch for classifier.shared.0.weight: copying a param with shape torch.Size([64, 64]) from checkpoint, the shape in current model is torch.Size([32, 64]).
+	size mismatch for classifier.shared.0.bias: copying a param with shape torch.Size([64]) from checkpoint, the shape in current model is torch.Size([32]).
+	size mismatch for classifier.gesture_head.weight: copying a param with shape torch.Size([6, 64]) from checkpoint, the shape in current model is torch.Size([6, 32]).
+	size mismatch for classifier.none_head.weight: copying a param with shape torch.Size([1, 64]) from checkpoint, the shape in current model is torch.Size([1, 32]).

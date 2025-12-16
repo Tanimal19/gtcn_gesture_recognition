@@ -1,5 +1,5 @@
 # run script for optimizing and training the main model
-# nohup python -u -m src.run &
+# nohup python -u -m src.run_final &
 
 from src.dataset_builder import (
     GTCNDatasetBuilder,
@@ -16,16 +16,16 @@ from src.gtcn.classifier import DoubleHeadClassifier
 
 
 FINAL_ARCHITECTURE = GTCNParams(
-    id="final_model",
+    id="final",
     GCN_CLASS=GCNLayerFingerPool,
     TCN_CLASS=TCNLayerLastStep,
     CLASSIFIER_CLASS=DoubleHeadClassifier,
-    WINDOW_LENGTH=10,
+    WINDOW_LENGTH=15,
 )
 
 
 # create final datasets
-# builder = GTCNDatasetBuilder(window_length=10, peek=2)
+# builder = GTCNDatasetBuilder(window_length=15, peek=5)
 # create_datasets(builder, suffix="final")
 
 # optimize hyperparameters
@@ -37,7 +37,7 @@ best_training_params = run_optimize(
 )
 
 # train final model with best hyperparameters
-best_training_params.model_path = DEFAULT_MODEL_FOLDER + "final_model.pth"
+best_training_params.model_path = DEFAULT_MODEL_FOLDER + "final.pth"
 best_training_params.epochs = 200
 train_model(best_training_params)
 
@@ -45,7 +45,7 @@ train_model(best_training_params)
 # test final model
 results = test_model(
     test_dataset_path=DEFAULT_DATASET_FOLDER + "test_final.pkl",
-    model_path=DEFAULT_MODEL_FOLDER + "final_model.pth",
+    model_path=DEFAULT_MODEL_FOLDER + "final.pth",
 )
 
 import pandas as pd
