@@ -1,11 +1,7 @@
 from src.gtcn.model import GTCNParams
 from src.gtcn.gcn import GCNLayerFingerPool
 from src.gtcn.tcn import TCNLayerMeanPool
-from src.gtcn.classifier import (
-    RegularClassifier,
-    DoubleHeadClassifier,
-    ProbThresholdClassifier,
-)
+from src.gtcn.classifier import RegularClassifier
 
 
 FINAL_ARCHITECTURE = GTCNParams(
@@ -30,8 +26,6 @@ from src.train import train_model, DEFAULT_MODEL_FOLDER, GTCNTrainParams
 
 training_settings = [
     ("final", "base"),
-    ("final_peek1", "peek1"),
-    ("final_peek5", "peek5"),
 ]
 
 loss_history = {}
