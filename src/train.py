@@ -7,14 +7,11 @@ from collections import Counter
 from src.utils import DEVICE, GestureLabel
 from src.gtcn import OUTPUT_GESTURES, GTCNDataset
 from src.gtcn.model import GTCNModel, GTCNParams
-from src.gtcn.gcn import GCNLayerFingerPool
-from src.gtcn.tcn import TCNLayerLastStep
-from src.gtcn.classifier import RegularClassifier
-from src.dataset_builder import GTCNDataset, DEFAULT_DATASET_FOLDER
+from src.dataset_builder import GTCNDataset
 from dataclasses import dataclass
 
 
-DEFAULT_MODEL_FOLDER = "./src/models/"
+DEFAULT_MODEL_FOLDER = "./models/"
 
 
 @dataclass
@@ -142,4 +139,4 @@ def train_model(params: GTCNTrainParams):
 
     print(f"\nTraining completed in {time.time() - start_time:.2f} seconds.")
 
-    return model, loss_history
+    return loss_history

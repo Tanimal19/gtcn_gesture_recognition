@@ -3,9 +3,7 @@ import pickle
 import torch
 import numpy as np
 from torch.utils.data import DataLoader
-from sklearn.metrics import classification_report, confusion_matrix
 from src.utils import DEVICE
-from src.gtcn import OUTPUT_GESTURES
 from src.gtcn.model import GTCNModel, GTCNParams
 from src.dataset_builder import GTCNDataset
 
@@ -27,6 +25,7 @@ def load_model(model_path: str) -> GTCNModel:
         TCN_KERNEL_SIZE=hyperparams_dict["TCN_KERNEL_SIZE"],
         TCN_DILATIONS=hyperparams_dict["TCN_DILATIONS"],
         TCN_DROPOUT=hyperparams_dict["TCN_DROPOUT"],
+        CLASSIFIER_DIM=hyperparams_dict["CLASSIFIER_DIM"],
         DOUBLE_HEAD_BCE_WEIGHT=hyperparams_dict["DOUBLE_HEAD_BCE_WEIGHT"],
         PROB_THRESHOLD=hyperparams_dict["PROB_THRESHOLD"],
     )
@@ -98,23 +97,6 @@ def test_model(test_dataset_path, model_path, batch_size=32):
                 "predictions": seq_predictions,
             }
         )
-
-    flat_truths = [item for res in results for item in res["truths"]]
-    flat_predictions = [item for res in results for item in res["predictions"]]
-
-    print("Confusion Matrix:")
-    print(confusion_matrix(flat_truths, flat_predictions))
-
-    print("Classification Report:")
-    print(
-        classification_report(
-            flat_truths,
-            flat_predictions,
-            digits=4,
-            target_names=[g.name for g in OUTPUT_GESTURES],
-            zero_division=0,
-        )
-    )
 
     print(f"\nTest completed in {time.time() - start_time:.2f} seconds.")
 

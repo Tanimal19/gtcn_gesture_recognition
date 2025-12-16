@@ -112,7 +112,7 @@ def train_models():
             epochs=150,
         )
         print(f"\n=== Training model '{model_name}' on dataset '{dataset_suffix}' ===")
-        _, history[model_name] = train_model(params)
+        history[model_name] = train_model(params)
 
     start_train("base", BASE_ARCHITECTURE, "base", None)
     start_train("base_simple", BASE_ARCHITECTURE, "base", "simple")
@@ -181,29 +181,6 @@ def test_models():
 
 
 if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser(description="GTCN Running Script")
-    parser.add_argument(
-        "--generate",
-        action="store_true",
-        help="Generate datasets",
-    )
-    parser.add_argument(
-        "--train",
-        action="store_true",
-        help="Train models",
-    )
-    parser.add_argument(
-        "--test",
-        action="store_true",
-        help="Test models",
-    )
-    args = parser.parse_args()
-
-    if args.generate:
-        generate_datasets()
-    if args.train:
-        train_models()
-    if args.test:
-        test_models()
+    generate_datasets()
+    train_models()
+    test_models()

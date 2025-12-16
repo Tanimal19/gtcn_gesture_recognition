@@ -12,7 +12,7 @@ from src.utils import (
 from src.gtcn import INPUT_LANDMARKS, OUTPUT_GESTURES, GTCNDataset
 
 
-DEFAULT_DATASET_FOLDER = "./src/datasets/"
+DEFAULT_DATASET_FOLDER = "./datasets/"
 
 
 class GTCNDatasetBuilder:
