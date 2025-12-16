@@ -1,7 +1,7 @@
 from src.gtcn.model import GTCNParams
 from src.gtcn.gcn import GCNLayerFingerPool
 from src.gtcn.tcn import TCNLayerMeanPool
-from src.gtcn.classifier import RegularClassifier
+from src.gtcn.classifier import RegularClassifier, DoubleHeadClassifier, ProbThresholdClassifier
 
 
 FINAL_ARCHITECTURE = GTCNParams(
@@ -10,11 +10,13 @@ FINAL_ARCHITECTURE = GTCNParams(
     GCN_DIMS=[16, 32],
     GCN_DROPOUT=0.2,
     TCN_CLASS=TCNLayerMeanPool,
-    TCN_CHANNELS=[64, 64, 64],
+    TCN_CHANNELS=[64, 64, 64, 64],
     TCN_KERNEL_SIZE=3,
-    TCN_DILATIONS=[1, 3, 9],
+    TCN_DILATIONS=[1, 2, 4, 8],
     TCN_DROPOUT=0.3,
-    CLASSIFIER_CLASS=RegularClassifier,
+    CLASSIFIER_CLASS=DoubleHeadClassifier,
+    DOUBLE_HEAD_BCE_WEIGHT = 0.1,
+    PROB_THRESHOLD = 0.6,
     WINDOW_LENGTH=15,
 )
 
@@ -24,9 +26,7 @@ from src.dataset_builder import DEFAULT_DATASET_FOLDER
 from src.train import train_model, DEFAULT_MODEL_FOLDER, GTCNTrainParams
 
 training_settings = [
-    ("final_peek1", "peek1"),
-    ("final_peek3", "peek3"),
-    ("final_peek5", "peek5"),
+    ("final", "base"),
 ]
 
 loss_history = {}
@@ -36,12 +36,13 @@ for model_name, dataset_suffix in training_settings:
         training_dataset_path=DEFAULT_DATASET_FOLDER + f"train_{dataset_suffix}.pkl",
         model_path=DEFAULT_MODEL_FOLDER + f"{model_name}.pth",
         weight_mode="simple",
+        learning_rate=1e-3,
         epochs=200,
     )
     loss_history[model_name] = train_model(training_params)
 
 
-# test final model
+# # test final model
 from src.test import test_model
 import pandas as pd
 

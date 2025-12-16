@@ -3,7 +3,6 @@ import numpy as np
 from typing import Any
 import ast
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.metrics import confusion_matrix, classification_report
 import argparse
 from src.gtcn import OUTPUT_GESTURES
