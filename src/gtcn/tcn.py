@@ -41,7 +41,7 @@ class TCNLayerLastStep(BaseTCNLayer):
 
     def forward(self, x):
         out = self.net(x)
-        out = out[:, :, -1]  # only take last time step
+        out = out[:, :, 0]  # only take last time step
         return out
 
 
@@ -64,7 +64,7 @@ class TCNLayerWeightPool(BaseTCNLayer):
     def forward(self, x):
         T = x.shape[2]
         out = self.net(x)
-        weights = torch.linspace(0, 1, steps=T).to(x.device)
+        weights = torch.linspace(1, 0, steps=T).to(x.device)
         out = (out * weights.unsqueeze(0).unsqueeze(1)).sum(dim=2)
         return out
 

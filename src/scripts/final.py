@@ -1,7 +1,7 @@
 from src.gtcn.model import GTCNParams
 from src.gtcn.gcn import GCNLayerFingerPool
-from src.gtcn.tcn import TCNLayerMeanPool
-from src.gtcn.classifier import RegularClassifier
+from src.gtcn.tcn import TCNLayerMeanPool, TCNLayerWeightPool
+from src.gtcn.classifier import RegularClassifier, DoubleHeadClassifier
 
 
 FINAL_ARCHITECTURE = GTCNParams(
@@ -9,13 +9,14 @@ FINAL_ARCHITECTURE = GTCNParams(
     GCN_CLASS=GCNLayerFingerPool,
     GCN_DIMS=[16, 32],
     GCN_DROPOUT=0.2,
-    TCN_CLASS=TCNLayerMeanPool,
+    TCN_CLASS=TCNLayerWeightPool,
     TCN_CHANNELS=[64, 64, 64, 64],
     TCN_KERNEL_SIZE=3,
     TCN_DILATIONS=[1, 2, 4, 8],
     TCN_DROPOUT=0.3,
-    CLASSIFIER_CLASS=RegularClassifier,
-    CLASSIFIER_DIM=32,
+    CLASSIFIER_CLASS=DoubleHeadClassifier,
+    CLASSIFIER_DIM=128,
+    DOUBLE_HEAD_BCE_WEIGHT=0.1,
     WINDOW_LENGTH=15,
 )
 
@@ -26,6 +27,8 @@ from src.train import train_model, DEFAULT_MODEL_FOLDER, GTCNTrainParams
 
 training_settings = [
     ("final", "base"),
+    ("final_peek1", "peek1"),
+    ("final_peek5", "peek5"),
 ]
 
 loss_history = {}
