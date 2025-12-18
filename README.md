@@ -1,8 +1,3 @@
-https://univr-vips.github.io/Shrec21/
+## Graph Temporal Convolution Network in Real-Time Gesture Recognition
+Final Project for EECS 242: Deep Learning, 2025 Fall at UC Merced
 
-
-setup workstation environment:
-```bash
-pip install optuna --target=/tmp2/b11902038/pip_packages
-export PYTHONPATH=/tmp2/b11902038/pip_packages:$PYTHONPATH
-```
